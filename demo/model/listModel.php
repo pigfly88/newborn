@@ -1,8 +1,9 @@
 <?php
 class listModel extends Model{
-	public function comment(){
-		$list = DB::fetch('SELECT * FROM `test`.`tbl_lookup`');
-		return $list;
+	protected $table='user';
+	
+	public function ss(){
+		return $this->getOne(array('id'=>1));
 	}
 	
 	

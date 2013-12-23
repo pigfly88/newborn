@@ -2,8 +2,8 @@
 class DB{
 	protected static $db = null;
 	
-	public static function connect(){
-		is_null(self::$db) && self::$db = new PDO('mysql:host=localhost', 'root', '');
+	public static function connect($config){
+		is_null(self::$db) && self::$db = new PDO($config['dsn'], $config['username'], $config['password']);
 		return self::$db;
 	}
 	

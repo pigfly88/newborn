@@ -4,7 +4,8 @@ class indexController extends Controller{
 		echo "hello , I'm NFS!";
 	}
 	public function sayHello() {
-		echo 'hello';
+		$res = M('list')->getAll(array('id'=>2), 'uid');
+		$this->view();
 	}
 	
 }
