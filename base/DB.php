@@ -31,11 +31,19 @@ class DB{
 		}
 	}
 	
-	public static function fetchAll($sql, $param=null){
+	public static function fetchAll($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC, $fetch_argument){
 		$stmt = self::statement($sql, $param);
 		
 		if($stmt->execute()){
-			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+			return $stmt->fetchAll($fetchStyle);
+		}
+	}
+	
+	public static function fetchColumn($sql, $param=null){
+		$stmt = self::statement($sql, $param);
+		
+		if($stmt->execute()){
+			return $stmt->fetchColumn();
 		}
 	}
 	

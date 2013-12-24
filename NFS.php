@@ -1,39 +1,23 @@
 <?php
+define('TIME', time());
 define('NFS_ROOT', dirname(__FILE__).'/');
-define('MODEL_ROOT', APP_ROOT.'/model/');
-define('CONTROLLER_ROOT', APP_ROOT.'/controller/');
-define('VIEW_ROOT', APP_ROOT.'/view/');
+define('PROTECT_FOLDER', 'protected');
+define('CORE_ROOT', APP_ROOT.PROTECT_FOLDER.'/');
+define('MODEL_ROOT', CORE_ROOT.'model/');
+define('CONTROLLER_ROOT', CORE_ROOT.'controller/');
+define('VIEW_ROOT', CORE_ROOT.'view/');
 
-$controllerName = !empty($_REQUEST['c']) ? $_REQUEST['c'].'Controller' : 'indexController';
-$actionName = !empty($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
-$controllerFile = APP_ROOT."/controller/{$controllerName}.php";
 
-NFS::load(NFS_ROOT.'/base/Component.php');
-NFS::load(NFS_ROOT.'/base/NFSException.php');
-NFS::load(NFS_ROOT.'/base/Model.php');
-NFS::load(NFS_ROOT.'/base/View.php');
-NFS::load(NFS_ROOT.'/base/Controller.php');
-NFS::load(NFS_ROOT.'/base/DB.php');
-NFS::load(NFS_ROOT.'/base/Common.php');
-
-DB::connect(NFS::load(APP_ROOT.'/config/db.php'));
-
-try{
-	NFS::load($controllerFile);	
-	$controller = new $controllerName();	
-	$controller->$actionName();
-}catch (Exception $e){
-	var_dump($e);
-}
 
 class NFS{
-	public static function load($file){
-		static $loaded;
+	static $loaded;
+	
+	public static function load($file){		
 		$res = false;
 		
-		if(!isset($loaded[$file])){
+		if(!isset(self::$loaded[$file])){
 			if($res = require($file)){
-				$loaded[$file] = true;
+				self::$loaded[$file] = true;
 			}
 		}
 		
@@ -41,9 +25,45 @@ class NFS{
 	}
 	
 	public static function loaded($file){
-		return $loaded[$file];
+		return true===self::$loaded[$file] ? true : false;
 	}
 	
+	public static function autoload($className){
+		$basePath = NFS_ROOT.'base/';
+		$helperPath = NFS_ROOT.'helper/';
+		$ext = '.php';
+
+		if(true!==self::$loaded[$basePath.$className.$ext])
+			return self::load($basePath.$className.$ext);
+		
+		if(true!==self::$loaded[$basePath.$className.$ext])
+			return self::load($basePath.$className.$ext);
+		
+		return true;
+	}
 	
-	
+}
+
+spl_autoload_register(array('NFS', 'autoload'));
+
+NFS::load(NFS_ROOT.'/base/NFSException.php');
+NFS::load(NFS_ROOT.'/base/Component.php');
+NFS::load(NFS_ROOT.'/base/Model.php');
+NFS::load(NFS_ROOT.'/base/Controller.php');
+NFS::load(NFS_ROOT.'/base/Common.php');
+NFS::load(NFS_ROOT.'/base/DB.php');
+DB::connect(NFS::load(CORE_ROOT.'/config/db.php'));
+
+$controllerName = !empty($_REQUEST['c']) ? $_REQUEST['c'].'Controller' : 'indexController';
+$actionName = !empty($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
+define('CONTROLLER', $controllerName);
+define('ACTION', $actionName);
+
+$controllerFile = CORE_ROOT."/controller/{$controllerName}.php";
+try{
+	NFS::load($controllerFile);	
+	$controller = new $controllerName();	
+	$controller->$actionName();
+}catch (Exception $e){
+	var_dump($e);
 }
