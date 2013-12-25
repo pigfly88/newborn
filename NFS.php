@@ -16,7 +16,7 @@ class NFS{
 		$res = false;
 		
 		if(!isset(self::$loaded[$file])){
-			if($res = require($file)){
+			if(is_file($file) && $res = require($file)){
 				self::$loaded[$file] = true;
 			}
 		}
@@ -33,13 +33,19 @@ class NFS{
 		$helperPath = NFS_ROOT.'helper/';
 		$ext = '.php';
 
-		if(true!==self::$loaded[$basePath.$className.$ext])
-			return self::load($basePath.$className.$ext);
+		$res = false;
 		
 		if(true!==self::$loaded[$basePath.$className.$ext])
-			return self::load($basePath.$className.$ext);
+			$res = self::load($basePath.$className.$ext);
 		
-		return true;
+		if(true!==self::$loaded[$helperPath.$className.$ext])
+			$res = self::load($helperPath.$className.$ext);
+			
+		if(true!==self::$loaded[CONTROLLER_ROOT.$className.$ext]){
+			//echo CONTROLLER_ROOT.$className.$ext;exit;
+			$res = self::load(CONTROLLER_ROOT.$className.$ext);
+		}
+		return $res;
 	}
 	
 }
