@@ -42,7 +42,6 @@ class NFS{
 			$res = self::load($helperPath.$className.$ext);
 			
 		if(true!==self::$loaded[CONTROLLER_ROOT.$className.$ext]){
-			//echo CONTROLLER_ROOT.$className.$ext;exit;
 			$res = self::load(CONTROLLER_ROOT.$className.$ext);
 		}
 		return $res;
@@ -60,8 +59,8 @@ NFS::load(NFS_ROOT.'/base/Common.php');
 NFS::load(NFS_ROOT.'/base/DB.php');
 DB::connect(NFS::load(CORE_ROOT.'/config/db.php'));
 
-$controllerName = !empty($_REQUEST['c']) ? $_REQUEST['c'].'Controller' : 'indexController';
-$actionName = !empty($_REQUEST['a']) ? $_REQUEST['a'] : 'index';
+$controllerName = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
+$actionName = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
 define('CONTROLLER', $controllerName);
 define('ACTION', $actionName);
 

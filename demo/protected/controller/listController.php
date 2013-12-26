@@ -1,5 +1,5 @@
 <?php
-class listController extends Controller{	
+class listController extends Controller{
 	public function cate(){
 		indexController::sayHello();
 	}
