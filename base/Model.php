@@ -8,12 +8,21 @@ class Model extends Component {
 	}
 	
 	public static function load($model, $ext='.php'){
-		NFS::load(MODEL_ROOT.$model.'Model'.$ext);
 		$class = $model.'Model';
 		if(isset(self::$models[$class])){
 			return self::$models[$class];
 		}
+				
+		if(!is_file($file)){
+			$obj = new self();
+			$obj->table=$model;
+			self::$models[$class] = $obj;
+			return $obj;
+		}
 		
+		$file = MODEL_ROOT.$model.'Model'.$ext;
+		NFS::load($file);
+
 		$res = false;
 		if($res = new $class()){
 			self::$models[$class] = $res;

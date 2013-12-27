@@ -6,7 +6,7 @@ define('CORE_ROOT', APP_ROOT.PROTECT_FOLDER.'/');
 define('MODEL_ROOT', CORE_ROOT.'model/');
 define('CONTROLLER_ROOT', CORE_ROOT.'controller/');
 define('VIEW_ROOT', CORE_ROOT.'view/');
-
+define('CONFIG_ROOT', CORE_ROOT.'config/');
 
 
 class NFS{

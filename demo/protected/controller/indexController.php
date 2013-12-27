@@ -7,7 +7,12 @@ class indexController extends Controller{
 	}
 	
 	public static function sayhello(){
-		$res = M('list')->getColumn(array('id'=>self::$id), 'deparment_id');
+		//var_dump(C('db.2'));
+		//DB::connect(C('db.2'));
+		
+		$res = M('pepsi_code')->getColumn(array('id'=>self::$id), 'code');
+		$ss = M('pepsi_code')->getColumn(array('id'=>self::$id), 'voucher_id');
+		var_dump($res, $ss);
 		self::view($res, 'sayHello');
 	}
 	
