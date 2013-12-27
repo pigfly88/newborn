@@ -7,7 +7,10 @@ function customError($errno, $errstr, $errfile, $errline){
 class NFSException extends Exception {
 	public function __construct($msg){
 		if(C('debug.on')){
-			echo "error: $msg <br />file: ".$this->getFile()."<br />code: ".$this->getCode();
+			echo "error: $msg <br />
+			code: ".$this->getCode()."<br />
+			file: ".$this->getFile()."<br />		
+			line: ".$this->getLine();
 			exit;
 		}
 	}

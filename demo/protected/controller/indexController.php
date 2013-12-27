@@ -7,12 +7,14 @@ class indexController extends Controller{
 	}
 	
 	public static function sayhello(){
-		//var_dump(C('db.2'));
-		//DB::connect(C('db.2'));
+
+		//DB::connect(C('db.0'));
+		$res1 = M('pepsi_code')->getColumn(array('id'=>self::$id), 'code');
+
+		//DB::connect(C('db.0'));
+		$res2 = M('pepsi_code')->getColumn(array('id'=>self::$id), 'voucher_id');
+		var_dump($res1, $res2);
 		
-		$res = M('pepsi_code')->getColumn(array('id'=>self::$id), 'code');
-		$ss = M('pepsi_code')->getColumn(array('id'=>self::$id), 'voucher_id');
-		var_dump($res, $ss);
 		self::view($res, 'sayHello');
 	}
 	

@@ -8,17 +8,27 @@ class DB{
 	protected static $db = null;
 	
 	public static function connect($config, $once=true){
-		if(empty($config))	exit('db config is empty');
+		if(empty($config) || count($config)<1)	exit('db config is empty');
 		
-		$init = $config[mt_rand(0, count($config)-1)];
+		$init = isset($config[0]) ? $config[mt_rand(0, count($config)-1)] : $config;
+
+		if(!$init['dsn'])	throw new NFSException('db config parse error');
 		
-		if($once && !isset(self::$dbList[$init['dsn']])){
-			$charset = self::getCharset($init['dsn']);
-			self::$db = new PDO($init['dsn'], $init['username'], $init['password'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}'"));
-		
-			self::$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);//关闭本地模拟prepare
-			
-			self::$dbList[$init['dsn']] = self::$db;
+		if(!isset(self::$dbList[$init['dsn']])){	
+			try{
+				$charset = self::getCharset($init['dsn']);
+			    $db = new PDO($init['dsn'], $init['username'], $init['password'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}'"));
+			    
+			    //关闭本地模拟prepare
+			    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+			    
+			    self::$db = $db;
+			    self::$dbList[$init['dsn']] = $db;
+			}catch (PDOException $e){
+			    echo 'Connection failed: ' . $e->getMessage();
+			}
+		}else{
+			self::$db = self::$dbList[$init['dsn']];
 		}
 		return self::$dbList[$init['dsn']];
 	}
@@ -36,8 +46,10 @@ class DB{
 	}
 	
 	protected static function statement($sql, $param=null){
-		$stmt = self::$db->prepare($sql);
-		if(!$stmt)	throw new NFSException('stmt false');
+		$stmt = self::$db->prepare($sql);		
+		if(!$stmt)	{
+			throw new NFSException('stmt false');
+		}
 		
 		if(!is_null($param)){
 			if(is_array($param) && !empty($param)){

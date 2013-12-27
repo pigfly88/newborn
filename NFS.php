@@ -1,4 +1,11 @@
 <?php
+/**
+ * NFS
+ *
+ * @version        2013 Fri Dec 27 09:50:23 GMT 2013
+ * @author         Barry <328877098@qq.com>
+ * @link           https://github.com/justlikeheaven/NFS.git
+ */
 define('TIME', time());
 define('NFS_ROOT', dirname(__FILE__).'/');
 define('PROTECT_FOLDER', 'protected');
@@ -51,11 +58,12 @@ class NFS{
 
 spl_autoload_register(array('NFS', 'autoload'));
 
+NFS::load(NFS_ROOT.'/base/Common.php');
 NFS::load(NFS_ROOT.'/base/NFSException.php');
 NFS::load(NFS_ROOT.'/base/Component.php');
 NFS::load(NFS_ROOT.'/base/Model.php');
 NFS::load(NFS_ROOT.'/base/Controller.php');
-NFS::load(NFS_ROOT.'/base/Common.php');
+
 NFS::load(NFS_ROOT.'/base/DB.php');
 DB::connect(NFS::load(CORE_ROOT.'/config/db.php'));
 
