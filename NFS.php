@@ -65,7 +65,10 @@ NFS::load(NFS_ROOT.'/base/Model.php');
 NFS::load(NFS_ROOT.'/base/Controller.php');
 
 NFS::load(NFS_ROOT.'/base/DB.php');
-DB::connect(NFS::load(CORE_ROOT.'/config/db.php'));
+DB::init(NFS::load(CORE_ROOT.'/config/db.php'));
+
+NFS::load(NFS_ROOT.'/base/Cache.php');
+Cache::init(NFS::load(CORE_ROOT.'/config/cache.php'));
 
 $controllerName = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
 $actionName = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';

@@ -12,15 +12,16 @@ class Model extends Component {
 		if(isset(self::$models[$class])){
 			return self::$models[$class];
 		}
-				
+		
+		$file = MODEL_ROOT.$model.'Model'.$ext;
 		if(!is_file($file)){
-			$obj = new self();
+			$obj = new Model;
 			$obj->table=$model;
 			self::$models[$class] = $obj;
 			return $obj;
 		}
 		
-		$file = MODEL_ROOT.$model.'Model'.$ext;
+		
 		NFS::load($file);
 
 		$res = false;

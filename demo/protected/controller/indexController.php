@@ -7,14 +7,18 @@ class indexController extends Controller{
 	}
 	
 	public static function sayhello(){
+		//DB::init(C('db.0'));
+		$res1 = M('list')->getColumn(array('id'=>self::$id), 'code');
 
-		//DB::connect(C('db.0'));
-		$res1 = M('pepsi_code')->getColumn(array('id'=>self::$id), 'code');
-
-		//DB::connect(C('db.0'));
-		$res2 = M('pepsi_code')->getColumn(array('id'=>self::$id), 'voucher_id');
-		var_dump($res1, $res2);
+		//DB::init(C('db.1'));
+		$res2 = M('list')->getColumn(array('id'=>self::$id), 'code');
 		
+		//Cache::init('memcache')->set('name', 'zhupp');
+		//var_dump($res1, $res2, Cache::init('memcache')->get('name'));
+		//Cache::init('memcache')->get('name');
+		//Cache::init('memcache')->get('name');
+		Cache::init('redis')->get('name');
+		Cache::init('redis')->get('name');
 		self::view($res, 'sayHello');
 	}
 	

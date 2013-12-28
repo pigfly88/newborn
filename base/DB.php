@@ -7,17 +7,22 @@ class DB{
 	protected static $dbList = array();
 	protected static $db = null;
 	
-	public static function connect($config, $once=true){
+	public static function init($config, $once=true){
 		if(empty($config) || count($config)<1)	exit('db config is empty');
 		
 		$init = isset($config[0]) ? $config[mt_rand(0, count($config)-1)] : $config;
-
+		
 		if(!$init['dsn'])	throw new NFSException('db config parse error');
 		
 		if(!isset(self::$dbList[$init['dsn']])){	
 			try{
 				$charset = self::getCharset($init['dsn']);
-			    $db = new PDO($init['dsn'], $init['username'], $init['password'],array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}'"));
+			    $db = new PDO($init['dsn'], $init['username'], $init['password'],
+			    array(
+				    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}'",
+				    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+				    PDO::ATTR_TIMEOUT => 10,
+			    ));
 			    
 			    //关闭本地模拟prepare
 			    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -72,7 +77,7 @@ class DB{
 		}
 	}
 	
-	public static function fetchAll($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC, $fetch_argument){
+	public static function fetchAll($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC){
 		$stmt = self::statement($sql, $param);
 		
 		if($stmt->execute()){
