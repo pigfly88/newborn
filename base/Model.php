@@ -4,7 +4,7 @@ class Model extends Component {
 	protected static $models;
 	
 	protected function __init(){
-		
+		DB::init(NFS::load(CORE_ROOT.'/config/db.php'));
 	}
 	
 	public static function load($model, $ext='.php'){
@@ -60,6 +60,28 @@ class Model extends Component {
 	public function table(){
 		return $this->table ? $this->table : substr($this->classname(), 0, -5);
 	}
+	
+	public function sql(){
+		
+		
+	}
+	
+	public function where(){
+		
+	}
+	
+	public function select(){
+		
+	}
+	
+	public function orderby(){
+		
+	}
+	
+	public function limit(){
+		
+	}
+	
 	
 	protected function buildWhere($where){
 		$keys = ' 1=1 ';
