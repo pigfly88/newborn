@@ -1,6 +1,6 @@
 <?php
 /**
- * 加载模型
+ * 加载模型（只实例化一次）
  *
  * @param string $model
  * @return object
@@ -11,11 +11,22 @@ function M($model=''){
 }
 
 /**
- * 读取配置文件
+ * 加载控制器（只实例化一次）
+ *
+ * @param string $model
+ * @return object
+ */
+function C($controller){
+	if(empty($controller))	return;
+	return Controller::loadController(substr(CONTROLLER, 0, -10));
+}
+
+/**
+ * 读取文件
  *
  * @param string $path
  */
-function C($path, $ext='.php'){
+function F($path, $ext='.php'){
 	static $config;
 	if(isset($config[$path.$ext])) return $config[$path.$ext];
 	

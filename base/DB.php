@@ -9,10 +9,10 @@ class DB{
 	
 	public static function init($config, $once=true){
 		if(empty($config) || count($config)<1)	exit('db config is empty');
+
+		$init = $config[array_rand($config)];//随机选取一台数据库
 		
-		$init = isset($config[0]) ? $config[mt_rand(0, count($config)-1)] : $config;
-		
-		if(!$init['dsn'])	throw new NFSException('db config parse error');
+		if(!isset($init['dsn']))	throw new NFSException('db config parse error');
 		
 		if(!isset(self::$dbList[$init['dsn']])){	
 			try{

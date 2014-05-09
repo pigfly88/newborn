@@ -7,13 +7,15 @@
  * @link           https://github.com/justlikeheaven/NFS.git
  */
 define('TIME', time());
-define('NFS_ROOT', dirname(__FILE__).'/');
+!defined('NFS_ROOT') && define('NFS_ROOT', dirname(__FILE__).'/');
 define('PROTECT_FOLDER', 'protected');
-define('CORE_ROOT', APP_ROOT.PROTECT_FOLDER.'/');
-define('MODEL_ROOT', CORE_ROOT.'model/');
-define('CONTROLLER_ROOT', CORE_ROOT.'controller/');
-define('VIEW_ROOT', CORE_ROOT.'view/');
-define('CONFIG_ROOT', CORE_ROOT.'config/');
+define('PUBLIC_FOLDER', 'public');
+define('PROTECT_ROOT', APP_ROOT.PROTECT_FOLDER.'/');
+define('PUBLIC_ROOT', APP_ROOT.PUBLIC_FOLDER.'/');
+define('MODEL_ROOT', PROTECT_ROOT.'model/');
+define('CONTROLLER_ROOT', PROTECT_ROOT.'controller/');
+define('VIEW_ROOT', PUBLIC_ROOT.'view/');
+define('CONFIG_ROOT', PROTECT_ROOT.'config/');
 
 
 class NFS{
@@ -75,6 +77,7 @@ define('CONTROLLER', $controllerName);
 define('ACTION', $actionName);
 
 $controllerFile = CORE_ROOT."/controller/{$controllerName}.php";
+
 try{
 	NFS::load($controllerFile);	
 	$controller = new $controllerName();	

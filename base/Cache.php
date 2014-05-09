@@ -40,6 +40,7 @@ class Cache extends Component {
 			}
 		}else{
 			$name = strtolower($config);
+			F('');
 			if(isset(self::$cache[$name]))	return self::$cache[$name];
 		}
 	}

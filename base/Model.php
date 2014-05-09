@@ -4,7 +4,7 @@ class Model extends Component {
 	protected static $models;
 	
 	protected function __init(){
-		DB::init(NFS::load(CORE_ROOT.'/config/db.php'));
+		DB::init(NFS::load(PROTECT_ROOT.'/config/db.php'));
 	}
 	
 	public static function load($model, $ext='.php'){
