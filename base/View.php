@@ -1,10 +1,9 @@
 <?php
 class View extends Component {
 	public static function load($var=array(), $view='', $ext='.html'){
-		$view = empty($view) ? ACTION : $view;
+		$view = empty($view) ? NFS::$action : $view;
 		$data = $var;
-		var_dump($data);exit;
-		include VIEW_ROOT.$view.$ext;
+		include APP_ROOT.DS.'view'.DS.$view.$ext;
 	}
 	
 }

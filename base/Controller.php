@@ -1,15 +1,17 @@
 <?php
 class Controller extends Component {
-	static $obj = array();
+	protected static $obj = array();
+	
 	public function index(){
 		echo "Hello, I'm NFS!";
 	}
 	
-	protected function view($data=array(), $view=''){
+	protected function display($data=array(), $view=''){
+		NFS::load(NFS_ROOT.DS.'base'.DS.'View.php');
 		View::load($data, $view);
 	}
 	
-	public static function loadController($controller){
+	public static function load($controller){
 		$class = $controller.'Controller';
 		if(isset(self::$obj[$class])){
 			echo 'static';
@@ -29,13 +31,20 @@ class Controller extends Component {
 		return $res;
 	}
 	
-	public static function loadModel($model){
-		$model = empty($model) ? substr(CONTROLLER, 0, -10) : $model;
-		return Model::load($model);
+	public static function model($model=''){
+		NFS::load(NFS_ROOT.DS.'base'.DS.'Model.php');
+		$model = empty($model) ? substr(NFS::$controller, 0, -10).'Model' : $model.'Model';
+		
+		return new $model();
 	}
 	
 	protected function jump(){
 		
 	}
 	
+	public function __call($name, $arguments){
+		self::model()->getAll();
+    }
+    
+    
 }

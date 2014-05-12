@@ -3,8 +3,12 @@ class Model extends Component {
 	protected $table='';
 	protected static $models;
 	
+
 	protected function __init(){
-		DB::init(NFS::load(PROTECT_ROOT.'/config/db.php'));
+		NFS::load(NFS_ROOT.DS.'base'.DS.'DB.php');
+		$config = NFS::load(APP_ROOT.DS.'config'.DS.'db.php');
+
+		DB::init($config);
 	}
 	
 	public static function load($model, $ext='.php'){
@@ -31,7 +35,7 @@ class Model extends Component {
 		return $res;
 	}
 	
-	public function getAll($where, $fields='*'){
+	public function getAll($where='', $fields='*'){
 		return DB::fetchAll(self::buildSelect($where, $fields), self::buildValues($where));
 	}
 	

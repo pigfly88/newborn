@@ -3,15 +3,23 @@
  * 数据库操作类
  *
  */
-class DB{
+class DB extends Component {
 	protected static $dbList = array();
 	protected static $db = null;
 	
-	public static function init($config, $once=true){
-		if(empty($config) || count($config)<1)	exit('db config is empty');
+	public static function init($config){
+		if(empty($config) || !is_array($config))
+			exit('db config is empty');
 
-		$init = $config[array_rand($config)];//随机选取一台数据库
-		
+		//随机选取两台数据库，一个读，一个写。
+		/*
+		$init = array(
+			$config['read'][array_rand($config['read'])],
+			$config['write'][array_rand($config['write'])],
+		);
+		*/
+		$init = $config['read'][array_rand($config['read'])];
+
 		if(!isset($init['dsn']))	throw new NFSException('db config parse error');
 		
 		if(!isset(self::$dbList[$init['dsn']])){	

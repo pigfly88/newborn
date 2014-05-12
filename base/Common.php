@@ -1,25 +1,4 @@
 <?php
-/**
- * 加载模型（只实例化一次）
- *
- * @param string $model
- * @return object
- */
-function M($model=''){
-	$model = empty($model) ? substr(CONTROLLER, 0, -10) : $model;
-	return Model::load($model);
-}
-
-/**
- * 加载控制器（只实例化一次）
- *
- * @param string $model
- * @return object
- */
-function C($controller){
-	if(empty($controller))	return;
-	return Controller::loadController(substr(CONTROLLER, 0, -10));
-}
 
 /**
  * 读取文件

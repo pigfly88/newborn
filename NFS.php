@@ -1,32 +1,34 @@
 <?php
 /**
- * NFS
+ * NFS框架初始化文件
  *
  * @version        2013 Fri Dec 27 09:50:23 GMT 2013
- * @author         Barry <328877098@qq.com>
+ * @author         justlikeheaven <328877098@qq.com>
  * @link           https://github.com/justlikeheaven/NFS.git
  */
-define('TIME', time());
-!defined('NFS_ROOT') && define('NFS_ROOT', dirname(__FILE__).'/');
-define('PROTECT_FOLDER', 'protected');
-define('PUBLIC_FOLDER', 'public');
-define('PROTECT_ROOT', APP_ROOT.PROTECT_FOLDER.'/');
-define('PUBLIC_ROOT', APP_ROOT.PUBLIC_FOLDER.'/');
-define('MODEL_ROOT', PROTECT_ROOT.'model/');
-define('CONTROLLER_ROOT', PROTECT_ROOT.'controller/');
-define('VIEW_ROOT', PUBLIC_ROOT.'view/');
-define('CONFIG_ROOT', PROTECT_ROOT.'config/');
 
+//NFS框架根目录
+define('NFS_ROOT', __DIR__);
+
+//开始时间
+define('TIME', time());
+
+//文件分隔符
+define('DS', DIRECTORY_SEPARATOR);
 
 class NFS{
-	static $loaded;
+	protected static $_loaded;
 	
-	public static function load($file){		
-		$res = false;
+	public static $controller;
+	public static $action;	
+	public static $approot;
+	
+	public static function load($file){
+		$res = true;
 		
-		if(!isset(self::$loaded[$file])){
+		if(!isset(self::$_loaded[$file])){
 			if(is_file($file) && $res = require($file)){
-				self::$loaded[$file] = true;
+				self::$_loaded[$file] = true;
 			}
 		}
 		
@@ -34,54 +36,57 @@ class NFS{
 	}
 	
 	public static function loaded($file){
-		return true===self::$loaded[$file] ? true : false;
+		return true===self::$_loaded[$file] ? true : false;
 	}
 	
-	public static function autoload($className){
-		$basePath = NFS_ROOT.'base/';
-		$helperPath = NFS_ROOT.'helper/';
-		$ext = '.php';
-
+	public static function autoload($class){
+		
 		$res = false;
+		$ext = '.php';
 		
-		if(true!==self::$loaded[$basePath.$className.$ext])
-			$res = self::load($basePath.$className.$ext);
+		if(false!==strpos($class, 'Controller'))
+			$res = self::load(APP_ROOT.DS.'Controller'.DS.$class.$ext);
+		else if(false!==strpos($class, 'Model'))
+			$res = self::load(APP_ROOT.DS.'Model'.DS.$class.$ext);
 		
-		if(true!==self::$loaded[$helperPath.$className.$ext])
-			$res = self::load($helperPath.$className.$ext);
-			
-		if(true!==self::$loaded[CONTROLLER_ROOT.$className.$ext]){
-			$res = self::load(CONTROLLER_ROOT.$className.$ext);
-		}
 		return $res;
 	}
 	
+	public static function run(){
+		NFS::load(NFS_ROOT.'/base/Common.php');
+		NFS::load(NFS_ROOT.'/base/NFSException.php');
+		NFS::load(NFS_ROOT.'/base/Component.php');
+		NFS::load(NFS_ROOT.'/base/Component.php');
+		NFS::load(NFS_ROOT.'/base/Controller.php');
+		spl_autoload_register(array(self, 'autoload'));
+		
+		
+		self::$controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
+		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
+		$controllerFile = APP_ROOT.DS.'controller'.DS.self::$controller.'.php';
+		
+		/**
+		 * 当调用到不存在的控制器时，智能调用方法，方便应付一些简单的功能，这样就不需要编写控制器了。
+		 */
+		if(!file_exists($controllerFile)){
+			//$c = new Controller();
+			//$c->$action();
+		}else{
+			//try{
+				$controller = new self::$controller();	
+				$controller->$action();
+			//}catch (Exception $e){
+				var_dump($e);
+			//}
+		}
+	}
+	
+	
+   
+   
 }
 
-spl_autoload_register(array('NFS', 'autoload'));
 
-NFS::load(NFS_ROOT.'/base/Common.php');
-NFS::load(NFS_ROOT.'/base/NFSException.php');
-NFS::load(NFS_ROOT.'/base/Component.php');
-NFS::load(NFS_ROOT.'/base/Model.php');
-NFS::load(NFS_ROOT.'/base/Controller.php');
-
-NFS::load(NFS_ROOT.'/base/DB.php');
 
 //NFS::load(NFS_ROOT.'/base/Cache.php');
 //Cache::init(NFS::load(CORE_ROOT.'/config/cache.php'));
-
-$controllerName = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
-$actionName = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
-define('CONTROLLER', $controllerName);
-define('ACTION', $actionName);
-
-$controllerFile = CORE_ROOT."/controller/{$controllerName}.php";
-
-try{
-	NFS::load($controllerFile);	
-	$controller = new $controllerName();	
-	$controller->$actionName();
-}catch (Exception $e){
-	var_dump($e);
-}
