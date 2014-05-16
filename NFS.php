@@ -7,14 +7,21 @@
  * @link           https://github.com/justlikeheaven/NFS.git
  */
 
-//NFS框架根目录
-define('NFS_ROOT', __DIR__);
-
 //开始时间
 define('TIME', time());
 
 //文件分隔符
 define('DS', DIRECTORY_SEPARATOR);
+
+//NFS框架根目录
+define('NFS_ROOT', __DIR__.DS);
+
+define('NFS_BASE_ROOT', NFS_ROOT.'base'.DS);
+
+define('CONTROLLER_ROOT', APP_ROOT.DS.'controller'.DS);
+define('MODEL_ROOT', APP_ROOT.DS.'model'.DS);
+define('CONFIG_ROOT', APP_ROOT.DS.'config'.DS);
+define('VIEW_ROOT', APP_ROOT.DS.'view'.DS);
 
 class NFS{
 	protected static $_loaded;
@@ -24,15 +31,10 @@ class NFS{
 	public static $approot;
 	
 	public static function load($file){
-		$res = true;
-		
-		if(!isset(self::$_loaded[$file])){
-			if(is_file($file) && $res = require($file)){
-				self::$_loaded[$file] = true;
-			}
-		}
-		
-		return $res;
+		if(!isset(self::$_loaded[$file]))
+			self::$_loaded[$file] = require($file);
+
+		return self::$_loaded[$file];
 	}
 	
 	public static function loaded($file){
@@ -48,7 +50,7 @@ class NFS{
 			$res = self::load(APP_ROOT.DS.'Controller'.DS.$class.$ext);
 		else if(false!==strpos($class, 'Model'))
 			$res = self::load(APP_ROOT.DS.'Model'.DS.$class.$ext);
-		
+            
 		return $res;
 	}
 	
@@ -58,6 +60,7 @@ class NFS{
 		NFS::load(NFS_ROOT.'/base/Component.php');
 		NFS::load(NFS_ROOT.'/base/Component.php');
 		NFS::load(NFS_ROOT.'/base/Controller.php');
+		
 		spl_autoload_register(array(self, 'autoload'));
 		
 		
@@ -65,20 +68,13 @@ class NFS{
 		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
 		$controllerFile = APP_ROOT.DS.'controller'.DS.self::$controller.'.php';
 		
-		/**
-		 * 当调用到不存在的控制器时，智能调用方法，方便应付一些简单的功能，这样就不需要编写控制器了。
-		 */
-		if(!file_exists($controllerFile)){
-			//$c = new Controller();
-			//$c->$action();
-		}else{
-			//try{
-				$controller = new self::$controller();	
-				$controller->$action();
-			//}catch (Exception $e){
-				var_dump($e);
-			//}
-		}
+		//try{
+			$controller = new self::$controller();	
+			$controller->$action();
+		//}catch (Exception $e){
+			//var_dump($e);
+		//}
+		
 	}
 	
 	

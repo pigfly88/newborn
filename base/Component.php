@@ -5,6 +5,10 @@ abstract class Component{
             $this->__init();
 	}
 	
+	public function index(){
+		echo "Hello, I'm NFS!";
+	}
+	
 	protected static function calledClass(){
 		if(function_exists('get_called_class'))
 			return get_called_class();
@@ -12,7 +16,7 @@ abstract class Component{
 			exit('get_called_class fail');
 	}
 	
-	function __destruct() {
+	public function __destruct() {
        //var_dump($this);echo 'destruct...';
    }
 	

@@ -3,7 +3,6 @@ class Model extends Component {
 	protected $table='';
 	protected static $models;
 	
-
 	protected function __init(){
 		NFS::load(NFS_ROOT.DS.'base'.DS.'DB.php');
 		$config = NFS::load(APP_ROOT.DS.'config'.DS.'db.php');
@@ -11,16 +10,23 @@ class Model extends Component {
 		DB::init($config);
 	}
 	
-	public static function load($model, $ext='.php'){
+	/**
+	 * 加载模型
+	 *
+	 * @param String $model
+	 * @return unknown
+	 * 
+	 */
+	public static function loadModel($model){
 		$class = $model.'Model';
 		if(isset(self::$models[$class])){
 			return self::$models[$class];
 		}
 		
-		$file = MODEL_ROOT.$model.'Model'.$ext;
+		$file = MODEL_ROOT.$model.'Model.php';
 		if(!is_file($file)){
-			$obj = new Model;
-			$obj->table=$model;
+			$obj = new Model();
+			$obj->table = $model;
 			self::$models[$class] = $obj;
 			return $obj;
 		}
