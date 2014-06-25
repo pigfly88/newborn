@@ -17,7 +17,7 @@ abstract class Component{
 	}
 	
 	public function __destruct() {
-       //var_dump($this);echo 'destruct...';
+       var_dump($this);echo 'destructing...';
    }
 	
 	

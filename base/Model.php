@@ -1,6 +1,7 @@
 <?php
 class Model extends Component {
-	protected $table='';
+	protected $table = '';
+    public static $prefix = '';
 	protected static $models;
 	
 	protected function __init(){
@@ -17,28 +18,25 @@ class Model extends Component {
 	 * @return unknown
 	 * 
 	 */
-	public static function loadModel($model){
+	public static function load($model){
 		$class = $model.'Model';
+        
+        //只实例化一次
 		if(isset(self::$models[$class])){
 			return self::$models[$class];
 		}
 		
-		$file = MODEL_ROOT.$model.'Model.php';
-		if(!is_file($file)){
-			$obj = new Model();
+		$file = MODEL_ROOT.$model.'Model.php';			
+		if(NFS::load($file)){
+            $obj = new $class();
+            self::$models[$class] = $obj;
+        }else{
+            $obj = new Model();
 			$obj->table = $model;
 			self::$models[$class] = $obj;
-			return $obj;
-		}
-		
-		
-		NFS::load($file);
-
-		$res = false;
-		if($res = new $class()){
-			self::$models[$class] = $res;
-		}
-		return $res;
+        }
+        //method_exists($obj, '__init') && $obj->__init();
+		return $obj;
 	}
 	
 	public function getAll($where='', $fields='*'){

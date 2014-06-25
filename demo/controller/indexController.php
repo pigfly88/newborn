@@ -13,18 +13,20 @@ class indexController extends Controller{
 	
 	//模型加载示例
 	public function model_load(){
+        $res = array();
+        
 		//自定义模型
-		$res = $this->loadModel('index')->getCode();
+		$res = Model::load('index')->getCode();
 		var_dump($res);
 		
 		//未定义模型
-		$res = $this->loadModel('tbl_post')->getAll();
+		$res = Model::load('tbl_post')->getAll();
 		var_dump($res);
 	}
 	
 	//控制器调度示例
 	public function controller_dispatch(){
-		$res = $this->loadController('list')->index();
+		$res = Controller::load('list')->index();
 		var_dump($res);
 	}
 	

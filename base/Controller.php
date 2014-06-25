@@ -6,18 +6,12 @@ class Controller extends Component{
 		View::load($data, $view);
 	}
 	
-	public function loadController($controller){
+	public function load($controller){
 		$class = $controller.'Controller';		
 		$file = CONTROLLER_ROOT.$class.'.php';
 		NFS::load($file);
 		
 		return new $class();
-	}
-	
-	public function loadModel($model=''){
-		NFS::load(NFS_ROOT.DS.'base'.DS.'Model.php');
-		$model = empty($model) ? substr(NFS::$controller, 0, -10) : $model;
-		return Model::loadModel($model);
 	}
 	
 	protected function jump(){
