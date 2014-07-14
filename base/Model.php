@@ -19,24 +19,23 @@ class Model extends Component {
 	 * 
 	 */
 	public static function load($model){
-		$class = $model.'Model';
+		$class = $model.MODEL_EXT;
         
         //只实例化一次
-		if(isset(self::$models[$class])){
+		if(is_object(self::$models[$class])){
 			return self::$models[$class];
 		}
 		
-		$file = MODEL_ROOT.$model.'Model.php';			
+		$file = MODEL_ROOT.$model.MODEL_EXT.PHP_EXT;			
 		if(NFS::load($file)){
-            $obj = new $class();
-            self::$models[$class] = $obj;
+            self::$models[$class] = new $class();
         }else{
             $obj = new Model();
 			$obj->table = $model;
 			self::$models[$class] = $obj;
         }
         //method_exists($obj, '__init') && $obj->__init();
-		return $obj;
+		return self::$models[$class];
 	}
 	
 	public function getAll($where='', $fields='*'){

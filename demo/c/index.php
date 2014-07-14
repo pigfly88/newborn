@@ -30,4 +30,8 @@ class indexController extends Controller{
 		var_dump($res);
 	}
 	
+    //工具包调度
+    public function helper_usage(){
+        NFS::helper('Socket')->send('Hi');
+    }
 }
