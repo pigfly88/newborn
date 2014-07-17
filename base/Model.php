@@ -1,14 +1,17 @@
 <?php
 class Model extends Component {
+    protected static $db = null;
 	protected $table = '';
-    public static $prefix = '';
+    public $prefix = 'tbl_';
 	protected static $models;
 	
-	protected function __init(){
-		NFS::load(NFS_ROOT.DS.'base'.DS.'DB.php');
-		$config = NFS::load(APP_ROOT.DS.'config'.DS.'db.php');
-
-		DB::init($config);
+	protected function db(){
+        if(!is_object(self::$db)){
+            NFS::load(NFS_BASE_ROOT.'DB.php');
+            $config = NFS::load(APP_ROOT.DS.CONFIG_FOLDER_NAME.DS.'db.php');
+            self::$db = DB::init($config);
+        }
+        return self::$db;
 	}
 	
 	/**
@@ -19,6 +22,7 @@ class Model extends Component {
 	 * 
 	 */
 	public static function load($model){
+        self::db();
 		$class = $model.MODEL_EXT;
         
         //只实例化一次
@@ -26,7 +30,8 @@ class Model extends Component {
 			return self::$models[$class];
 		}
 		
-		$file = MODEL_ROOT.$model.MODEL_EXT.PHP_EXT;			
+		$file = MODEL_ROOT.$model.MODEL_EXT.PHP_EXT;
+        
 		if(NFS::load($file)){
             self::$models[$class] = new $class();
         }else{
@@ -65,7 +70,7 @@ class Model extends Component {
 	}
 	
 	public function table(){
-		return $this->table ? $this->table : substr($this->classname(), 0, -5);
+		return $this->table ? $this->prefix.$this->table : $this->prefix.substr($this->classname(), 0, -5);
 	}
 	
 	public function sql(){

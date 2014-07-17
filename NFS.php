@@ -46,8 +46,15 @@ class NFS{
     protected static $_obj;
     
     //加载文件
-    public static function load($file){
-		return !isset(self::$_loaded[$file]) && self::$_loaded[$file] = require($file);
+    public static function load($file=''){
+		if(empty($file)){
+            return self::$_loaded;
+        }elseif(!is_file($file)){
+            return false;
+        }elseif(!isset(self::$_loaded[$file])){
+            self::$_loaded[$file] = include($file);
+        }
+        return self::$_loaded[$file];
 	}
 	
     //这个文件加载过了吗？
@@ -60,7 +67,7 @@ class NFS{
 		$res = false;
 		
 		if(false!==strpos($class, 'Controller'))
-			$res = self::load(APP_ROOT.DS.CONTROLLER_NAME.DS.$class.$ext);
+			$res = self::load(APP_ROOT.DS.CONTROLLER_NAME.DS.$class.PHP_EXT);
 		else if(false!==strpos($class, 'Model'))
 			$res = self::load(APP_ROOT.DS.'Model'.DS.$class.PHP_EXT);
             
@@ -72,19 +79,19 @@ class NFS{
         return self::$_obj[$obj];
     }
     
-	public static function run(){
+	public static function run(){      
 		NFS::load(NFS_ROOT.'/base/Common.php');
 		NFS::load(NFS_ROOT.'/base/NFSException.php');
 		NFS::load(NFS_ROOT.'/base/Component.php');
-		NFS::load(NFS_ROOT.'/base/Component.php');
 		NFS::load(NFS_ROOT.'/base/Controller.php');
-		
+		NFS::load(NFS_ROOT.'/base/Model.php');
+        
 		//spl_autoload_register(array(self, 'autoload'));
 		
 		
 		self::$controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
 		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
-		$controllerFile = APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS.PHP_EXT;
+		$controllerFile = APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS.self::$controller.PHP_EXT;
 		require_once $controllerFile;
 		try{
 			$controller = new self::$controller();	
@@ -100,14 +107,15 @@ class NFS{
      * e.g:
      * NFS::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
      */
-	public static function __callStatic($folder, $class) {
-        if( !is_object( self::$_obj[$class[0]] ) ){
-            self::load(NFS_ROOT.$folder.DS.$class[0].PHP_EXT);
-            $arg = null && count($class)>1 && $arg = implode( ',', array_slice( $class, 1 ) );
-            self::$_obj[$class[0]] = new $class[0]($arg);
+	public static function __callStatic($folder, $arg) {
+        $class = explode('/', $arg[0]);
+        if(!is_object(self::$_obj[$arg[0]])){
+            self::load(NFS_ROOT.$folder.DS.$arg[0].PHP_EXT);
+            $arg = null && count($class)>1 && $arg = implode(',', array_slice($class, 1));
+            self::$_obj[$arg[0]] = new $class[count($class)-1]($arg);
         }
         
-        return self::$_obj[$class[0]];
+        return self::$_obj[$arg[0]];
     }
    
    

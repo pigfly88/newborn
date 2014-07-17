@@ -44,4 +44,5 @@ class Cache extends Component {
 			if(isset(self::$cache[$name]))	return self::$cache[$name];
 		}
 	}
+
 }

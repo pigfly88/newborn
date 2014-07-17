@@ -16,4 +16,18 @@ class NFSException extends Exception {
 		}
 		*/
 	}
+    
+    public function log(){
+        foreach((array)$this->getTrace() as $v){
+            $args = var_export($this['args'], true);
+            $log .= "[{$this->getFile()};{$this->getLine()};{$this->getFunction()};{$args};] \n";
+        }
+        $error = $this->getCode() . $this->getMessage() . ' '.  $log . date("H:i:s") . '[]';
+        echo $error;
+    }
+    
+    
+    
+    
+    
 }
