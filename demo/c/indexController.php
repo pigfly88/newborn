@@ -8,6 +8,8 @@ class indexController extends Controller{
 	
 	//模板加载示例
 	function index(){
+        Config::set(array('c'=>1));
+        var_dump(Config::$config);
 		$this->display();
 	}
 	

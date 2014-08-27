@@ -79,7 +79,8 @@ class NFS{
         return self::$_obj[$obj];
     }
     
-	public static function run(){      
+	public static function run(){
+        NFS::load(NFS_ROOT.'/base/Config.php');
 		NFS::load(NFS_ROOT.'/base/Common.php');
 		NFS::load(NFS_ROOT.'/base/NFSException.php');
 		NFS::load(NFS_ROOT.'/base/Component.php');
