@@ -7,7 +7,8 @@ class indexController extends Controller{
 	}
 	
 	//模板加载示例
-	function index(){
+	public function index(){
+
 		$this->display();
 	}
 	
@@ -16,12 +17,12 @@ class indexController extends Controller{
         $res = array();
         
 		//自定义模型
-		$res = Model::load('index')->getCode();
+		$res = Model::load('user');
 		var_dump($res);
         
 		//未定义模型
-		$res = Model::load('article')->getAll();
-        var_dump($res);
+		//$res = Model::load('article')->getAll();
+        //var_dump($res);
 	}
 	
 	//控制器调度示例
@@ -34,4 +35,15 @@ class indexController extends Controller{
     public function helper_usage(){
         NFS::helper('Socket')->send('Hi');
     }
+    
+    //自动完成-表单添加操作-前置方法
+    public function nfs_before_user_add(){
+    	echo 1;
+    }
+    
+    //自动完成-表单添加操作-后置方法
+    public function user_add(){
+    	
+    }
+    
 }

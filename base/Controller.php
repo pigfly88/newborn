@@ -22,5 +22,12 @@ class Controller extends Component{
 		//self::model()->getAll();
     }
     
+    public function json($arr){
+    	echo json_encode($arr);
+    }
+    
+    public function add(){
+    	$c = substr($this->caller, 0, CONTROLLER_EXT);
+    }
     
 }

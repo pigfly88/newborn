@@ -7,6 +7,10 @@
  * @link           https://github.com/justlikeheaven/NFS.git
  */
 
+define('VERSION', '1.0');
+
+define('FRAMEWORK', 'NFS');
+
 //开始时间
 define('TIME', time());
 
@@ -22,13 +26,36 @@ define('CONTROLLER_EXT', 'Controller');
 //Model文件修饰符
 define('MODEL_EXT', 'Model');
 
+//默认控制器
+define('DEFAULT_CONTROLLER', 'index');
+
+//默认方法
+define('DEFAULT_ACTION', 'index');
+
+define('BEFORE', 'before');
+
+define('AFTER', 'after');
+
+define('SEPARATOR', '_');
+
+define('COMMON_FLAG', '~~');
+
 //NFS框架根目录
 define('NFS_ROOT', __DIR__.DS);
+
+//NFS base目录
 define('NFS_BASE_ROOT', NFS_ROOT.'base'.DS);
 
+//项目控制器文件夹名称
 define('CONTROLLER_FOLDER_NAME', 'c');
+
+//项目模型文件夹名称
 define('MODEL_FOLDER_NAME', 'm');
+
+//项目模板文件夹名称
 define('VIEW_FOLDER_NAME', 'v');
+
+//项目配置文件夹名称
 define('CONFIG_FOLDER_NAME', 'cfg');
 
 define('CONTROLLER_ROOT', APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS);
@@ -66,10 +93,10 @@ class NFS{
 		
 		$res = false;
 		
-		if(false!==strpos($class, 'Controller'))
+		if(false!==strpos($class, CONTROLLER_EXT))
 			$res = self::load(APP_ROOT.DS.CONTROLLER_NAME.DS.$class.PHP_EXT);
-		else if(false!==strpos($class, 'Model'))
-			$res = self::load(APP_ROOT.DS.'Model'.DS.$class.PHP_EXT);
+		else if(false!==strpos($class, MODEL_EXT))
+			$res = self::load(APP_ROOT.DS.MODEL_EXT.DS.$class.PHP_EXT);
             
 		return $res;
 	}
@@ -87,19 +114,49 @@ class NFS{
 		NFS::load(NFS_ROOT.'/base/Model.php');
         
 		//spl_autoload_register(array(self, 'autoload'));
-		
-		
-		self::$controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).'Controller' : 'indexController';
-		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : 'index';
+
+		self::$controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).CONTROLLER_EXT : DEFAULT_CONTROLLER.CONTROLLER_EXT;
+		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : DEFAULT_ACTION;
 		$controllerFile = APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS.self::$controller.PHP_EXT;
-		require_once $controllerFile;
-		try{
-			$controller = new self::$controller();	
-			$controller->$action();
-		}catch (Exception $e){
-			var_dump($e);
+		if(is_file($controllerFile)){
+			require_once $controllerFile;
+			try{
+				$controller = new self::$controller();	
+				method_exists($controller, $action) && $controller->$action();
+			}catch (Exception $e){
+				var_dump($e);
+			}
+		}else{
+			exit($controllerFile.' not found');
 		}
-		
+		/**
+		 * 通用方法调度
+		 * 应付普通的增删改查功能
+		 */
+		if(substr($action, 0, 2) == str_repeat(SEPARATOR, 2)){
+			//调度前执行before方法
+			$action_before = $action.SEPARATOR.BEFORE;
+			method_exists($controller, $action_before) && $controller->$action_before();
+			
+			list($func, $table) = explode(SEPARATOR, substr($action, 2));
+			if(in_array($func, array('insert', 'update', 'delete', 'select'))){
+				//根据表字段过滤请求参数
+				$m = Model::load($table);
+				//var_dump($m->columns);exit;
+				if(is_array($m->columns) && !empty($m->columns)){
+					foreach ($m->columns as $v){
+						if(isset($_REQUEST[$v['COLUMN_NAME']])){
+							$data[$v['COLUMN_NAME']] = $_REQUEST[$v['COLUMN_NAME']];
+						}
+					}
+				}
+				$m->$func($data);
+			}
+			
+			//调度后执行after方法
+			$action_after = $action.SEPARATOR.AFTER;
+			method_exists($controller, $action_after) && $controller->$action_after($__res);
+		}
 	}
 	
     /**
@@ -108,8 +165,8 @@ class NFS{
      * NFS::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
      */
 	public static function __callStatic($folder, $arg) {
-        $class = explode('/', $arg[0]);
         if(!is_object(self::$_obj[$arg[0]])){
+        	$class = explode('/', $arg[0]);
             self::load(NFS_ROOT.$folder.DS.$arg[0].PHP_EXT);
             $arg = null && count($class)>1 && $arg = implode(',', array_slice($class, 1));
             self::$_obj[$arg[0]] = new $class[count($class)-1]($arg);

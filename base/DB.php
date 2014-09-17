@@ -65,16 +65,21 @@ class DB extends Component {
 		}
 		
 		if(!is_null($param)){
+			$i=1;
 			if(is_array($param) && !empty($param)){
-				$i=1;
 				foreach ($param as $v){
 					$stmt->bindParam($i++, $v);
 				}
 			}else{
-				$stmt->bindParam(1, $v);
+				$stmt->bindParam($i, $v);
 			}
 		}
 		return $stmt;
+	}
+	
+	public static function execute($sql, $param=null){
+		$stmt = self::statement($sql, $param);
+		return $stmt->execute();
 	}
 	
 	public static function fetch($sql, $param=null){
@@ -100,5 +105,11 @@ class DB extends Component {
 			return $stmt->fetchColumn();
 		}
 	}
+
+	
+	
+	
+	
+	
 	
 }

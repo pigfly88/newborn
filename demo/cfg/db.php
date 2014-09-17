@@ -2,7 +2,7 @@
 return array(
 	'read'=>array(
 		array(
-			'dsn'=>'mysql:host=localhost;dbname=test;charset=utf8',
+			'dsn'=>'mysql:host=localhost;dbname=nfs;charset=utf8',
 			'username'=>'root',
 			'password'=>'',
 		),
@@ -10,7 +10,7 @@ return array(
 	
 	'write'=>array(
 		array(
-			'dsn'=>'mysql:host=localhost;dbname=test;charset=utf8',
+			'dsn'=>'mysql:host=localhost;dbname=nfs;charset=utf8',
 			'username'=>'root',
 			'password'=>'',
 		),
