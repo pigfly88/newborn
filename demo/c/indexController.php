@@ -7,8 +7,8 @@ class indexController extends Controller{
 	}
 	
 	//模板加载示例
-	public function index(){
 
+	public function index(){
 		$this->display();
 	}
 	
