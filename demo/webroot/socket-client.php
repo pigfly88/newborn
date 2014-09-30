@@ -1,18 +1,17 @@
 <?php
 
-$fp = stream_socket_client("tcp://127.0.0.1:1234", $errno, $errstr, 30);
-if (!$fp) {
+$server = stream_socket_client("tcp://127.0.0.1:9987", $errno, $errstr, 30);
+if (FLASE === $server) {
 	echo "$errstr ($errno)<br />\n";
 } else {
 
-	fwrite($fp, 'hello, server!');
+	fwrite($server, 'hello, server!');
 	
 }
-while($out = fread($fp, 8192)) {
+while($out = fread($server, 8192)) {
 	echo "server say: {$out}\n";
-	
 }
-fclose($fp);
+fclose($server);
 exit;
 
 

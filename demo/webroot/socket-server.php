@@ -1,22 +1,34 @@
 <?php
 set_time_limit(0);
 /* Open a server socket to port 1234 on localhost */
-$socket = stream_socket_server('tcp://127.0.0.1:1234');
-if(!$socket){
-	echo 'socket server create success';
+$context = stream_context_create();
+$server = @stream_socket_server('tcp://127.0.0.1:9987', $errno, $errstr, STREAM_SERVER_BIND|STREAM_SERVER_LISTEN, $context);
+if(FALSE === $server){
+	echo "socket server create [fail], {$errstr}[{$errno}]";
+	exit;
 }else{
-	echo 'socket server create fail';
+	echo 'socket server create [success]';
 }
-/* Accept a connection */
-
+/*
 do {
-	$conn = stream_socket_accept($socket);
-	$clientmsg = fread($conn, 8192);
-	echo "client say: {$clientmsg}\n";
-	fwrite($conn, "hello, client!\n");
-	fclose($conn);
+	$pkt = stream_socket_recvfrom($server, 1, 0, $peer);
+	echo "$peer\n";
+	stream_socket_sendto($server, date("D M j H:i:s Y\r\n"), 0, $peer);
+} while ($pkt !== false);
+*/
+do {
+	$client = @stream_socket_accept($server, 5);
+	if(FALSE !== $client){
+		$msg = fread($client, 8192);
+		echo "client say: {$msg}\n";
+		fwrite($client, "hello, client!");
+		fclose($client);
+	}
+	
+	
+	
 }while(true);
-echo 1111;
+
 
 /* Close it up */
 
