@@ -1,5 +1,5 @@
 <?php
-class userController extends Controller{
+class user_c extends Controller{
 	/*
 	public function __add_user_before(){
 		echo 'calling userController->__add_user_before()';

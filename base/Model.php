@@ -4,6 +4,7 @@ class Model extends Component {
 	protected $table = '';
 	public $columns = null;
     public $prefix = '';
+    public $debug = 0;//开启debug模式将会记录sql
 	protected static $models;
 	
 	protected function __init(){
@@ -101,9 +102,7 @@ class Model extends Component {
 		
 	}
 	
-	public function select(){
-		
-	}
+	
 	
 	public function orderby(){
 		
@@ -121,8 +120,8 @@ class Model extends Component {
 		return DB::execute(self::buildUpdate($data, $table));
 	}
 	
-	public function delete(){
-		return DB::execute(self::buildDelete($data, $table));
+	public function delete($where, $table=''){
+		return DB::execute(self::buildDelete($where, $table));
 	}
 	
 	public function insert($data, $table=''){

@@ -17,14 +17,17 @@ class Config {
     
     public function set($k, $v){
         $k = explode('.', $k);
-        $key = implode($glue, $pieces)
-        self::$config[$key]
+        $key = implode($glue, $pieces);
+        //self::$config[$key];
         return self::$config = array_merge(self::$config, $data);
     }
     
-    puiblic function get($k){
+    public function get($k){
         
     }
-}
 
-?>
+
+
+
+
+}

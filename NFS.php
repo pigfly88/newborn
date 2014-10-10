@@ -21,10 +21,10 @@ define('DS', DIRECTORY_SEPARATOR);
 define('PHP_EXT', '.php');
 
 //Controller文件修饰符
-define('CONTROLLER_EXT', 'Controller');
+define('CONTROLLER_EXT', '_c');
 
 //Model文件修饰符
-define('MODEL_EXT', 'Model');
+define('MODEL_EXT', '_m');
 
 //默认控制器
 define('DEFAULT_CONTROLLER', 'index');
@@ -133,6 +133,7 @@ class NFS{
 		/**
 		 * 通用方法调度
 		 * 应付普通的增删改查功能
+		 * 表名和字段经过加密之后放到表单，这边会解析出来，加密的token在配置文件中设置
 		 */
 		if(substr($action, 0, 2) == str_repeat(SEPARATOR, 2)){
 			//调度前执行before方法

@@ -1,5 +1,5 @@
 <?php
-class indexController extends Controller{
+class index_c extends Controller{
 	
 	//自动调用的初始化方法
 	protected function __init(){
