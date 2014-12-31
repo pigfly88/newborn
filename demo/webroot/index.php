@@ -9,5 +9,4 @@ define('APP_ROOT', dirname(__DIR__));
 
 require '../../NFS.php';
 
-NFS::core('Socket')->send('tcp://127.0.0.1:5555', 1);
-//NFS::run();
+NFS::run();

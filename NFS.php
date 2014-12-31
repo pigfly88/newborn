@@ -1,8 +1,4 @@
 <?php
-//$s = file_get_contents('https://bycdn5-i.akamaihd.net/data/id/1008/tables_id.data?v=14101317');
-$s = file_get_contents('4.data');
-
-file_put_contents('tables_id.data', gzcompress($s, 9));exit;
 /**
  * NFS框架初始化文件
  *

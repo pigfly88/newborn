@@ -33,7 +33,7 @@ class index_c extends Controller{
 	
     //工具包调度
     public function helper_usage(){
-        NFS::helper('Socket')->send('Hi');
+        NFS::helper('Socket')->send();
     }
     
     //自动完成-表单添加操作-前置方法
