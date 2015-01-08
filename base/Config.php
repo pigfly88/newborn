@@ -3,6 +3,12 @@
  * Description of Config
  *
  * @author BarryZhu
+ * 
+ * @uses
+ * $config = new Config('file');
+ * $data = array('time'=>date('Y-m-d H:i:s'));
+ * $config->set($data, 'config.php');
+ * //$config->set($data, 'cache');
  */
 class Config {
     public $type=0;

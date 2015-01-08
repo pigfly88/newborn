@@ -165,8 +165,15 @@ class Model extends Component {
 		return $sql;
 	}
 	
-	public function buildDelete(){
+	public function buildDelete($where, $table=''){
+		$wherestr = '1=1 ';
+		foreach ($where as $k=>$v){
+			$wherestr .= "AND `{$k}`={$v} ";
+		}
+		$table = empty($table) ? self::table() : $this->prefix.$table;
+		$sql = "DELETE FROM {$table} WHERE {$wherestr}";
 		
+		return $sql;
 	}
 	
 	public function buildUpdate(){

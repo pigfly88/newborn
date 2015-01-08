@@ -40,6 +40,8 @@ define('SEPARATOR', '_');
 
 define('COMMON_FLAG', '~~');
 
+define('TOKEN', base64_encode("I'm NFS"));
+
 //NFS框架根目录
 define('NFS_ROOT', __DIR__.DS);
 
@@ -152,7 +154,8 @@ class NFS{
 						}
 					}
 				}
-				$m->$func($data);
+				var_dump($data);
+				!empty($data) && $m->$func($data);
 			}
 			
 			//调度后执行after方法
