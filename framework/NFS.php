@@ -65,6 +65,8 @@ define('MODEL_ROOT', APP_ROOT.DS.MODEL_FOLDER_NAME.DS);
 define('CONFIG_ROOT', APP_ROOT.DS.CONFIG_FOLDER_NAME.DS);
 define('VIEW_ROOT', APP_ROOT.DS.VIEW_FOLDER_NAME.DS);
 
+require_once(NFS_BASE_ROOT.'Component.php');
+require_once(NFS_BASE_ROOT.'oo.php');
 class NFS{
 	protected static $_loaded;
 	
@@ -74,22 +76,7 @@ class NFS{
 	
     protected static $_obj;
     
-    //加载文件
-    public static function load($file=''){
-		if(empty($file)){
-            return self::$_loaded;
-        }elseif(!is_file($file)){
-            return false;
-        }elseif(!isset(self::$_loaded[$file])){
-            self::$_loaded[$file] = include($file);
-        }
-        return self::$_loaded[$file];
-	}
-	
-    //这个文件加载过了吗？
-	public static function loaded($file){
-		return true===self::$_loaded[$file] ? true : false;
-	}
+    
 	
 	public static function autoload($class){
 		
@@ -109,18 +96,20 @@ class NFS{
     }
     
 	public static function run(){
+		/*
         NFS::load(NFS_ROOT.'/base/Config.php');
 		NFS::load(NFS_ROOT.'/base/Common.php');
 		NFS::load(NFS_ROOT.'/base/NFSException.php');
 		NFS::load(NFS_ROOT.'/base/Component.php');
-		NFS::load(NFS_ROOT.'/base/Controller.php');
+		
 		NFS::load(NFS_ROOT.'/base/Model.php');
-        
+        */
 		//spl_autoload_register(array(self, 'autoload'));
-
-		self::$controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']).CONTROLLER_EXT : DEFAULT_CONTROLLER.CONTROLLER_EXT;
-		$action = self::$action = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : DEFAULT_ACTION;
-		$controllerFile = APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS.self::$controller.PHP_EXT;
+		self::$controller = $controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']) : DEFAULT_CONTROLLER;
+		self::$action = $act = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : DEFAULT_ACTION;
+		$ctl = oo::c($controller);
+		$ctl->$act();
+		/*
 		if(is_file($controllerFile)){
 			require_once $controllerFile;
 			try{
@@ -132,17 +121,19 @@ class NFS{
 		}else{
 			exit($controllerFile.' not found');
 		}
+		*/
 		/**
 		 * 通用方法调度
 		 * 应付普通的增删改查功能
 		 * 表名和字段经过加密之后放到表单，这边会解析出来，加密的token在配置文件中设置
 		 */
-		if(substr($action, 0, 2) == str_repeat(SEPARATOR, 2)){
+		/*
+		if(substr($act, 0, 2) == str_repeat(SEPARATOR, 2)){
 			//调度前执行before方法
-			$action_before = $action.SEPARATOR.BEFORE;
-			method_exists($controller, $action_before) && $controller->$action_before();
+			$act_before = $act.SEPARATOR.BEFORE;
+			method_exists($ctl, $act_before) && $ctl->$act_before();
 			
-			list($func, $table) = explode(SEPARATOR, substr($action, 2));
+			list($func, $table) = explode(SEPARATOR, substr($act, 2));
 			if(in_array($func, array('insert', 'update', 'delete', 'select'))){
 				//根据表字段过滤请求参数
 				$m = Model::load($table);
@@ -159,26 +150,13 @@ class NFS{
 			}
 			
 			//调度后执行after方法
-			$action_after = $action.SEPARATOR.AFTER;
-			method_exists($controller, $action_after) && $controller->$action_after($__res);
+			$act_after = $act.SEPARATOR.AFTER;
+			method_exists($controller, $act_after) && $controller->$act_after($res);
 		}
+		*/
 	}
 	
-    /**
-     * 利用魔术方法的特性动态加载NFS下的类库
-     * e.g:
-     * NFS::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
-     */
-	public static function __callStatic($folder, $arg) {
-        if(!is_object(self::$_obj[$arg[0]])){
-        	$class = explode('/', $arg[0]);
-            self::load(NFS_ROOT.$folder.DS.$arg[0].PHP_EXT);
-            $arg = null && count($class)>1 && $arg = implode(',', array_slice($class, 1));
-            self::$_obj[$arg[0]] = new $class[count($class)-1]($arg);
-        }
-        
-        return self::$_obj[$arg[0]];
-    }
+    
    
    
 }

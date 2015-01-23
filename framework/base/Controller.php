@@ -2,7 +2,7 @@
 class Controller extends Component{
 	
 	protected function display($data=array(), $view=''){
-		NFS::load(NFS_BASE_ROOT.'View.php');
+		oo::load(NFS_BASE_ROOT.'View.php');
 		View::load($data, $view);
 	}
 	
