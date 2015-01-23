@@ -6,8 +6,9 @@ class Socket{
 	public static function write($addr, $data, $proto='udp', $timeout=1){
 		$socket = socket_create(AF_INET, self::$proto[$proto], getprotobyname($proto)) or die('socket create error '.socket_strerror(socket_last_error()));
 		list($host, $port) = explode(':', $addr);
+		stream_set_timeout($socket, $timeout);
 		socket_connect($socket, $host, $port) or die('socket connect error');
-		//stream_set_timeout($socket, $timeout);
+		
 		$res = socket_write($socket, $data);
 		socket_close($socket);
 
@@ -20,10 +21,10 @@ class Socket{
 		list($host, $port) = explode(':', $addr);
 		socket_bind($socket, $host, $port) or die('socket bind error\n');
 		socket_listen($socket,4) or die('socket listen error\n');
-		$i=0;
+
 		while(1){
 			$newsocket = socket_accept($socket) or die('socket accept error\n');	
-			socket_write($newsocket, date('Y-m-d H:i:s'));
+			//socket_write($newsocket, date('Y-m-d H:i:s'));
 			if($res = socket_read($newsocket, 8192)){
 				//sleep(5);
 				var_dump(date('Y-m-d H:i:s'), $res);

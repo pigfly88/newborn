@@ -5,13 +5,33 @@
  * 
  *
  */
-class oo extends Component {
-	static $obj = null;
+class oo {
+	private static $obj = null;//对象容器
+	const SINGLETON_TAG = '_s_';//单例标记
 	
-	//实例化
-	public static function obj($class, $arg = null){
-        !is_object(self::$obj[$class]) && self::$obj[$class] = new $class(implode(',', $arg));
-        return self::$obj[$class];
+	/**
+	 * 单例模式
+	 */
+	public static function singleton($class){
+        
+    }
+    
+    /**
+     * 实例化对象
+     * @param string $class
+     * @param string $args
+     * @param string $singleton 是否单例
+     * @return unknown
+     */
+    public static function obj($class, $args=null, $singleton=true){
+    	$singleton && $prefix = self::SINGLETON_TAG;
+    	$k = $prefix.$class;
+    	if($singleton){
+    		!is_object(self::$obj[$k]) && self::$obj[$k] = new $class();
+    		return self::$obj[$k];
+    	}else{
+    		return new $class();
+    	}
     }
     
 	//model加载
