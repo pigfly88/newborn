@@ -22,7 +22,7 @@
 
 		/*-----------------------------2.画弹跳球-----------------------------*/
 		var c = document.getElementById('ball').getContext('2d');
-		var bx = x+10, by=y+10, step=2;//球的初始x,y值,每一帧的位移
+		var bx = x+80, yy=10, step=3, by=y+yy, br=5;//球的初始x,y值,每一帧的位移,球的半径
 		var img = new Image();
 		img.src = 'ball.jpg';
 		setInterval(moveball, 1);//每一毫秒改变一次球的位置，形成动画效果
@@ -31,18 +31,19 @@
 			c.clearRect(x,y,w,h);//擦掉画布
 			c.beginPath();
 			//让球碰到边界之后就反弹回去
-			if(bx<=0 || bx>=x+w){
+			if(by<=yy || by>=y+h-br){
 				step*=-1;
 			}
+
 			//x,y轴每一帧的位置变化
-			bx = bx+step;
+			//bx = bx+step;
 			by = by+step;
 			
 			//1.用图片来表示球
 			//c.drawImage(img, bx, by, 200, 200);
 			
 			//2.用canvas画个球	
-			c.arc(bx,by,5,3,Math.PI,true);
+			c.arc(bx, by, br, 3, Math.PI, true);
 			c.closePath();
 			//c.strokeStyle = 'rgb(255, 0, 0)';
 			//c.stroke();
