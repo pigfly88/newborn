@@ -1,0 +1,45 @@
+<html>
+	<head></head>
+	<body>
+		<canvas id="dice" width="200" height="100">not support h5!</canvas>
+		<canvas id="ball" width="450" height="350">not support h5!</canvas>
+	</body>
+	<script>
+	
+		/*-----------------------------1.画一个骰子-----------------------------*/
+		var c = document.getElementById('dice').getContext('2d');
+		var x = 10, y=20, w=300, h=300;
+		//画一个矩形，stroke:轨迹，行程，这里是画的意思，Rectangle:矩形，参数：x,y,w,h
+		c.strokeRect(x, y, w, h);
+		
+		c.beginPath();
+		c.arc(35,45,5,3,Math.PI,true);
+		c.closePath();
+		c.strokeStyle = 'rgb(255, 0, 0)';
+		c.stroke();
+		c.fillStyle = 'rgb(255, 0, 0)';
+		c.fill();
+
+		/*-----------------------------2.画弹跳球-----------------------------*/
+		var c = document.getElementById('ball').getContext('2d');
+		var bx = x+25, by=y+25;
+		setInterval(moveball, 100);
+		/*
+		var img = new Image();
+		img.src = 'ball.jpg';
+		c.drawImage(img, 30, 40, 10, 10);
+		*/
+		function moveball(){
+			c.clearRect(x,y,w,h);
+			c.beginPath();
+			c.arc(bx++,by++,5,3,Math.PI,true);
+			c.closePath();
+			//c.strokeStyle = 'rgb(255, 0, 0)';
+			//c.stroke();
+			//c.fillStyle = 'rgb(255, 0, 0)';
+			c.fill();
+			//c.strokeStyle = 'rgb(0, 0, 0)';
+			c.strokeRect(10, 20, 300, 300);
+		}
+	</script>
+</html>
