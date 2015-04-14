@@ -1,5 +1,6 @@
 <html>
 	<head>
+		<meta charset="UTF-8">
 		<title>canvas</title>
 	</head>
 	<body>
@@ -7,10 +8,10 @@
 		<canvas id="ball" width="200" height="200">not support h5!</canvas>
 	</body>
 	<script>
-		/*-----------------------------1.»­Ò»¸ö÷»×Ó-----------------------------*/
+		/*-----------------------------1.ç”»ä¸€ä¸ªéª°å­-----------------------------*/
 		var c = document.getElementById('dice').getContext('2d');
 		var x = 5, y=5, w=160, h=160;
-		//»­Ò»¸ö¾ØĞÎ£¬stroke:¹ì¼££¬ĞĞ³Ì£¬ÕâÀïÊÇ»­µÄÒâË¼£¬Rectangle:¾ØĞÎ£¬²ÎÊı£ºx,y,w,h
+		//ç”»ä¸€ä¸ªçŸ©å½¢ï¼Œstroke:è½¨è¿¹ï¼Œè¡Œç¨‹ï¼Œè¿™é‡Œæ˜¯ç”»çš„æ„æ€ï¼ŒRectangle:çŸ©å½¢ï¼Œå‚æ•°ï¼šx,y,w,h
 		c.strokeRect(5, 5, 60, 60);		
 		c.beginPath();
 		c.arc(35,35,5,3,Math.PI,true);
@@ -20,37 +21,37 @@
 		c.fillStyle = 'rgb(255, 0, 0)';
 		c.fill();
 
-		/*-----------------------------2.»­µ¯ÌøÇò-----------------------------*/
+		/*-----------------------------2.ç”»å¼¹è·³çƒ-----------------------------*/
 		var c = document.getElementById('ball').getContext('2d');
-		var bx = x+80, yy=10, step=3, by=y+yy, br=5;//ÇòµÄ³õÊ¼x,yÖµ,Ã¿Ò»Ö¡µÄÎ»ÒÆ,ÇòµÄ°ë¾¶
+		var bx = x+80, yy=10, step=3, by=y+yy, br=5;//çƒçš„åˆå§‹x,yå€¼,æ¯ä¸€å¸§çš„ä½ç§»,çƒçš„åŠå¾„
 		var img = new Image();
 		img.src = 'ball.jpg';
-		setInterval(moveball, 1);//Ã¿Ò»ºÁÃë¸Ä±äÒ»´ÎÇòµÄÎ»ÖÃ£¬ĞÎ³É¶¯»­Ğ§¹û
+		setInterval(moveball, 1);//æ¯ä¸€æ¯«ç§’æ”¹å˜ä¸€æ¬¡çƒçš„ä½ç½®ï¼Œå½¢æˆåŠ¨ç”»æ•ˆæœ
 		
 		function moveball(){
-			c.clearRect(x,y,w,h);//²Áµô»­²¼
+			c.clearRect(x,y,w,h);//æ“¦æ‰ç”»å¸ƒ
 			c.beginPath();
-			//ÈÃÇòÅöµ½±ß½çÖ®ºó¾Í·´µ¯»ØÈ¥
+			//è®©çƒç¢°åˆ°è¾¹ç•Œä¹‹åå°±åå¼¹å›å»
 			if(by<=yy || by>=y+h-br){
 				step*=-1;
 			}
 
-			//x,yÖáÃ¿Ò»Ö¡µÄÎ»ÖÃ±ä»¯
+			//x,yè½´æ¯ä¸€å¸§çš„ä½ç½®å˜åŒ–
 			//bx = bx+step;
 			by = by+step;
 			
-			//1.ÓÃÍ¼Æ¬À´±íÊ¾Çò
+			//1.ç”¨å›¾ç‰‡æ¥è¡¨ç¤ºçƒ
 			//c.drawImage(img, bx, by, 200, 200);
 			
-			//2.ÓÃcanvas»­¸öÇò	
+			//2.ç”¨canvasç”»ä¸ªçƒ	
 			c.arc(bx, by, br, 3, Math.PI, true);
 			c.closePath();
 			//c.strokeStyle = 'rgb(255, 0, 0)';
 			//c.stroke();
 			//c.fillStyle = 'rgb(255, 0, 0)';
-			c.fill();//»­¸öÇò
+			c.fill();//ç”»ä¸ªçƒ
 			//c.strokeStyle = 'rgb(0, 0, 0)';
-			c.strokeRect(x, y, w, h);//»­¾ØĞÎ
+			c.strokeRect(x, y, w, h);//ç”»çŸ©å½¢
 		}
 	</script>
 </html>
