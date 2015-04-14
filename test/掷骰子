@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        var cwidth = 400;  // 画布宽
+        var cheight = 300; // 画布高
+        var dicex = 50; // 骰子x坐标
+        var dicey = 50; // 骰子y坐标
+        var dicewidth = 120; //骰子面宽
+        var diceheight = 120; //骰子面高
+        var dotrad = 6 //圆点半径大小
+        var ctx;
+        var dx; // 水平定位的变量，两个骰子面的水平位置不同
+        var dy; // 垂直定位的变量，两个骰子面的垂直位置相同
+        var firstturn =true;
+        var point;
+
+        // 掷骰子
+        function throwdice() {
+            var ch = 1 + Math.floor(Math.random() * 6);  //申明并随机设置ch的变量为1，2，3，4，5，6
+            dx = dicex;
+            dy = dicey;
+            drawface(ch);
+            dx = dicex + 150; // 第二个骰子的x位置
+            ch = 1 + Math.floor(Math.random() * 6)
+            drawface(ch);
+        }
+
+
+        function drawface(n) {
+            ctx = document.getElementById("canvas").getContext("2d"); //画布对象
+            ctx.lineWidth = 5; // 设置描边为5
+            ctx.clearRect(dx, dy, dicewidth, diceheight); // 先清除骰子面的坐标和宽高
+            ctx.strokeRect(dx, dy, dicewidth, diceheight) // 画出骰子面的轮廓
+            ctx.fillStyle = "#009966"; //填充圆的颜色
+            switch (n) {
+                case 1:
+                    draw1();
+                    break;
+                case 2:
+                    draw2();
+                    break;
+                case 3:
+                    draw2();
+                    draw1();
+                    break;
+                case 4:
+                    draw4();
+                    break;
+                case 5:
+                    draw4();
+                    draw1();
+                    break;
+                case 6:
+                    draw4();
+                    draw2mid();
+                    break;
+            }
+        }
+
+        // 在模式1，3，5处调用
+        function draw1() {
+            var dotx, doty;  //单个原点水平和垂直位置的变量
+            ctx.beginPath();
+            dotx = dx + .5 * dicewidth;
+            doty = dy + .5 * diceheight;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // 在模式2，3 处调用
+        function draw2() {
+            var dotx, doty;  //单个原点水平和垂直位置的变量
+            ctx.beginPath();
+            dotx = dx + 3 * dotrad; //设置圆点在水平方向上与骰子面左上角相聚3个半径
+            doty = dy + 3 * dotrad; //设置圆点在垂直方向上与骰子面左上角相聚3个半径
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true); //第一个圆点
+            dotx = dx + dicewidth - 3 * dotrad; //设置圆点在水平方向上与骰子面右上角相聚3个半径
+            doty = dy + diceheight - 3 * dotrad; //设置圆点在水平方向上与骰子面右上角相聚3个半径
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);  //第二个圆点
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // 在模式4，5，6处调用
+        function draw4() {
+            var dotx, doty;  //单个原点水平和垂直位置的变量
+            ctx.beginPath();
+            dotx = dx + 3 * dotrad;
+            doty = dy + 3 * dotrad;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+            dotx = dx + dicewidth - 3 * dotrad;
+            doty = dy + dicewidth - 3 * dotrad;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        //在模式6调用
+        function draw2mid() {
+            var dotx, doty;  //单个原点水平和垂直位置的变量
+            ctx.beginPath();
+            dotx = dx + 3 * dotrad;
+            doty = dy + .5 * diceheight;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+            dotx = dx + dicewidth - 3 * dotrad;
+            doty = dy + .5 * diceheight;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+    </script>
+</head>
+<body onload="init()">
+<canvas id="canvas" width="400" height="300">不支持显示</canvas>
+<button onclick="throwdice();">throw dice</button>
+<!--<form name="f" onsubmit="throwdices()">-->
+<!--Stage: <input name="stage" value="First Throw"/>-->
+<!--Point: <input name="pv" value=""/>-->
+<!--Outcome: <input name="outcome" value=""/>-->
+<!--<input type="submit" value="THROW DICE"/>-->
+<!--</form>-->
+</body>
+</html>
