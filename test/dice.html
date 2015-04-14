@@ -3,7 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Document</title>
-    <script>
+    
+</head>
+<body>
+<canvas id="canvas" width="400" height="300">不支持显示</canvas>
+<button onclick="throwdice();">throw dice</button>
+<!--<form name="f" onsubmit="throwdices()">-->
+<!--Stage: <input name="stage" value="First Throw"/>-->
+<!--Point: <input name="pv" value=""/>-->
+<!--Outcome: <input name="outcome" value=""/>-->
+<!--<input type="submit" value="THROW DICE"/>-->
+<!--</form>-->
+<script>
         var cwidth = 400;  // 画布宽
         var cheight = 300; // 画布高
         var dicex = 50; // 骰子x坐标
@@ -16,7 +27,7 @@
         var dy; // 垂直定位的变量，两个骰子面的垂直位置相同
         var firstturn =true;
         var point;
-
+		var bcolor = ['', '#8B0000', '#000000', '#000000', '#8B0000', '#000000', '#000000'];
         // 掷骰子
         function throwdice() {
             var ch = 1 + Math.floor(Math.random() * 6);  //申明并随机设置ch的变量为1，2，3，4，5，6
@@ -24,8 +35,11 @@
             dy = dicey;
             drawface(ch);
             dx = dicex + 150; // 第二个骰子的x位置
-            ch = 1 + Math.floor(Math.random() * 6)
-            drawface(ch);
+            ch = 1 + Math.floor(Math.random() * 6);
+            
+			ctx.fillStyle = bcolor[ch]; //填充圆的颜色
+			console.log('[rand]', ch);
+			drawface(ch);
         }
 
 
@@ -33,9 +47,11 @@
             ctx = document.getElementById("canvas").getContext("2d"); //画布对象
             ctx.lineWidth = 5; // 设置描边为5
             ctx.clearRect(dx, dy, dicewidth, diceheight); // 先清除骰子面的坐标和宽高
-            ctx.strokeRect(dx, dy, dicewidth, diceheight) // 画出骰子面的轮廓
-            ctx.fillStyle = "#009966"; //填充圆的颜色
+            ctx.strokeRect(dx, dy, dicewidth, diceheight); // 画出骰子面的轮廓
+			
+            
             switch (n) {
+				
                 case 1:
                     draw1();
                     break;
@@ -89,11 +105,23 @@
         function draw4() {
             var dotx, doty;  //单个原点水平和垂直位置的变量
             ctx.beginPath();
-            dotx = dx + 3 * dotrad;
-            doty = dy + 3 * dotrad;
+            dotx = dx + .2 * dicewidth;
+            doty = dy + .2 * diceheight;
             ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
-            dotx = dx + dicewidth - 3 * dotrad;
-            doty = dy + dicewidth - 3 * dotrad;
+			ctx.closePath();
+            
+			dotx = dx + .2 * dicewidth;
+            doty = dy + .8 * diceheight;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+			ctx.closePath();
+			
+            dotx = dx + .8 * dicewidth;
+            doty = dy + .2 * diceheight;
+            ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+			ctx.closePath();
+			
+			dotx = dx + .8 * dicewidth;
+            doty = dy + .8 * diceheight;
             ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
             ctx.closePath();
             ctx.fill();
@@ -103,10 +131,10 @@
         function draw2mid() {
             var dotx, doty;  //单个原点水平和垂直位置的变量
             ctx.beginPath();
-            dotx = dx + 3 * dotrad;
+            dotx = dx + .2 * dicewidth;
             doty = dy + .5 * diceheight;
             ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
-            dotx = dx + dicewidth - 3 * dotrad;
+            dotx = dx + .8 * dicewidth;
             doty = dy + .5 * diceheight;
             ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
             ctx.closePath();
@@ -114,15 +142,5 @@
         }
 
     </script>
-</head>
-<body onload="init()">
-<canvas id="canvas" width="400" height="300">不支持显示</canvas>
-<button onclick="throwdice();">throw dice</button>
-<!--<form name="f" onsubmit="throwdices()">-->
-<!--Stage: <input name="stage" value="First Throw"/>-->
-<!--Point: <input name="pv" value=""/>-->
-<!--Outcome: <input name="outcome" value=""/>-->
-<!--<input type="submit" value="THROW DICE"/>-->
-<!--</form>-->
 </body>
 </html>
