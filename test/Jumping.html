@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Throwing dice</title>
+    <style>
+        form { width: 330px; margin: 20px; background: brown; padding: 20px; }
+    </style>
+    <script>
+        /*----------------------1、 画小球 -------------------------------*/
+        // 定义图像
+//        var img = new Image();
+//        img.src = "admin.gif";
+//        var ctx;
+//        function init() {
+//            ctx = document.getElementById("canvas").getContext("2d");
+//            // ctx.drawImage(img, 10, 20, 100, 100); // 定义图片位置大小
+//            ctx.beginPath();
+//            ctx.fillStyle = "#ff0000";
+//            // 绘制球
+//            ctx.arc(50, 50, 20, 0, Math.PI * 2, true);
+//            ctx.lineWidth = 6;
+//            ctx.fill();
+//        }
+
+        /*----------------------2、 弹跳球 -------------------------------*/
+        var boxx = 20; //距离左上角x位置
+        var boxy = 30; //距离左上角y位置
+        var boxwidth = 350; // 盒子宽度
+        var boxheight = 250; // 盒子高度
+        var ballrad = 20; //球的半径
+        var boxboundx = boxwidth + boxx - ballrad; //右边界
+        var boxboundy = boxheight + boxy - ballrad; // 下边界
+        var inboxboundx = boxx + ballrad; // 左边界
+        var inboxboundy = boxy + ballrad; // 上边界
+        var ballx = 50; // 球的初始x位置
+        var bally = 50; //球的初始y位置
+        var img = new Image();
+        img.src = "http://i0.hexunimg.cn/2011-08-16/132504759.jpg";
+        var ctx; // 画布内容
+        var grad;
+        var color;
+        var hue = ['#ff0000', '#00ffff', '#ff6600', '#cccccc', '#000000', '#00ffff'];
+        var ballvx = 4; //初始水平位移
+        var ballvy = 8; // 初始垂直位移
+
+        function init() {
+            var h; // 用来建立渐变梯度
+            ctx = document.getElementById("canvas").getContext("2d");
+            grad = ctx.createLinearGradient(boxx, boxy, boxx + boxwidth, boxy + boxheight);
+            for (h = 0; h < hue.length; h++) {
+                color = hue[h];
+                grad.addColorStop(h * 1 / 6, color)
+            }
+            ctx.lineWidth = ballrad;
+            ctx.fillStyle = grad;
+            moveball();
+            setInterval(moveball, 100);
+        }
+        function moveball() {
+            //移动，检查，显示球
+            ctx.clearRect(boxx, boxy, boxwidth, boxheight); // 清空盒子
+            moveandcheck()
+            //  填充盒子
+            //  ctx.beginPath();
+            //  ctx.arc(ballx,bally,ballrad,0,Math.PI*2,true);
+            //  ctx.fill();
+            //  ctx.strokeRect(boxx,boxy,boxwidth,boxheight);
+
+            // 填充渐变颜色
+            ctx.drawImage(img, ballx - ballrad, bally - ballrad, 2 * ballrad, 2 * ballrad); //绘制图像
+            ctx.fillRect(boxx, boxy, ballrad, boxheight); //绘制左墙
+            ctx.fillRect(boxx + boxwidth - ballrad, boxy, ballrad, boxheight); //绘制右墙
+            ctx.fillRect(boxx, boxy, boxwidth, ballrad); //绘制上墙
+            ctx.fillRect(boxx, boxy + boxheight - ballrad, boxwidth, ballrad); //绘制下墙
+        }
+        function moveandcheck() {
+            var nballx = ballx + ballvx; //设置试探的下一个x位置
+            var nbally = bally + ballvy; //设置试探的下一个y位置
+            //x》右边界
+            if (nballx > boxboundx) {
+                ballvx = -ballvx; //先改变水平位置
+                nballx = boxboundx; //再赋值nballx
+            }
+            // x《左边界
+            if (nballx < inboxboundx) {
+                nballx = inboxboundx; //先赋值nballx
+                ballvx = -ballvx; // 再改变水平位置
+            }
+            //y》下边界
+            if (nbally > boxboundy) {
+                nbally = boxboundy;
+                ballvy = -ballvy; //改变垂直位移
+            }
+            // y《上边界
+            if (nbally < inboxboundy) {
+                nbally = inboxboundy;
+                ballvy = -ballvy //改变垂直位移
+            }
+            ballx = nballx;
+            bally = nbally;
+        }
+        function changge() {
+            ballvx = Number(f.hv.value);
+            ballvy = Number(f.vv.value);
+            return false;
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <canvas id="canvas" width="400" height="300">不支持显示</canvas>
+    <br>
+    <form name="f" id="f" onsubmit="return changge();">
+        <p>水平速度：<input name="hv" id="hv" value="4" type="number" min="-10" max="10"></p>
+        <p>垂直速度：<input name="vv" id="vv" value="8" type="number" min="-10" max="10"></p>
+        <input type="submit" value="change"/>
+    </form>
+</body>
+</html>
