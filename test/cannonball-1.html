@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cannonBall</title>
+
+</head>
+<body onload="init()">
+    <canvas id="canvas" width="600" height="400">不支持显示</canvas>
+    <form name="f" id="f" onsubmit="return fire();">
+        水平：<input type="number" name="hv" id="hv" value="10" min="-100" max="100"/>
+        垂直：<input type="number" name="vv" id="vv" value="-80" min="-100" max="100"/>
+        <input type="submit" value="Fire"/>
+    </form>
+    <script>
+        var cwidth = 600;
+        var cheight = 400;
+        var ctx;
+        var everything = [];  // 所有要绘制的对象
+        var tid; //定时事件标识符的变量
+        var horvelocity; //水平位移
+        var verticalvel1; // 间隔开始时的垂直速度
+        var verticalvel2; // 间隔结束时的垂直速度
+        var gravity = 2; //加速度
+        var iballx = 20; // 子弹的初始x坐标
+        var ibally = 300; // 子弹的初始Y坐标
+        var cball = new Ball(iballx, ibally, 10, "#ff6600");  // 绘制小球
+        var target = new Myrectangle(300, 100, 80, 200, "#000000");   //绘制墙
+        var ground = new Myrectangle(0, 300, 600, 30, "#333333");   // 绘制地面
+        everything.push(target);
+        everything.push(ground);
+        everything.push(cball);
+
+        // 初始化
+        function init() {
+            ctx = document.getElementById("canvas").getContext("2d");
+            drawall(); //绘制所有对象
+        }
+
+        function Ball(sx, sy, rad, stylestring) {
+            this.sx = sx;
+            this.sy = sy;
+            this.rad = rad;
+            this.draw = drawball;
+            this.moveit = moveball;
+            this.fillStyle = stylestring;
+        }
+
+        function Myrectangle(sx, sy, swidth, sheight, stylestring) {
+            this.sx = sx;
+            this.sy = sy;
+            this.swidth = swidth;
+            this.sheight = sheight;
+            this.fillStyle = stylestring;
+            this.draw = drawrects;
+            this.moveit = moveball;
+        }
+
+        // 绘制一个填充的圆
+        function drawball() {
+            ctx.fillStyle = this.fillStyle;
+            ctx.beginPath();
+            ctx.arc(this.sx, this.sy, this.rad, 0, Math.PI * 2, true);
+            ctx.fill();
+        }
+
+        // 改变对象在应用中的位置
+        function moveball(dx, dy) {
+            this.sx += dx;
+            this.sy += dy;
+        }
+
+        function drawrects() {
+            ctx.fillStyle = this.fillStyle;
+            ctx.fillRect(this.sx, this.sy, this.swidth, this.sheight);
+        }
+
+        function fire() {
+            cball.sx = iballx;
+            cball.sy = ibally;
+            horvelocity = Number(document.f.hv.value);
+            verticalvel1 = Number(document.f.vv.value);
+            drawall(); //绘制所有对象
+            tid = setInterval(change, 100);
+            return false;
+        }
+
+        function drawall() {
+            ctx.clearRect(0, 0, cwidth, cheight); //擦除画布
+            for (var i = 0; i < everything.length; i++) {
+                everything[i].draw();
+            }
+        }
+
+        function change() {
+            var dx = horvelocity;
+            verticalvel2 = verticalvel1 + gravity;  //时间间隔结束时的垂直速度
+            var dy = (verticalvel1 + verticalvel2) * .5; //时间间隔的垂直位移
+            verticalvel1 = verticalvel2;
+            cball.moveit(dx, dy);
+            var bx = cball.sx;
+            var by = cball.sy;
+            // 子弹在目标的水平范围和垂直范围内
+            if ((bx >= target.sx)
+                && (bx <= (target.sx + target.swidth))
+                && (by >= (target.sy))
+                && (by <= (target.sy + target.sheight))
+                ) {
+                    clearInterval(tid); // 停止运动
+                }
+            // 子弹超出地面
+            if (by >= ground.sy) {
+                clearInterval(tid); // 停止运动
+            }
+            drawall();
+        }
+    </script>
+</body>
+</html>

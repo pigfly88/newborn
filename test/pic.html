@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pic</title>
+
+</head>
+<body onload="init()">
+<canvas id="canvas" width="400" height="300">不支持显示</canvas>
+
+<script>
+    var ctx;
+    function init() {
+        ctx = document.getElementById("canvas").getContext("2d"); //画布对象
+        ctx.fillStyle = "#eeeeff";
+        ctx.fillRect(0, 0, 300, 400);
+        var n = 0;
+        var dx = 150;
+        var dy = 150;
+        var s = 100;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgb(255,0,0)';
+        ctx.strokeStyle = "#FF0000";
+        var x = Math.sin(0);
+        var y = Math.cos(0);
+        var dig = Math.PI / 15 * 11;
+        for (var i = 0; i < 30; i++) {
+            var x = Math.sin(i * dig);
+            var y = Math.cos(i * dig);
+            ctx.lineTo(dx + x * s, dy + y * s);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.stroke();
+    }
+
+</script>
+</body>
+</html>
