@@ -42,6 +42,7 @@
     }
 
     function fire() {
+		tid && clearInterval(tid); // 停止运动
         cBall.sx = iBallx;
         cBall.sy = iBally;
         xSpeed = Number(document.control.x_speed.value);
@@ -63,6 +64,7 @@
                 && (cBall.sx <= target.sx + target.sWidth)
                 && (cBall.sy >= target.sy)
                 && (cBall.sy <= target.sy + target.sHeight)) {
+			console.log('[close]');	
             clearInterval(tid); // 停止运动
         } else {
             cBall.moveIt(dx, dy);
