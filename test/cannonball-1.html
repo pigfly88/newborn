@@ -15,8 +15,7 @@
     <script>
         var cwidth = 600;
         var cheight = 400;
-        var ctx;
-        var everything = [];  // 所有要绘制的对象
+        var ctx;     
         var tid; //定时事件标识符的变量
         var horvelocity; //水平位移
         var verticalvel1; // 间隔开始时的垂直速度
@@ -25,11 +24,10 @@
         var iballx = 20; // 子弹的初始x坐标
         var ibally = 300; // 子弹的初始Y坐标
         var cball = new Ball(iballx, ibally, 10, "#ff6600");  // 绘制小球
-        var target = new Myrectangle(300, 100, 80, 200, "#000000");   //绘制墙
+		var tx=300, ty=100, tw=80, th = 200;
+        var target = new Myrectangle(tx, ty, tw, th, "#000000");   //绘制墙
         var ground = new Myrectangle(0, 300, 600, 30, "#333333");   // 绘制地面
-        everything.push(target);
-        everything.push(ground);
-        everything.push(cball);
+		var everything = [target, ground, cball];  // 所有要绘制的对象
 
         // 初始化
         function init() {
@@ -42,7 +40,7 @@
             this.sy = sy;
             this.rad = rad;
             this.draw = drawball;
-            this.moveit = moveball;
+            this.moveit = move;
             this.fillStyle = stylestring;
         }
 
@@ -53,7 +51,6 @@
             this.sheight = sheight;
             this.fillStyle = stylestring;
             this.draw = drawrects;
-            this.moveit = moveball;
         }
 
         // 绘制一个填充的圆
@@ -61,11 +58,12 @@
             ctx.fillStyle = this.fillStyle;
             ctx.beginPath();
             ctx.arc(this.sx, this.sy, this.rad, 0, Math.PI * 2, true);
+			ctx.closePath();//昨天说什么来着!
             ctx.fill();
         }
 
         // 改变对象在应用中的位置
-        function moveball(dx, dy) {
+        function move(dx, dy) {
             this.sx += dx;
             this.sy += dy;
         }
@@ -80,7 +78,6 @@
             cball.sy = ibally;
             horvelocity = Number(document.f.hv.value);
             verticalvel1 = Number(document.f.vv.value);
-            drawall(); //绘制所有对象
             tid = setInterval(change, 100);
             return false;
         }
@@ -95,24 +92,20 @@
         function change() {
             var dx = horvelocity;
             verticalvel2 = verticalvel1 + gravity;  //时间间隔结束时的垂直速度
-            var dy = (verticalvel1 + verticalvel2) * .5; //时间间隔的垂直位移
+            var dy = (verticalvel1 + verticalvel2) * .3; //时间间隔的垂直位移
             verticalvel1 = verticalvel2;
-            cball.moveit(dx, dy);
-            var bx = cball.sx;
-            var by = cball.sy;
+			console.log(cball.sx, target.sx,cball.sy,target.sy, ground.sy);
             // 子弹在目标的水平范围和垂直范围内
-            if ((bx >= target.sx)
-                && (bx <= (target.sx + target.swidth))
-                && (by >= (target.sy))
-                && (by <= (target.sy + target.sheight))
-                ) {
-                    clearInterval(tid); // 停止运动
-                }
-            // 子弹超出地面
-            if (by >= ground.sy) {
-                clearInterval(tid); // 停止运动
-            }
-            drawall();
+            if (cball.sx >= target.sx - cball.rad//子弹超出墙的x
+                || cball.sy <= target.sy//子弹超出墙的y
+				|| cball.sy > ground.sy// 子弹超出地面
+			) {
+				console.log('!close!');
+				clearInterval(tid); // 停止运动
+			}else{
+				cball.moveit(dx, dy);
+				drawall();
+			}
         }
     </script>
 </body>
