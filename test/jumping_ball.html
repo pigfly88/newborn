@@ -26,8 +26,6 @@
         /*----------------------2、 弹跳球 -------------------------------*/
         var boxx = 20; //距离左上角x位置
         var boxy = 30; //距离左上角y位置
-        var dicex = 50; // 骰子x坐标
-        var dicey = 50; // 骰子y坐标
         var boxwidth = 350; // 盒子宽度
         var boxheight = 250; // 盒子高度
         var ballrad = 20; //球的半径
@@ -37,8 +35,8 @@
         var inboxboundy = boxy + ballrad; // 上边界
         var ballx = 50; // 球的初始x位置
         var bally = 50; //球的初始y位置
-//        var img = new Image();
-//        img.src = "http://i0.hexunimg.cn/2011-08-16/132504759.jpg";
+        var img = new Image();
+        img.src = "images/pic1.jpg";
         var ctx; // 画布内容
         var grad;
         var color;
@@ -63,34 +61,14 @@
             //移动，检查，显示球
             ctx.clearRect(boxx, boxy, boxwidth, boxheight); // 清空盒子
             moveandcheck()
-            //  绘制骰子
-              ctx.beginPath();
-                var dotx, doty;  //单个原点水平和垂直位置的变量
-                ctx.beginPath();
-                dotx = dicex + .2 * boxwidth;
-                doty = dicey + .2 * boxheight;
-                ctx.arc(dotx, doty, ballrad, 0, Math.PI * 2, true);
-                ctx.closePath();
-
-                dotx = dicex + .2 * boxwidth;
-                doty = dicey + .8 * boxheight;
-                ctx.arc(dotx, doty, ballrad, 0, Math.PI * 2, true);
-                ctx.closePath();
-
-                dotx = dicex + .8 * boxwidth;
-                doty = dicey + .2 * boxheight;
-                ctx.arc(dotx, doty, ballrad, 0, Math.PI * 2, true);
-                ctx.closePath();
-
-                dotx = dicex + .8 * boxwidth;
-                doty = dicey + .8 * boxheight;
-                ctx.arc(dotx, doty, ballrad, 0, Math.PI * 2, true);
-                ctx.closePath();
-                ctx.fill();
-              ctx.strokeRect(boxx,boxy,boxwidth,boxheight);
+            //  填充盒子
+            //  ctx.beginPath();
+            //  ctx.arc(ballx,bally,ballrad,0,Math.PI*2,true);
+            //  ctx.fill();
+            //  ctx.strokeRect(boxx,boxy,boxwidth,boxheight);
 
             // 填充渐变颜色
-           // ctx.drawImage(img, ballx - ballrad, bally - ballrad, 2 * ballrad, 2 * ballrad); //绘制图像
+            ctx.drawImage(img, ballx-ballrad, bally-ballrad, 2 * ballrad, 2 * ballrad); //绘制图像
             ctx.fillRect(boxx, boxy, ballrad, boxheight); //绘制左墙
             ctx.fillRect(boxx + boxwidth - ballrad, boxy, ballrad, boxheight); //绘制右墙
             ctx.fillRect(boxx, boxy, boxwidth, ballrad); //绘制上墙
@@ -101,8 +79,8 @@
             var nbally = bally + ballvy; //设置试探的下一个y位置
             //x》右边界
             if (nballx > boxboundx) {
-                ballvx = -ballvx; //先改变水平位置
                 nballx = boxboundx; //再赋值nballx
+				ballvx = -ballvx; //先改变水平位置
             }
             // x《左边界
             if (nballx < inboxboundx) {
@@ -127,8 +105,6 @@
             ballvy = Number(f.vv.value);
             return false;
         }
-
-       
     </script>
 </head>
 

@@ -24,7 +24,9 @@
     var iBallx = 20; // 子弹的初始x坐标
     var iBally = 300; // 子弹的初始Y坐标
     var cBall = new Ball(iBallx, iBally, 10, "#ff6600");  // 绘制小球
+	console.log(cBall.sx);
     var target = new MyRectangle(300, 100, 80, 200, "#000000");   //绘制墙
+	console.log(target.sx);
     var ground = new MyRectangle(0, 300, 600, 30, "#333333");   // 绘制地面
     var everything = [target, ground, cBall];  // 所有要绘制的对象
 
@@ -57,7 +59,7 @@
         ySpeed2 = ySpeed1 + quick;  //时间间隔结束时的垂直速度
         var dy = (ySpeed1 + ySpeed2) * .3; //时间间隔的垂直位移
         ySpeed1 = ySpeed2;
-        cBall.moveIt(dx, dy);
+        //cBall.moveIt(dx, dy);
         console.log("line59:dy:"+dy); //todo 在一次弹跳动作未完成又重复点击会造成垂直速度累加！
         // 子弹在目标的水平范围和垂直范围内
         if ((cBall.sx >= target.sx)

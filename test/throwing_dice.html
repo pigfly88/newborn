@@ -15,16 +15,18 @@ Outcome: <input name="outcome" value=""/>
 </form>
 
 <script>
-    var cwidth = 400;  // 画布宽
-    var cheight = 300; // 画布高
+    //var cwidth = 400;  // 画布宽
+    //var cheight = 300; // 画布高
     var dicex = 50; // 骰子x坐标
     var dicey = 50; // 骰子y坐标
     var dicewidth = 100; //骰子面宽
     var diceheight = 100; //骰子面高
-    var dotrad = 10 //圆点半径大小
+	
+    var dotrad = 10; //圆点半径大小
     var ctx;
-    var dx; // 水平定位的变量，两个骰子面的水平位置不同
-    var dy; // 垂直定位的变量，两个骰子面的垂直位置相同
+    var dx; // 矩形x轴，水平定位的变量，两个骰子面的水平位置不同
+    var dy; // 矩形y轴，垂直定位的变量，两个骰子面的垂直位置相同
+	
     var firstturn = true;
     var point;
     var bcolor = ['#ff0000', '#000000', '#000000', '#ff0000', '#000000', '#000000']; //1，4为红色，2，3，5，6为黑色
@@ -36,6 +38,7 @@ Outcome: <input name="outcome" value=""/>
         dx = dicex;
         dy = dicey;
         drawface(ch);
+		
         dx = dicex + 150; // 第二个骰子的x位置
         ch = 1 + Math.floor(Math.random() * 6);
         drawface(ch);
@@ -128,11 +131,12 @@ Outcome: <input name="outcome" value=""/>
     function draw2() {
         var dotx, doty;  //单个原点水平和垂直位置的变量
         ctx.beginPath();
-        dotx = dx + 2 * dotrad; //设置圆点在水平方向上与骰子面左上角相聚2个半径
-        doty = dy + 2 * dotrad; //设置圆点在垂直方向上与骰子面左上角相聚2个半径
+        dotx = dx + .2 * dicewidth; //设置圆点在水平方向上与骰子面左上角相聚2个半径
+        doty = dy + .2 * diceheight; //设置圆点在垂直方向上与骰子面左上角相聚2个半径
         ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true); //第一个圆点
-        dotx = dx + dicewidth - 2 * dotrad; //设置圆点在水平方向上与骰子面右上角相聚2个半径
-        doty = dy + diceheight - 2 * dotrad; //设置圆点在水平方向上与骰子面右上角相聚2个半径
+		
+        dotx = dx + .8 * dicewidth; //设置圆点在水平方向上与骰子面右上角相聚2个半径
+        doty = dy + .8 * diceheight; //设置圆点在水平方向上与骰子面右上角相聚2个半径
         ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);  //第二个圆点
         ctx.closePath();
         ctx.fill();
@@ -171,6 +175,7 @@ Outcome: <input name="outcome" value=""/>
         dotx = dx + .2 * dicewidth;
         doty = dy + .5 * diceheight;
         ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
+		
         dotx = dx + .8 * dicewidth;
         doty = dy + .5 * diceheight;
         ctx.arc(dotx, doty, dotrad, 0, Math.PI * 2, true);
