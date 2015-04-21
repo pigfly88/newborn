@@ -13,7 +13,7 @@
     //3、定时执行弹跳函数
     //4、弹跳函数进行判断
     //问题:
-    //如何定位到上下左右一半的距离？ 
+    //如何定位到上下左右一半的距离？  宽度除以一半，已解决
     //小人为什么只弹了一次就离开画布了？ 判断位置出错，已解决
     //如何加速小人的移动
 
@@ -24,16 +24,16 @@
     var box_height = 300;
 
     // 球默认位置
-    var ball_x = 50;
-    var ball_y = 50;
+    var ball_x = 0;
+    var ball_y = 0;
     var ball_rad = 10;
     // 球位移的距离
-    var move_x = 5;
-    var move_y = 10;
+    var move_x = box_width*.5;
+    var move_y = box_width*.5;
 
     //盒子上，下，左,右
 	var ctx;
-	var speed = 100; //定时速度
+	var speed = 500; //定时速度
 
     var box_top = box_y + ball_rad; //上边距：
     var box_bottom = box_height + box_y - ball_rad;
@@ -59,7 +59,12 @@
       //  debugger;
 		ctx.drawImage(img, ball_x-ball_rad, ball_y-ball_rad, 2 * ball_rad, 2 * ball_rad); //绘制图像
         ctx.strokeRect(box_x,box_y,box_width,box_height); //矩形框
-		
+        if(speed>0){
+            speed = speed-50; // 加速
+        }else{
+            return;
+        }
+        console.log(speed);
     }
 
     // 判断位置
@@ -76,7 +81,6 @@
             // 球的X轴>画布左侧
             move_x = -move_x;
             local_x = box_left;
-
         } else if (local_y > box_bottom) {
             // 球的X轴>画布下侧
             move_y = -move_y;
