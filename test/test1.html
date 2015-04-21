@@ -28,18 +28,16 @@
     var ball_y = 0;
     var ball_rad = 10;
     // 球位移的距离
-    var move_x = box_width * .5;
-    var move_y = box_width * .5;
+    var move_x = 4;
+    var move_y = 8;
 
     //盒子上，下，左,右
     var ctx;
-    var speed = 100; //定时速度
-    console.log("line36:"+speed);
     var box_top = box_y + ball_rad; //上边距：
     var box_bottom = box_height + box_y - ball_rad;
     var box_left = box_x + ball_rad;
     var box_right = box_width + box_x - ball_rad;
-    //console.log(box_top+":"+box_bottom+":"+box_left+":"+box_right)
+    console.log(box_top+":"+box_bottom+":"+box_left+":"+box_right)
 
     // 画球
     var img = new Image();
@@ -47,18 +45,9 @@
     function init() {
         ctx = document.getElementById("canvas").getContext("2d");
         move_ball(); //第一次调用来移动，检查，显示球
-        setInterval(speed_up,500); //定时去更新speed
+        setInterval(move_ball,100); //定时去更新speed
     }
 
-   function speed_up(){
-       if (speed > 0) {
-           speed--; // 加速
-           setInterval(move_ball, speed); //todo 动态调整speed值
-           console.log(speed);
-       } else {
-           return;
-       }
-   }
 
     // 上下移动球
     function move_ball() {
@@ -74,8 +63,14 @@
         //debugger;
         var local_x = ball_x + move_x;
         var local_y = ball_y + move_y;
+		//console.log(local_x+":"+local_y);
+        if (local_y > box_bottom) {
+            // 球的X轴>画布下侧
+			move_y =4; //Y轴的一半
+            move_y = -move_y;
+            local_y = box_bottom;
 
-        if (local_x > box_right) {
+        } else if(local_x > box_right) {
             // 球的X轴>画布右侧
             move_x = -move_x;
             local_x = box_right;
@@ -83,11 +78,7 @@
             // 球的X轴>画布左侧
             move_x = -move_x;
             local_x = box_left;
-        } else if (local_y > box_bottom) {
-            // 球的X轴>画布下侧
-            move_y = -move_y;
-            local_y = box_bottom;
-        } else if (local_y < box_top) {
+        }  else if (local_y < box_top) {
             // 球的X轴>画布上侧
             move_y = -move_y;
             local_y = box_top;
