@@ -2,173 +2,197 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>cannonBall-1</title>
+    <title>炮弹实验</title>
 </head>
 <body onload="init()">
-<canvas id="canvas" width="600" height="400">不支持显示</canvas>
+<canvas id="canvas" width="500" height="500">不支持显示</canvas>
 
 <form name="control" id="control">
     <label for="speed">速度：</label><input type="number" name="speed" id="speed" value="10" min="-100" max="100"/>
     <label for="angle">角度：</label><input type="number" name="angle" id="angle" value="10" min="0" max="80"/>
-    <input type="button" onclick="fire()"/>
+    <input type="button" value="发射" onclick="fire()"
+           style="background: #cccccc;border: 0 none;width: 80px;height: 20px;"/>
 </form>
 <script>
-    // 目标改成大炮图片
-    var cWidth = 600;
-    var cHeight = 400;
+    // 区域
+    var box_width = 500;
+    var box_height = 500;
     var ctx;
+
+    //速度
     var tid; //定时事件标识符的变量
-    var xSpeed; //水平位移
-    var ySpeed1; // 间隔开始时的垂直速度
-    var ySpeed2; // 间隔结束时的垂直速度
+    var speed_x; //水平位移
+    var speed_y1; // 间隔开始时的垂直速度
+    var speed_y2; // 间隔结束时的垂直速度
     var quick = 2; //加速度
-    var ballrad = 10;
+
+
     // 炮弹
-    var cannonX = 10;
-    var cannonY = 280;
-    var cannonLength = 200;
-    var cannonHeight = 20;
+    var ball_x = 10;
+    var ball_y = 280;
+    var ball_len = 200;
+    var ball_height = 20;
+    var ball_rad = 10;
+
+
     // 目标
-    var targetX = 300;
-    var targetY = 50;
-    var targetWidth = 85;
-    var targetHeight = 280;
+    var target_x = 300;
+    var target_y = 50;
+    var target_width = 180;
+    var target_height = 280;
+
+
     // 命中目标
-    var hitTargetX = 450;
-    var hitTargetY = 220;
-    var hitTargetWidth = 355;
-    var hitTargetHeight = 96;
+    var target2_x = 300;
+    var target2_y = 50;
+    var target2_width = 180;
+    var target2_height = 280;
 
-    var cBall = new Ball(cannonX + cannonLength, cannonY + cannonHeight * .5, ballrad, "#ff6600");
-    var target = new picture(targetX, targetY, targetWidth, targetHeight, "http://wenwen.sogou.com/p/20120304/20120304205823-858720231.jpg"); //目标人物
-    var hitTarget = new picture(hitTargetX, hitTargetY, hitTargetWidth, hitTargetHeight, "http://picapi.ooopic.com/11/19/76/59b1OOOPIC43.jpg");
-    var ground = new MyRectangle(0, 300, 600, 30, "#333333");
-    var cannon = new MyRectangle(cannonX, cannonY, cannonLength, cannonHeight, "#ff0000");
+
+    // 固定对象
+    var support_ball = new MyRectangle(ball_x, ball_y, ball_len, ball_height, "#ff0000"); //发射体
+    var ball = new Ball(ball_x + ball_len, ball_y + ball_height * .5, ball_rad, "#ff6600"); //发射的子弹
+    var target = new Picture(target_x, target_y, target_width, target_height, "images/pic1.jpg"); //目标人物
+    var target2 = new Picture(target2_x, target2_y, target2_width, target2_height, "images/pic2.jpg"); //替换的目标
+    var floor = new MyRectangle(0, 300, 600, 30, "#000000"); //地面
+
+
+    // 数组
     var everything = [];
-    everything.push([target, false]);
-    var targetIndex = everything.length;
-    everything.push([ground, false]);
-    var ballIndex = everything.length;
-    everything.push([cBall, false]);
-    var cannonIndex = everything.length;
-    everything.push([cannon, true, 0, cannonX, cannonY + cannonHeight * .5]);
 
+    var target_index = everything.length;
+    everything.push([target, false])
 
+    var floor_index = everything.length;
+    everything.push([floor, false])
 
+    var ball_index = everything.length;
+    everything.push([ball, false])
+
+    everything.push([ball, true, 0, ball_x, ball_y + ball_height * .5]);
     // 初始化
     function init() {
         ctx = document.getElementById("canvas").getContext("2d");
-        drawAll(); //绘制所有对象
+        draw_all(); //绘制所有对象
     }
 
-    function drawAll() {
-        ctx.clearRect(0, 0, cWidth, cHeight); //擦除画布
+    function draw_all() {
+        ctx.clearRect(0, 0, box_width, box_height); //擦除画布
         for (var i = 0; i < everything.length; i++) {
             var obj = everything[i];
             if (obj[1]) {
-                ctx.save();
-                ctx.translate(obj[3], obj[4]);
-                ctx.rotate(obj[2]);
-                ctx.translate(-obj[3], -obj[4]);
+                ctx.save(); //保存原来的轴
+                ctx.translate(obj[3], obj[4]);  //完成平移
+                ctx.rotate(obj[2]); //完成旋转
+                ctx.translate(-obj[3], -obj[4]); //完整平移
                 obj[0].draw();
-                ctx.restore();
+                ctx.restore(); //恢复轴
             } else {
-                obj[0].draw();
+                obj[0].draw();  //完成绘制
             }
         }
     }
 
     function fire() {
-        tid && clearInterval(tid); // 停止运动
-        var angle = Number(document.control.angle.value);
-        var outofSpeed = Number(document.control.speed.value);
-        var anglerRadian = angle * Math.PI / 180;
-        xSpeed = outofSpeed * Math.cos(anglerRadian);
-        ySpeed1 = -outofSpeed * Math.sin(anglerRadian);
-        everything[cannonIndex][2] = -anglerRadian;
-        cBall.sx = cannonY + cannonHeight * .5 - cannonLength * Math.sin(anglerRadian);
-        drawAll()
-        //console.log("line48:ySpeed1:"+ySpeed1);
+        //tid && clearInterval(tid); // 停止运动
+        var angle = Number(document.control.angle.value); //飞出炮口的角度
+        var speed = Number(document.control.speed.value); //飞出炮口的速度
+        var angle_rad = angle * Math.PI / 180; //转为弧度
+        speed_x = speed * Math.cos(angle_rad);  //水平速度
+        speed_y1 = -speed * Math.sin(angle_rad); //初始垂直速度
+        everything[ball_index][2] = -angle_rad;  //旋转大炮
+        ball.x = ball_x + ball_len * Math.cos(angle_rad);  //炮弹的X轴，旋转后大炮的炮口
+        ball.y = ball_y + ball_height * .5 - ball_len * Math.sin(angle_rad); //炮弹的Y轴，旋转后大炮的炮口
+        draw_all()
+        //console.log("line48:speed_y1:"+speed_y1);
         tid = setInterval(change, 100);
         return false;
     }
 
     function change() {
-        var dx = xSpeed;
-        ySpeed2 = ySpeed1 + quick;  //时间间隔结束时的垂直速度
-        var dy = (ySpeed1 + ySpeed2) * .3; //时间间隔的垂直位移
-        ySpeed1 = ySpeed2;
-        cBall.moveIt(dx, dy);
-        console.log("line59:dy:" + dy); //todo 在一次弹跳动作未完成又重复点击会造成垂直速度累加！
+        var dx = speed_x;
+        speed_y2 = speed_y1 + quick;  //时间间隔结束时的垂直速度
+        var dy = (speed_y1 + speed_y2) * .3; //时间间隔的垂直位移
+        speed_y1 = speed_y2;
+        ball.move_it(dx, dy);
+        //console.log("line59:dy:" + dy); //todo 在一次弹跳动作未完成又重复点击会造成垂直速度累加！
         // 子弹在目标的水平范围和垂直范围内
-        if ((cBall.sx >= target.sx)
-                && (cBall.sx <= target.sx + target.sWidth)
-                && (cBall.sy >= target.sy)
-                && (cBall.sy <= target.sy + target.sHeight)) {
-            console.log('[close]');
+        if ((ball.x >= target.x)
+                && (ball.x <= target.x + target.width)
+                && (ball.y >= target.y)
+                && (ball.y <= target.y + target.height)) {
+            //console.log('[close]');
             clearInterval(tid); // 停止运动
-            everything.splice(targetIndex, 1, [hitTarget, false]);
-            everything.splice(ballIndex, 1);
-            drawAll();
+            everything.splice(target_index, 1, [target2, false]);
+            everything.splice(ball_index, 1);
+            draw_all();
         }
-        if (cBall.sy >= ground.sy) {
+        if (ball.y >= floor.y) {
             clearInterval(tid)
         }
     }
 
-    function Ball(sx, sy, rad, styleString) {
-        this.sx = sx;
-        this.sy = sy;
+    // 矩形对象
+    function Ball(x, y, rad, style) {
+        this.x = x;
+        this.y = y;
         this.rad = rad;
-        this.draw = drawBall;
-        this.moveIt = moveBall;
-        this.fillStyle = styleString;
+        this.draw = draw_ball;
+        this.move_it = move_ball;
+        this.fillStyle = style;
     }
 
-    function MyRectangle(sx, sy, sWidth, sHeight, styleString) {
-        this.sx = sx;
-        this.sy = sy;
-        this.sWidth = sWidth;
-        this.sHeight = sHeight;
-        this.fillStyle = styleString;
-        this.draw = drawRects;
-        this.moveIt = moveBall;
+    // 矩形对象
+    function MyRectangle(x, y, width, height, style) {
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.fillStyle = style;
+        this.draw = draw_rect;
+        this.move_it = move_ball;
     }
 
-    // 绘制一个填充的圆
-    function drawBall() {
+    // 图片对象
+    function Picture(x, y, width, height, name) {
+        var img = new Image();
+        img.src = name;
+        this.x = x;
+        this.y = y;
+        this.img = img;
+        this.width = width;
+        this.height = height;
+        this.draw = draw_image;
+        this.move_it = move_ball;
+    }
+
+
+    // 画圆
+    function draw_ball() {
         ctx.fillStyle = this.fillStyle;
         ctx.beginPath();
-        ctx.arc(this.sx, this.sy, this.rad, 0, Math.PI * 2, true);
+        ctx.arc(this.x, this.y, this.rad, 0, Math.PI * 2, true);
         ctx.closePath();
         ctx.fill();
     }
 
-    function drawRects() {
+    // 画矩形
+    function draw_rect() {
         ctx.fillStyle = this.fillStyle;
-        ctx.fillRect(this.sx, this.sy, this.sWidth, this.sHeight);
+        ctx.fillRect(this.x, this.y, this.width, this.height);
     }
 
-    function picture(sx, sy, sWidth, sHeight, name) {
-        var imga = new Image();
-        imga.src = name;
-        this.sx = sx;
-        this.sy = sy;
-        this.img = imga;
-        this.sWidth = sWidth;
-        this.sHeight = sHeight;
-        this.draw = drawAnImage;
-        this.moveIt = moveBall;
+
+    // 画图片
+    function draw_image() {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
 
-    function drawAnImage() {
-        ctx.drawImage(this.img, this.sx, this.sy, this.sWidth, this.sHeight);
-    }
 
     // 改变对象在应用中的位置
-    function moveBall(dx, dy) {
-        this.sx += dx;
-        this.sy += dy;
+    function move_ball(dx, dy) {
+        this.x += dx;
+        this.y += dy;
         //console.log("line108:dx:"+dx+"-----dy:"+dy)
     }
 
