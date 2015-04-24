@@ -1,11 +1,10 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>测试题目一 上下左右弹跳</title>
+    <title>测试一 上下左右弹跳</title>
 </head>
 <body onload="init()">
 <canvas width="300" height="300" id="canvas"></canvas>
-</body>
 <script>
     // 思路：
     //1、获得canvas上下文
@@ -28,8 +27,9 @@
     var ball_y = 150;
     var ball_rad = 10;
     // 球位移的距离
-    var move_x = 4;
-    var move_y = 4;
+	var move_x =2;
+	var move_y =2;
+    
 
     //盒子上，下，左,右
     var ctx;
@@ -37,12 +37,13 @@
     var box_bottom = box_height + box_y - ball_rad;
     var box_left = box_x + ball_rad;
     var box_right = box_width + box_x - ball_rad;
-    console.log(box_top+":"+box_bottom+":"+box_left+":"+box_right)
+    //console.log(box_top+":"+box_bottom+":"+box_left+":"+box_right)
 
     // 画球
     var img = new Image();
     img.src = "images/pic1.jpg";
     function init() {
+		setInterval(move_ball);
         ctx = document.getElementById("canvas").getContext("2d");
         move_ball(); //第一次调用来移动，检查，显示球
         setInterval(move_ball,80); //定时去更新speed
@@ -62,32 +63,36 @@
 
     // 判断位置
     function check_localtion() {
+		
         //debugger;
         var local_x = ball_x + move_x;
         var local_y = ball_y + move_y;
-		//console.log(local_x+":"+local_y);
         if (local_y > box_bottom) {
             // 球的X轴>画布下侧
-			//move_y = move_x; //Y轴的一半
             move_y = -move_y;
+			// 让球的速度越来越快
+			if(move_x<10 && move_y<10){
+				move_y = move_y*2;
+				move_x = move_x*2;
+			}
             local_y = box_bottom;
-
         } else if(local_x > box_right) {
             // 球的X轴>画布右侧
             move_x = -move_x;
             local_x = box_right;
-        } else if (local_x < box_left) {
-            // 球的X轴>画布左侧
-            move_x = -move_x;
-            local_x = box_left;
-        }  else if (local_y < box_top) {
+        }else if (local_y < box_top) {
             // 球的X轴>画布上侧
             move_y = -move_y;
             local_y = box_top;
-        }
-
+        }else if (local_x < box_left) {
+            // 球的X轴>画布左侧
+            move_x = -move_x;
+            local_x = box_left;
+        } 
+	
         ball_x = local_x;
         ball_y = local_y;
     }
 </script>
+</body>
 </html>
