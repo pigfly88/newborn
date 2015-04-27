@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>点击翻牌</title>
+</head>
+<body onload="init()">
+<canvas id="canvas" width="900" height="400">不支持显示</canvas>
+
+
+<script>
+    var ctx;
+
+    var first_x = 30; //第一张牌X坐标
+    var first_y = 50; //第二张牌Y坐标
+    var card_rad = 30; //多边形的半径
+    var card_width = 4 * card_rad; //牌宽
+    var card_height = 4 * card_rad; //牌高
+    var margin = 30; //牌之间的边距
+
+    var bgcolor = "rgb(251,215,73)"; //牌正面背景
+    var backcolor = "rgb(128,0,128)"; //牌背面背景
+
+    var cards = []; //一副牌
+    var first_pick = true;
+    var first_card;//第一次选择
+    var second_card;//第二次选择
+
+
+
+    //单击一张牌
+    function choose(ev) {
+        var mx;
+        var my;
+        var pick1;
+        var pick2;
+        if (ev.layerX || ev.layerX == 0) {
+            mx = ev.layerX;
+            my = ev.layerY;
+        } else if (ev.offsetX || ev.offsetX == 0) {
+            mx = ev.offsetX;
+            my = ev.offsetY;
+        }
+
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i];
+            if (card.sx >= 0);
+            if ((mx > card.sx) && (mx < card.sx + card.swidth) && (my > card.sy) && my < card.sy + card.sheight) {
+
+            }
+            if ((first_pick) || (i != first_card))
+                break;
+        }
+
+        if (i < cards.length) {
+            if (first_pick) {
+                first_card = i;
+                first_pick = false;
+                pick1 = new Polycard
+            }
+        }
+    }
+    // 设置牌的背面
+    function draw_back() {
+        ctx.fillStyle = backcolor;
+        ctx.fillRect(this.sx, this.sy, this.swidth, this.sheight);
+    }
+
+    // 设置多边形图案
+    function draw_shape() {
+        ctx.fillStyle = bgcolor;
+    }
+
+
+    // 对象 -- 多边形
+    function Shape(sx, sy, rad, n) {
+        this.sx = sx;
+        this.sy = sy;
+        this.rad = rad;
+        this.draw = draw_shape;
+        this.n = n;
+        this.angle = (2 * Math.PI) / n;
+    }
+
+    // 对象 -- 牌
+    function Card(sx, sy, swidth, sheight, info) {
+        this.sx = sx;
+        this.sy = sy;
+        this.swidth = swidth;
+        this.sheight = sheight;
+        this.info = info;  //设置边数
+        this.draw = draw_back; //
+    }
+
+    //新建一副牌
+    function mark_cards() {
+        var first_card; //一对牌中第一张牌的变量
+        var second_card; //一对牌中第二张牌的变量
+        var cx = first_x; //第一个x坐标
+        var cy = first_y; //第一个y坐标
+        for (var i = 3; i < 9; i++) {
+            //创建一张牌和位置
+            first_card = new Card(cx, cy, card_width, card_height, i);
+            second_card = new Card(cx, cy + card_height + margin, card_width, card_height, i);
+            cards.push(second_card);
+            cx = cx + card_width + margin; //加上牌的宽度加外边距
+            first_card.draw();
+            second_card.draw();
+        }
+        flush() //刷新，洗牌
+    }
+
+    //洗牌
+    function flush() {
+        var i; //牌一
+        var k; //牌二
+        var holder; //保存交换所需的对象
+        var sum = cards.length; //牌的数量
+        var nt;
+        for (nt = 0; nt < 3 * sum; nt++) {
+            i = Math.floor(Math.random() * sum);
+            k = Math.floor(Math.random() * sum);
+            holder = cards[i].info;
+            cards[i].info = cards[k].info;
+            cards[k].info = holder;
+        }
+    }
+
+    function init() {
+        ctx = document.getElementById("canvas").getContext("2d");
+        var canvas = document.getElementById("canvas");
+        canvas.addEventListener('click', choose, false); //设置事件处理程序
+        mark_cards();
+    }
+</script>
+</body>
+</html>

@@ -27,9 +27,9 @@
     var ball_y = 150;
     var ball_rad = 10;
     // 球位移的距离
-	var move_x =2;
-	var move_y =2;
-    
+    var move_x =2;
+    var move_y =2;
+
 
     //盒子上，下，左,右
     var ctx;
@@ -43,7 +43,7 @@
     var img = new Image();
     img.src = "images/pic1.jpg";
     function init() {
-		setInterval(move_ball);
+        setInterval(move_ball);
         ctx = document.getElementById("canvas").getContext("2d");
         move_ball(); //第一次调用来移动，检查，显示球
         setInterval(move_ball,80); //定时去更新speed
@@ -56,40 +56,46 @@
         check_localtion();
         //  debugger;
         ctx.drawImage(img, ball_x - ball_rad, ball_y - ball_rad, 2 * ball_rad, 2 * ball_rad); //绘制图像
-		ctx.beginPath();
-		
+        ctx.beginPath();
+
         ctx.strokeRect(box_x, box_y, box_width, box_height); //矩形框
     }
 
     // 判断位置
     function check_localtion() {
-		
+
         //debugger;
         var local_x = ball_x + move_x;
         var local_y = ball_y + move_y;
         if (local_y > box_bottom) {
             // 球的X轴>画布下侧
             move_y = -move_y;
-			// 让球的速度越来越快
-			if(move_x<10 && move_y<10){
-				move_y = move_y*2;
-				move_x = move_x*2;
-			}
+            // 让球的速度越来越快
+            if(move_x<10 && move_y<10){
+                move_y = move_y*2;
+                move_x = move_x*2;
+            }
             local_y = box_bottom;
-        } else if(local_x > box_right) {
+        }
+
+        if(local_x > box_right) {
             // 球的X轴>画布右侧
             move_x = -move_x;
             local_x = box_right;
-        }else if (local_y < box_top) {
+        }
+
+        if (local_y < box_top) {
             // 球的X轴>画布上侧
             move_y = -move_y;
             local_y = box_top;
-        }else if (local_x < box_left) {
+        }
+
+        if (local_x < box_left) {
             // 球的X轴>画布左侧
             move_x = -move_x;
             local_x = box_left;
-        } 
-	
+        }
+
         ball_x = local_x;
         ball_y = local_y;
     }
