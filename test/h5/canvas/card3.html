@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>点击翻牌</title>
+    <title>删除匹配的图形</title>
 </head>
 <body onload="init()">
+<p>游戏规则：每点击两次进行对比，匹配的话消除，不匹配则恢复，直至全部消除</p>
 <canvas id="canvas" width="900" height="400">不支持显示</canvas>
-
 
 <script>
     var ctx;
@@ -24,12 +24,11 @@
     var bgcolor = "#ff6600"; //牌正面背景
     var backcolor = "#333333"; //牌背面背景
     var bgshape = "#ffffff" //多边形背景
-    var bgtable = "#000000";
+    var bgtable = "#ffffff";
 
 
     var cards = []; //一副牌
     var match; //配对
-
 
 
     // 对象 -- 多边形
@@ -66,11 +65,11 @@
             my = ev.offsetY;
         }
         var i;
-        for ( i = 0; i < cards.length; i++) {
+        for (i = 0; i < cards.length; i++) {
             var card = cards[i];
             if (card.sx >= 0);
             if ((mx > card.sx) && (mx < card.sx + card.swidth) && (my > card.sy) && my < card.sy + card.sheight) {
-                if ((first_pick) || (i != first_card)){
+                if ((first_pick) || (i != first_card)) {
                     break;
                 }
 
@@ -92,15 +91,32 @@
                 //检查是否配对
                 if (cards[i].info == cards[first_card].info) {
                     match = true;
-                    alert("match!")
+                    console.log("match!")
                 } else {
                     match = false;
                 }
+
+                //删除匹配
+                first_pick = true;
+                setTimeout(flip_back, 500);
             }
         }
     }
 
+    //处理牌是否匹配后的结果
+    function flip_back() {
+        if (!match) {
+            cards[first_card].draw();
+            cards[second_card].draw();
+        } else {
+            ctx.fillStyle = bgtable;
+            ctx.fillRect(cards[second_card].sx, cards[second_card].sy, cards[second_card].swidth, cards[second_card].sheight);
+            ctx.fillRect(cards[first_card].sx, cards[first_card].sy, cards[first_card].swidth, cards[first_card].sheight);
+            cards[second_card].sx = -1;
+            cards[first_card].sx = -1;
 
+        }
+    }
     // 设置牌的背面
     function draw_back() {
         ctx.fillStyle = backcolor;
@@ -125,7 +141,6 @@
         ctx.closePath();
         //结束绘制
     }
-
 
 
     //新建一副牌
