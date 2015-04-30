@@ -52,7 +52,7 @@ class oo extends Component {
     /**
      * 利用魔术方法的特性动态加载NFS下的类库
      * e.g:
-     * NFS::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
+     * nfs::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
      */
     /*
     public static function __callStatic($folder, $arg) {
@@ -73,7 +73,7 @@ class oo extends Component {
      * @return Ambigous <boolean, object>
      */
 	public static function m($model=''){
-		empty($model) && $model = NFS::$controller;
+		empty($model) && $model = nfs::$controller;
 
 		$res = false;
 		if(self::include_file(NFS_BASE_ROOT.'model.php')){
@@ -93,7 +93,7 @@ class oo extends Component {
 	public static function c($controller=''){
 		self::include_file(NFS_BASE_ROOT.'controller.php');
 		
-		if(empty($controller))	$controller = NFS::$controller;	
+		if(empty($controller))	$controller = nfs::$controller;	
 		$path = explode('.', $controller);
 		$c = APP_ROOT.DS;
 		if(count($path)>1){
