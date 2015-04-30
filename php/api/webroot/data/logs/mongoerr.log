@@ -1,17 +1,0 @@
-[mongo err] 2015-02-04 01:31:08 Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-[mongo err] 2015-02-04 01:31:47 Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
-[mongo err] 2015-02-04 01:31:47 Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
-[mongo err] 2015-02-04 01:31:51 Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
-[mongo err] 2015-02-04 01:32:07 Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
-[mongo err] 2015-02-04 01:32:19 Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
-[mongo err] 2015-02-04 01:32:20 Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
-[mongo err] 2015-02-04 01:32:21 Failed to connect to: localhost:27017: Previous connection attempts failed, server blacklisted
-[mongo err] 2015-02-04 01:32:26 Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
-[2015-02-04 01:33:26] [mongo err] Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
-[2015-02-04 01:33:56] [mongo err] Failed to connect to: localhost:27017: 由于目标机器积极拒绝，无法连接。
-
