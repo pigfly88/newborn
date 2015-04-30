@@ -7,7 +7,7 @@
  * @link           https://github.com/justlikeheaven/NFS.git
  */
 
-define('VERSION', '1.0');
+define('NFS_VERSION', '1.0');
 
 define('FRAMEWORK', 'NFS');
 
@@ -15,7 +15,7 @@ define('FRAMEWORK', 'NFS');
 define('TIME', time());
 
 //文件分隔符
-define('DS', DIRECTORY_SEPARATOR);
+define('DS', '/');
 
 //PHP文件后缀
 define('PHP_EXT', '.php');
@@ -48,6 +48,9 @@ define('NFS_ROOT', __DIR__.DS);
 //NFS base目录
 define('NFS_BASE_ROOT', NFS_ROOT.'base'.DS);
 
+//NFS helper目录
+define('NFS_HELPER_ROOT', NFS_ROOT.'helper'.DS);
+
 //项目控制器文件夹名称
 define('CONTROLLER_FOLDER_NAME', 'c');
 
@@ -60,68 +63,36 @@ define('VIEW_FOLDER_NAME', 'v');
 //项目配置文件夹名称
 define('CONFIG_FOLDER_NAME', 'cfg');
 
-define('CONTROLLER_ROOT', APP_ROOT.DS.CONTROLLER_FOLDER_NAME.DS);
+!defined('APP_DIR') && define('APP_DIR', '');
+define('CONTROLLER_ROOT', APP_ROOT.DS.APP_DIR.DS.CONTROLLER_FOLDER_NAME.DS);
 define('MODEL_ROOT', APP_ROOT.DS.MODEL_FOLDER_NAME.DS);
-define('CONFIG_ROOT', APP_ROOT.DS.CONFIG_FOLDER_NAME.DS);
-define('VIEW_ROOT', APP_ROOT.DS.VIEW_FOLDER_NAME.DS);
+define('CONFIG_ROOT', APP_ROOT.DS.APP_DIR.DS.CONFIG_FOLDER_NAME.DS);
+define('VIEW_ROOT', APP_ROOT.DS.APP_DIR.DS.VIEW_FOLDER_NAME.DS);
 
-require_once(NFS_BASE_ROOT.'Component.php');
-require_once(NFS_BASE_ROOT.'oo.php');
+require NFS_BASE_ROOT.'component.php';
+require NFS_BASE_ROOT.'oo.php';
+oo::include_file(NFS_BASE_ROOT.'func.php');
+oo::include_file(NFS_BASE_ROOT.'controller.php');
+oo::base('file')->import(NFS_BASE_ROOT.'log.php');
+oo::base('file')->import(NFS_BASE_ROOT.'db.php');
 class NFS{
-	protected static $_loaded;
-	
 	public static $controller;
 	public static $action;	
-	public static $approot;
+	public static $cfg;
 	
-    protected static $_obj;
-    
-    
-	
-	public static function autoload($class){
-		
-		$res = false;
-		
-		if(false!==strpos($class, CONTROLLER_EXT))
-			$res = self::load(APP_ROOT.DS.CONTROLLER_NAME.DS.$class.PHP_EXT);
-		else if(false!==strpos($class, MODEL_EXT))
-			$res = self::load(APP_ROOT.DS.MODEL_EXT.DS.$class.PHP_EXT);
-            
-		return $res;
-	}
-	
-    public static function obj($obj, $arg = null){
-        !is_object(self::$_obj[$obj]) && self::$_obj[$obj] = new $obj(implode(',', $arg));
-        return self::$_obj[$obj];
-    }
-    
 	public static function run(){
-		/*
-        NFS::load(NFS_ROOT.'/base/Config.php');
-		NFS::load(NFS_ROOT.'/base/Common.php');
-		NFS::load(NFS_ROOT.'/base/NFSException.php');
-		NFS::load(NFS_ROOT.'/base/Component.php');
 		
-		NFS::load(NFS_ROOT.'/base/Model.php');
-        */
-		//spl_autoload_register(array(self, 'autoload'));
 		self::$controller = $controller = !empty($_REQUEST['c']) ? strtolower($_REQUEST['c']) : DEFAULT_CONTROLLER;
-		self::$action = $act = !empty($_REQUEST['a']) ? strtolower($_REQUEST['a']) : DEFAULT_ACTION;
-		$ctl = oo::c($controller);
+		$ctl = oo::c();
+		$resful = '_'.strtolower($_SERVER['REQUEST_METHOD']);
+		if( ($a=strtolower($_REQUEST['a'])) && method_exists($ctl, $a) )	$act = $a;
+		elseif(method_exists($ctl, $resful))	$act = $resful;
+		elseif(method_exists($ctl, DEFAULT_ACTION))	$act = DEFAULT_ACTION;
+		else die('error action');
+		self::$action = $act;
+
 		$ctl->$act();
-		/*
-		if(is_file($controllerFile)){
-			require_once $controllerFile;
-			try{
-				$controller = new self::$controller();	
-				method_exists($controller, $action) && $controller->$action();
-			}catch (Exception $e){
-				var_dump($e);
-			}
-		}else{
-			exit($controllerFile.' not found');
-		}
-		*/
+		
 		/**
 		 * 通用方法调度
 		 * 应付普通的增删改查功能
@@ -158,10 +129,8 @@ class NFS{
 	
     
    
-   
+
+	
+	
+	
 }
-
-
-
-//NFS::load(NFS_ROOT.'/base/Cache.php');
-//Cache::init(NFS::load(CORE_ROOT.'/config/cache.php'));

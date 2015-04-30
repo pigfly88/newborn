@@ -1,5 +1,5 @@
 <?php
-class Socket{
+class socket{
 
 	protected static $proto = array('udp'=>SOCK_DGRAM, 'tcp'=>SOCK_STREAM);
 	

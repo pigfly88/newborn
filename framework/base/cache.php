@@ -1,5 +1,6 @@
 <?php
-class Cache extends Component {
+//namespace nfs\cache;
+class cache {
 	protected static $cache=array();
 	
 	public static function init($config){

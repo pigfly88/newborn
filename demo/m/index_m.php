@@ -1,15 +1,15 @@
 <?php
-class indexModel extends Model{
+class index_m extends model{
 	protected $table='user';
 	protected $cache;
     
     public function __init(){
-        echo __CLASS__."->__init()\n";
-        $this->cache = NFS::helper('Cache/CacheMongo', 'mongodb://localhost:27017', array('timeout'=>1000, 'socketTimeoutMS'=>2));
+         
+        //$this->cache = NFS::helper('Cache/CacheMongo', 'mongodb://localhost:27017', array('timeout'=>1000, 'socketTimeoutMS'=>2));
     }
     
-	public function getCode(){
-        
+	public function get(){
+       echo __METHOD__.'()<br />';
         //$res = $this->cache->insert('test.article', array('name'=>'zhupp'));
         //var_dump($res);
         $cdt = array(
@@ -22,8 +22,8 @@ class indexModel extends Model{
             //'l'=>2,
             //'s'=>2,
         );
-        $res = $this->cache->find('test.article', $cdt);
-        var_dump($res);exit;
+        //$res = $this->cache->find('test.article', $cdt);
+        //var_dump($res);exit;
 		//$res = $this->getOne(array('id'=>1));
 		return $res;
 	}

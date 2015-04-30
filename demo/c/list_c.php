@@ -1,7 +1,7 @@
 <?php
-class listController extends Controller{
+class list_c extends controller{
 	public function index(){
-		return 'calling listController->index()';
+		echo __METHOD__.'()<br />';
 	}
 	
 	

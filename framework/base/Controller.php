@@ -1,33 +1,26 @@
 <?php
-class Controller extends Component{
-	
-	protected function display($data=array(), $view=''){
-		oo::load(NFS_BASE_ROOT.'View.php');
-		View::load($data, $view);
+class controller extends component{
+	public $m;
+	protected function display($data=array(), $file=''){
+		oo::include_file(NFS_BASE_ROOT.'view.php');
+		view::display($data, $file);
 	}
 	
-	public function load($controller){
-		$class = $controller.'Controller';		
-		$file = CONTROLLER_ROOT.$class.'.php';
-		NFS::load($file);
-		
-		return new $class();
+	protected function req($name, $default=null, $callback=null, $type='REQUEST'){
+		return oo::base('request')->param($name, $default, array(array($this, $callback)), $type);
 	}
-	
-	protected function jump(){
-		
-	}
-	
-	public function __call($name, $arguments){
-		//self::model()->getAll();
+
+    protected function json($array){
+    	return oo::base('request')->json($array, 'encode', 1);
     }
-    
-    public function json($arr){
-    	echo json_encode($arr);
+   
+    /**
+     * 动态加载
+     * 
+     */
+    public function __call($c, $args) {
+    	if(in_array($c, array('get', 'update', 'delete', 'insert'))){
+    		oo::base('controller_auto')->$c($args);
+    	}
     }
-    
-    public function add(){
-    	$c = substr($this->caller, 0, CONTROLLER_EXT);
-    }
-    
 }

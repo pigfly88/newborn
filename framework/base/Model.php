@@ -1,199 +1,116 @@
 <?php
-class Model extends Component {
-    protected static $db = null;
-	protected $table = '';
+class model extends component {
+	protected $db;
+	protected $dbobj;
+	protected $auto;
+	protected $table;
+    protected $mongo;
+
 	public $columns = null;
-    public $prefix = '';
-    public $debug = 0;//开启debug模式将会记录sql
-	protected static $models;
+    public $prefix;
+    public $debug = 0;
+	protected $sql = null;
+	public $last_sql;
 	
-	protected function __init(){
-		
-	}
-	protected function db(){
-        if(!is_object(self::$db)){
-            NFS::load(NFS_BASE_ROOT.'DB.php');
-            $config = NFS::load(APP_ROOT.DS.CONFIG_FOLDER_NAME.DS.'db.php');
-            self::$db = DB::init($config);
-        }
-        return self::$db;
+	protected function _init(){
+		//$db = $this->db ? $this->db : 'mysql.default';
+		//$this->dbobj = db::driver($db);
 	}
 	
 	/**
-	 * 加载模型
-	 *
-	 * @param String $model
-	 * @return unknown
-	 * 
+	 * 自动填充
+	 * @param array $query
 	 */
-	public static function load($model){
-        self::db();
-		$class = $model.MODEL_EXT;
-        
-        //只实例化一次
-		if(is_object(self::$models[$class])){
-			return self::$models[$class];
-		}
-		
-		$file = MODEL_ROOT.$model.MODEL_EXT.PHP_EXT;
-        
-		if(NFS::load($file)){
-            self::$models[$class] = new $class();
-        }else{//自动实例化不存在的model
-            $obj = new Model();
-			$obj->table = $model;
-			self::$models[$class] = $obj;
-        }
-        self::$models[$class]->table = $model;
-        //表结构
-        self::$models[$class]->columns = self::columns($model);
-        //var_dump($obj->columns);
-        method_exists($obj, '__init') && $obj->__init();
-		return self::$models[$class];
+	protected function auto(&$query, $func='find'){
+		is_array($this->auto[$func]) && is_array($query) && $query = array_merge($this->auto[$func], $query);
 	}
 	
-	/**
-	 * 执行一条sql语句，增删改
-	 *
-	 * @param string $sql
-	 * @param array/string $param
-	 * @return boolean
-	 */
-	public function execute($sql, $param=null){
-		return DB::execute($sql, $param);
+	public function execute($sql){
+		return db::execute($sql);
 	}
 	
-	/**
-	 * 执行一条查询
-	 *
-	 * @param string $sql
-	 * @param array/string $param
-	 * @return array
-	 */
-	public function query($sql, $param=null){
-		return DB::fetchAll($sql, $param);
+	public function fields($fields){
+		is_array($friends) && $fields = implode(', ', $fields);
+		$this->sql['fields'] = $fields;
+		return $this;
 	}
 	
-	
-	public function fetchAll($where='', $fields='*'){
-		return DB::fetchAll(self::buildSelect($where, $fields), self::buildValues($where));
+	public function table($table){
+		$this->sql['table'] = $table;
+		return $this;
 	}
 	
-	public function fetchOne($where, $fields='*'){
-		$sql = self::buildSelect($where, $fields).' LIMIT 1';
-		return DB::fetch($sql, self::buildValues($where));
+	public function where($where){
+		$this->sql['where'] = $where;
+		return $this;
 	}
 	
-	public function fetchColumn($where, $fields='*'){
-		$sql = self::buildSelect($where, $fields);
-		return DB::fetchColumn($sql, self::buildValues($where));
+	public function orderby($orderby){
+		$this->sql['orderby'] = $orderby;
+		return $this;
 	}
 	
-	public function table(){
-		return $this->table ? $this->prefix.$this->table : $this->prefix.substr($this->classname(), 0, -5);
+	public function limit($limit){
+		$this->sql['limit'] = $limit;
+		return $this;
+	}
+
+	public function get(){
+		return db::get($this->sql(__FUNCTION__));
 	}
 	
-	public function sql(){
-		
-		
+	public function insert($data){
+		//$this->auto($data, __FUNCTION__);
+		return db::execute($this->sql(__FUNCTION__, $data));
 	}
 	
-	public function where(){
-		
+	public function getall(){
+		//$this->auto($query, 'select');
+		return db::getall($this->sql(__FUNCTION__));
 	}
 	
-	
-	
-	public function orderby(){
-		
+	public function update($data){
+		return db::execute($this->sql(__FUNCTION__, $data));
 	}
 	
-	public function limit(){
-		
+	public function delete(){
+		return db::execute($this->sql(__FUNCTION__));
 	}
-	
-	public function select(){
-		return DB::execute(self::buildUpdate($data, $table));
-	}
-	
-	public function update(){
-		return DB::execute(self::buildUpdate($data, $table));
-	}
-	
-	public function delete($where, $table=''){
-		return DB::execute(self::buildDelete($where, $table));
-	}
-	
-	public function insert($data, $table=''){
-		return DB::execute(self::buildInsert($data, $table));
-	}
-	
-	protected function buildWhere($where){
-		$keys = ' 1=1 ';
-		if(is_array($where) && !empty($where)){
-			foreach ($where as $k=>$v){
-				$keys .= " and $k=?";
+
+	protected function sql($method='get', $data=null){
+		$fields = empty($this->sql['feilds']) ? '*' : $this->sql['feilds'];
+		$table = $this->sql['table'] ? $this->sql['table'] : $this->table; 
+		if(in_array($method, array('get', 'getall'))){
+			$sql = "SELECT {$fields} FROM {$table}";
+		}else if($method=='update'){
+			foreach ($data as $k=>$v){
+				is_string($v) && $v="'{$v}'";
+				$set.="`{$k}`={$v}";
 			}
+			$sql = "UPDATE {$table} SET {$set}";
+		}else if($method=='delete'){
+			$sql = "DELETE FROM `{$table}`";
+		}else if($method=='insert'){
+			foreach ($data as $k=>$v){				
+				$key[]="`{$k}`";
+				is_string($v) && $v="'{$v}'";
+				$value[]=$v;
+			}
+			$keystr = implode(', ', $key);
+			$valuestr = implode(', ', $value);
+			$sql = "INSERT INTO {$table} ({$keystr}) VALUES ({$valuestr})";
 		}
-		return $keys;
-	}
-	
-	protected function buildSelect($where, $fields){
-		$where = self::buildWhere($where);
-		$table = self::table();
-		if(is_array($fields) && !empty($fields)){
-			$fields = implode(', ',$fields);
-		}
-		return "SELECT {$fields} FROM {$table} WHERE {$where}";
-	}
-	
-	protected function buildInsert($data, $table=''){
-		$table = empty($table) ? self::table() : $this->prefix.$table;
+		if($this->sql['where'])	$sql.=" WHERE {$this->sql['where']}";
+		if($this->sql['orderby'])	$sql.=" ORDER BY {$this->sql['orderby']}";
+		if($this->sql['groupby'])	$sql.=" GROUP BY {$this->sql['groupby']}";
+		if($this->sql['limit'])	$sql.=" LIMIT {$this->sql['limit']}";
 		
-		$sql = "INSERT INTO {$table} (";
-		if(!is_array($data) || empty($data)) exit('buildInsert fail,data is empty');
-		
-		$sql .= implode(', ',array_keys($data));
-		$sql .= ") VALUES (";
-		//IS_NULLABLE, DATA_TYPE, COLUMN_DEFAULT
-		foreach ($data as $v){
-			$sql .= "'{$v}',";
-		}
-		$sql = rtrim($sql, ',');
-		$sql .= ");";
-		//echo $sql;
+		$this->last_sql = "<i>{$sql}</i>".PHP_EOL;
+		$this->sql = array();
 		return $sql;
 	}
 	
-	public function buildDelete($where, $table=''){
-		$wherestr = '1=1 ';
-		foreach ($where as $k=>$v){
-			$wherestr .= "AND `{$k}`={$v} ";
-		}
-		$table = empty($table) ? self::table() : $this->prefix.$table;
-		$sql = "DELETE FROM {$table} WHERE {$wherestr}";
+	public function get_last_sql(){
 		
-		return $sql;
-	}
-	
-	public function buildUpdate(){
-		
-	}
-	
-	protected function buildValues($where){
-		$values = array();
-		if(is_array($where) && !empty($where)){
-			$values = array_values($where);
-		}
-		return $values;
-	}
-	
-	public function columns($table){
-		$sql="SELECT * FROM information_schema.columns where table_schema='nfs' and table_name='{$table}' order by COLUMN_NAME";
-		$res = DB::fetchAll($sql);
-		if(!is_array($res) || empty($res)){
-			//log
-		}
-		return json_decode(json_encode($res), true);
 	}
 }

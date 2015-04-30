@@ -10,7 +10,7 @@
  * $config->set($data, 'config.php');
  * //$config->set($data, 'cache');
  */
-class Config {
+class config {
     public $type=0;
     public $file;
     public $config = array();

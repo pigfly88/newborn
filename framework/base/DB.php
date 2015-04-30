@@ -1,69 +1,128 @@
 <?php
-/**
- * 数据库操作类
- *
- */
-class DB extends Component {
-	protected static $dbList = array();
-	protected static $db = null;
-	
-	public static function init($config){
-		if(empty($config) || !is_array($config))
-			exit('db config is empty');
+class db{
+	static $current_driver;
+	static $default_driver;
 
-		//随机选取两台数据库，一个读，一个写。
-		/*
-		$init = array(
-			$config['read'][array_rand($config['read'])],
-			$config['write'][array_rand($config['write'])],
-		);
-		*/
-		$init = $config['read'][array_rand($config['read'])];
-
-		if(!isset($init['dsn']))	throw new NFSException('db config parse error');
-		
-		if(!isset(self::$dbList[$init['dsn']])){	
-			try{
-				$charset = self::getCharset($init['dsn']);
-			    $db = new PDO($init['dsn'], $init['username'], $init['password'],
-			    array(
-				    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES '{$charset}'",
-				    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-				    PDO::ATTR_TIMEOUT => 10,
-			    ));
-			    
-			    //关闭本地模拟prepare
-			    $db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			    
-			    self::$db = $db;
-			    self::$dbList[$init['dsn']] = $db;
-			}catch (PDOException $e){
-			    echo 'Connection failed: ' . $e->getMessage();
+	public static function driver($driver=null, $default=0){
+		if($default){
+			if(is_null($driver)){
+				return self::$default_dirver;
+			}else{
+				if(is_object(self::$default_driver))	return self::$default_driver; //默认的数据库只设置一次
+				self::$default_driver = dbfactory::driver($driver);
+				self::$current_driver = self::$default_driver;
+				return self::$default_driver;
 			}
 		}else{
-			self::$db = self::$dbList[$init['dsn']];
+			return is_null($driver) ? self::$current_driver : self::$current_driver = dbfactory::driver($driver);
 		}
-		return self::$dbList[$init['dsn']];
 	}
 	
-	protected static function getCharset($dsn){
-		$dsninfo = explode(';', $dsn);	
-		$cv='';
-		foreach($dsninfo as $v){
-			if(false!==strpos(strtolower($v), 'charset')){
-				list($ck, $cv) = explode('=', $v);
-				break;
-			}
+	public function __callstatic($name, $params){
+		return call_user_func_array(array(self::$default_driver, $name), $params);
+	}
+
+}
+
+class dbconfig{
+	public static function get($driver){
+		return oo::cfg('db.'.$driver);
+	}
+}
+
+class dbfactory{
+	static $drivers;
+	const DRIVER_TAIL = '_driver';
+
+	public static function driver($driver){
+		$config = dbconfig::get($driver);
+		list($driver_type, $desc) = explode('.', $driver);
+		$driver_type .= self::DRIVER_TAIL;
+		if(isset(self::$drivers[$driver])){
+			return self::$drivers[$driver];
 		}
-		return empty($cv) ? 'utf8' : $cv;
+		if(class_exists($driver_type)){
+			return self::$drivers[$driver] = new $driver_type($config);
+		}else{
+			die('driver not found'.PHP_EOL);
+		}
+	}
+}
+
+/**
+ * driver的模板
+ * 所有的drive必须定义这里包含的方法
+ */
+interface dbdriver_template{
+	//public function conn();
+
+	public function get($sql, $param=null);
+
+	public function getall($sql, $param=null, $fetchStyle);
+
+	public function delete();
+
+	public function update();
+}
+
+/**
+ * driver的公共方法
+ * 可以共用的方法写在这里
+ */
+class dbdriver{
+	public function debug($msg){
+		echo $msg.PHP_EOL;
+	}
+
+	public function delete(){
+
+	}
+
+	public function update(){
+
+	}
+}
+
+/**
+ * pdo驱动
+ *
+ */
+class pdo_driver extends dbdriver implements dbdriver_template{
+	protected $db;
+	protected $table;
+	
+	public function __construct($config){
+		try{
+		    $this->db = new PDO($config['dsn'], $config['username'], $config['password'],
+		    array(
+			    PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+			    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,//ERRMODE_WARNING, PDO::ERRMODE_EXCEPTION, PDO::ERRMODE_SILENT
+			    PDO::ATTR_TIMEOUT => 10,
+		    ));
+		    
+		    //关闭本地模拟prepare
+		    $this->db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		}catch (PDOException $e){
+		    die('Connection failed: ' . $e->getMessage());
+		}
+	}
+
+	public function table($table){
+		$this->table = $table;
 	}
 	
-	protected static function statement($sql, $param=null){
-		$stmt = self::$db->prepare($sql);		
-		if(!$stmt)	{
-			throw new NFSException('stmt false');
+	protected function statement($sql, $param=null){
+		try{
+			$stmt = $this->db->prepare($sql);
+		}catch (PDOException $e){
+			echo $sql;
+			die('prepare failed: ' . $e->getMessage());
 		}
-		
+
+		if(false===$stmt)	{
+			echo "\nPDO::errorInfo():\n";
+    		p($this->db->errorInfo());
+		}
 		if(!is_null($param)){
 			$i=1;
 			if(is_array($param) && !empty($param)){
@@ -71,45 +130,57 @@ class DB extends Component {
 					$stmt->bindParam($i++, $v);
 				}
 			}else{
-				$stmt->bindParam($i, $v);
+				$stmt->bindParam($i, $param);
 			}
 		}
-		return $stmt;
+		return $stmt;	
 	}
 	
-	public static function execute($sql, $param=null){
-		$stmt = self::statement($sql, $param);
+	/**
+	 * 
+	 * @param unknown $sql
+	 * @param string $param
+	 * @return boolean
+	 * @usage db::execute("insert into tbl_user values (null, 'kkoo')"); 
+	 *
+	 */
+	public function execute($sql, $param=null){
+		$stmt = $this->statement($sql, $param);
 		return $stmt->execute();
 	}
 	
-	public static function fetch($sql, $param=null){
-		$stmt = self::statement($sql, $param);
+	/**
+	 * @usage db::get("select * from tbl_user");
+	 * @see dbdriver_template::get()
+	 */
+	public function get($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC){
+		$stmt = $this->statement($sql, $param);		
+		$stmt->execute();
+		return $stmt->fetch($fetchStyle);
 		
-		if($stmt->execute()){
-			return $stmt->fetch(PDO::FETCH_ASSOC);
-		}
 	}
 	
-	public static function fetchAll($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC){
-		$stmt = self::statement($sql, $param);
-		
-		if($stmt->execute()){
-			return $stmt->fetchAll($fetchStyle);
-		}
+	/**
+	 * @usage db::getall("select * from tbl_user");
+	 * @see dbdriver_template::getall()
+	 */
+	public function getall($sql, $param=null, $fetchStyle=PDO::FETCH_ASSOC){
+		$stmt = $this->statement($sql, $param);		
+		$stmt->execute();
+		return $stmt->fetchAll($fetchStyle);
 	}
 	
-	public static function fetchColumn($sql, $param=null){
-		$stmt = self::statement($sql, $param);
+	public function insert($table, $data){
+		
+	}
+	/*
+	public function getColumn($sql, $param=null){
+		$stmt = $this->statement($sql, $param);
 		
 		if($stmt->execute()){
 			return $stmt->fetchColumn();
 		}
 	}
+	*/
 
-	
-	
-	
-	
-	
-	
 }
