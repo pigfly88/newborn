@@ -21,6 +21,6 @@ if(false===strpos($_SERVER['SERVER_NAME'], 'local') && false===strpos($_SERVER['
 define('APP_DIR', basename(dirname(__DIR__)));
 define('APP_ROOT', dirname(dirname(__DIR__)).'/');
 
-require APP_ROOT.'NFS/framework/NFS.php';
+require APP_ROOT.'nfs/framework/nfs.php';
 oo::base('file')->import(CONTROLLER_ROOT.'base_c.php');
-NFS::run();
+nfs::run();

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<buildpath>
+	<buildpathentry kind="src" path="php/api/c"/>
+	<buildpathentry kind="src" path="php/api/cfg"/>
+	<buildpathentry kind="src" path="php/api/webroot"/>
+	<buildpathentry kind="src" path="php/m"/>
+	<buildpathentry kind="src" path="php/nfs/demo/c"/>
+	<buildpathentry kind="src" path="php/nfs/demo/cfg"/>
+	<buildpathentry kind="src" path="php/nfs/demo/m"/>
+	<buildpathentry kind="src" path="php/nfs/demo/webroot"/>
+	<buildpathentry kind="src" path="php/nfs/framework"/>
+	<buildpathentry kind="src" path="test/h5/websocket"/>
+	<buildpathentry kind="src" path="test/html5/websocket"/>
+	<buildpathentry kind="con" path="org.eclipse.php.core.LANGUAGE"/>
+</buildpath>
