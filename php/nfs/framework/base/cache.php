@@ -11,7 +11,7 @@ class cache {
 				if(empty($v['timeout']))	$v['timeout']=8;
 				$name = strtolower($k);
 				if(isset(self::$cache[$name]))	return self::$cache[$name];
-				
+				//糟糕的if else模式
 				switch ($name){
 					case 'memcache':
 						if(!extension_loaded('memcache')){

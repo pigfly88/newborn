@@ -1,5 +1,6 @@
 <?php
 return array(
+		/*
 	'pdo'=>array(
 		'dsn'=>'mysql:dbname=test;host=127.0.0.1',
 		'username'=>'root',
@@ -10,4 +11,5 @@ return array(
   	'mongo' => 'mongodb://localhost:27017',
 	'redis' => '',
 	'memcached' => '',
+	*/
 );
