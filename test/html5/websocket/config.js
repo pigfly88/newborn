@@ -1,1 +1,0 @@
-var vars={};vars.server='ws://local.nfs.com:9000/ws/websocket.php';
