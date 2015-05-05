@@ -8,8 +8,9 @@ return array(
 		'charset'=>'utf8',
 		'timeout'=>10,
 	),
+	*/
   	'mongo' => 'mongodb://localhost:27017',
 	'redis' => '',
 	'memcached' => '',
-	*/
+	
 );

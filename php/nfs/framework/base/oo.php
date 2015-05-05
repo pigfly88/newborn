@@ -45,8 +45,8 @@ class oo extends Component {
      * @param string $server 格式：mongodb://[username:password@]host1[:port1][,host2[:port2:],...]/db
      * @return obj
      */
-    public static function mongo(){
-    	return oo::base('cachemongo', self::cfg('db.mongo'));
+	public static function cache($cache){
+    	return oo::base('cache'.$cache, self::cfg('db.'.$cache));
     }
     
     /**
