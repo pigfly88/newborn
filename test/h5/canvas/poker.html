@@ -77,7 +77,7 @@ function deal_start() {
     play_i++;
     //庄家得到第一张牌
     house_hand[house_i] = deal_cards(2);
-    ctx.drawImage(house_hand[house_i].picture, house_x, house_y, card_w, card_h);
+    ctx.drawImage(back, house_x, house_y, card_w, card_h);
     house_x = house_x + 20;
     house_i++;
     // 玩家第二张牌
@@ -171,7 +171,7 @@ function add_up_player() {
 function player_done() {
     while (more_to_house()) {
         house_hand[house_i] = deal_cards(2); //给庄家一张牌
-        ctx.drawImage(back, house_x, house_y, card_w, card_h);
+        ctx.drawImage(house_hand[house_i].picture, house_x, house_y, card_w, card_h);
         house_x = house_x + 20;
         house_i++;
     }
