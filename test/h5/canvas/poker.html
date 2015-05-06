@@ -8,13 +8,9 @@
 </head>
 <body onload="init()">
 <h3>游戏规则：</h3>
-
 <p>1、庄家，玩家分别发2张牌，庄家第一张牌不可见</p>
-
 <p>2、J，Q，K 为10分，A为1分或11分</p>
-
 <p>3、总分值最接近21并不超过21点的赢</p>
-
 <h3>游戏说明：</h3>
 
 <p>按n键 游戏开始:<a href="javascript:new_game();" style="background: blue;width: 100px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">游戏开始</a></p>
@@ -232,9 +228,56 @@ function swap_in_cards(j, k) {
     cards[k] = hold;
 }
 
+// 判断玩家是否再要牌的逻辑
+function add_up_player() {
+    var ac = 0;
+    var i;
+    var sumup = 0;
+    for (i = 0; i < play_i; i++) {
+        sumup += player_hand[i].value;
+        if (player_hand[i].value == 1) {
+            ac++;
+        }
+    }
+    if (ac > 0) {
+        if ((sumup + 10) <= 21) {
+            sumup += 10;
+        }
+    }
+    return sumup;
+}
 
 function player_done() {
-
+    while (more_to_house()) {
+        house_hand[house_i] = deal_cards(2);
+        ctx.drawImage(back, house_x, house_y, card_w, card_h);
+        house_x = house_x + 20;
+        house_i++;
+    }
+    show_house();
+    play_total = add_up_player();
+    if (play_total > 21) {
+        if (house_total > 21) {
+            ctx.fillText("你赢了，庄家超过21点！", 30, 100);
+        } else {
+            ctx.fillText("你已经超过21点，失败了！");
+        }
+    } else {
+        if (play_total >= house_total) {
+            if (play_total > house_total) {
+                ctx.fillText("你赢了！", 30, 100);
+            } else {
+                ctx.fillText("平局", 30, 100);
+            }
+        }
+        else {
+            if (house_total <= 21) {
+                ctx.fillText("你输啦！", 30, 100);
+            } else {
+                ctx.fillText("玩家小于21点，庄家超过21点");
+            }
+        }
+    }
 }
 
 function show_house() {
