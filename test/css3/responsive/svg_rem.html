@@ -1,0 +1,417 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <title></title>
+    <style>
+        *{ font-size: .65rem; padding: 0; margin: 0}
+        html{height:100%;font-size:62.5%;overflow:hidden}
+        body{height:100%;margin:0 auto;color:#333;padding:0;font:normal .7rem "Microsoft YaHei",Verdana,Tahoma;-webkit-text-size-adjust:none}
+        dl,dt,dd{margin:0;padding:0}
+        input,select,textarea{font-family:"Microsoft YaHei",Verdana,Tahoma;background-color:#FFF;overflow:hidden;-webkit-tap-highlight-color:rgba(0,0,0,0); font-size: .7rem}
+        input:focus,textarea:focus{outline:0}input[type="button"],input[type="submit"],input[type="reset"] input[type="text"]{-webkit-appearance:none}
+        ul,ol{margin:0;padding:0;list-style-type:none}
+        h1,h2,h3,h4,h5,h6{ font-weight: normal}
+        i,em{font-style:normal}
+        a{text-decoration:none;color:#333}
+        a img{border:0}
+
+        body{ width: 16rem; margin: 0 auto; overflow: hidden}
+        #container{ position: relative; height: 100%}
+        #container>header{ width: 100%; height:2.2rem; border-bottom: #ed2d43 2px solid; background: #ff647c;  position: absolute; top:0}
+
+        .content{ width: 100%;position: absolute; top:2.25rem; bottom:2.85rem; overflow-y: scroll; -webkit-overflow-scrolling : touch; }
+        #container>header .logo{ display: block; width: 3.45rem; height:.92rem; margin: .5rem 0 0 .5rem; font-size: 1rem; color: #fff}
+        #container>header .mes{ position:absolute; right:.5rem; display: block; top: .6rem; width: 1rem;height: 1rem}
+        #container>header .mes i{ width: .4rem; height: .4rem; border-radius: 100%; background: #ed2d43; position: absolute; right: -.1rem}
+        #container>header .mes svg{ width: 3.6rem; height: 3.6rem; margin: -1.6rem 0 0 -.7rem }
+        .banner{ height: 4.6rem; position: relative;}
+        .banner{ position: relative;width:100%;overflow:hidden}
+        .banner>ul{position:relative;margin:0;padding:0;list-style-type:none;width:100%;height:100%}
+        .banner>ul>li{position:absolute;left:0;top:0;width:100%;box-sizing:border-box;text-align:center}
+        .banner>ul>li>a{display:block;background:#bbb;height:4.6rem;background-size:100%;background-position:center center}
+        .banner>ul>li:first-child{position:relative}
+        .banner>ul.anim{transition:all .5s ease-in-out;-webkit-transition:all .5s ease-in-out;-moz-transition:all .5s ease-in-out;-o-transition:all .5s ease-in-out;-ms-transition:all .5s ease-in-out}
+        .pagina{ position: absolute; bottom:.5rem; left:50%; height: .2rem;}
+        .pagina i{ display: inline-block; width: .2rem; height: .2rem; border-radius:.2rem;background:#ccc; margin: 0 .1rem;}
+        .pagina .active{ background: #fff}
+        .newList{ }
+        .newList a{ height: 2.35rem; border-bottom: #eee 1px solid; padding: .5rem; display: block}
+        .newList a>img{ width: 3.62rem; height: 2.6rem; float: left; margin-right: .4rem}
+        .newList a>div{  display: inline-block; height: 2.6rem; width: 10.5rem}
+        .newList a>div h1{ line-height: .75rem; min-height: 1.3rem}
+        .newList a>div p span:nth-child(1){  color: #fe5454}
+        .newList a>div p,span,em{ font-size: .5rem}
+        .newList a>div p{ position: relative; margin-top: .4rem}
+        .newList a>div p em{ position: absolute;right: 0; color: #999}
+        .newList a>div p em i{ overflow:hidden; display: inline-block; width: .52rem; height: .52rem; margin-right: .1rem}
+        .newList a>div p em i svg{ width: 3.6rem; margin-top: -1.78rem; height: 3.6rem}
+        .newList a:active{ background: #e5e5e5}
+
+        #container>footer{ width: 100%; height:2.85rem; border-top:#ccc 1px solid; background: #fef0ee; position: absolute; bottom:0; overflow: hidden }
+        #container>footer>a{ opacity: .7;width:2.1rem;height: 2.75rem; display: inline-block; margin:.1rem .85rem 0 ; font-size: .5rem; text-align: center; overflow: hidden}
+        #container>footer>a i{ width:2rem;height: 2rem; display: inline-block; border-radius: 100%}
+        #container>footer .active{ opacity: 1}
+        #container>footer>a:active{ opacity: 1}
+        #container>footer>a i svg{ width: 8rem; height: 3.8rem;}
+        #container>footer>a:nth-child(1) i{ background: #a0d455}
+        #container>footer>a:nth-child(1) i svg{ margin: .35rem 0 0 -1.6rem}
+        #container>footer>a:nth-child(2) i{ background: #fd7076}
+        #container>footer>a:nth-child(2) i svg{ margin: .3rem 0 0 -3.15rem}
+        #container>footer>a:nth-child(3) i{ background: #fbc139}
+        #container>footer>a:nth-child(3) i svg{ margin: .3rem 0 0 -4.63rem}
+        #container>footer>a:nth-child(4) i{ background: #44c4f5}
+        #container>footer>a:nth-child(4) i svg{ margin: .3rem 0 0 -6.2rem}
+
+    </style>
+</head>
+
+<body>
+<div style="display: none">
+    <svg>
+        <symbol id="huaiyun" viewBox="-0 -0 160 144.025"><path fill="#FFFFFF" d="M52.143,2.566C38.316-0.977,30.119,2.398,27,4.53c-3.121-2.124-11.192-5.535-25-2 c-1.062,0.269-2,0.902-2,2v34c0,0.739,0.39,1.519,0.975,1.975C1.555,40.962,2.281,40.706,3,40.53c12.902-3.152,20.511,1.199,23,3 c0.842,0.605,1.161,0.605,2,0c2.491-1.801,10.1-6.152,23-3c0.719,0.176,1.463,0.425,2.035-0.033C53.609,40.049,54,39.27,54,38.53 v-34C54,3.433,53.203,2.835,52.143,2.566z M26,40.53c-3.529-2.113-10.936-5.815-23-3v-32c13.627-3.394,20.885,0.375,23,2V40.53z M28,40.53v-33c2.116-1.632,9.354-5.397,23-2l0.146,32.592C39.082,35.308,31.53,38.413,28,40.53z M8.703,11.041 c-0.302,0.034-0.527,0.289-0.527,0.594v0.852c0,0.172,0.073,0.336,0.202,0.448c0.129,0.117,0.3,0.168,0.472,0.149 c4.123-0.512,7.947-0.329,11.364,0.546c0.179,0.048,0.37,0.004,0.518-0.104c0.146-0.113,0.231-0.289,0.231-0.478v-0.866 c0-0.277-0.188-0.516-0.455-0.583C16.919,10.709,12.947,10.522,8.703,11.041z M20.508,17.36 c-3.585-0.891-7.558-1.078-11.805-0.558c-0.302,0.038-0.527,0.291-0.527,0.597v0.851c0,0.172,0.073,0.337,0.202,0.45 s0.3,0.168,0.472,0.145c4.125-0.512,7.95-0.328,11.364,0.547c0.179,0.046,0.37,0.008,0.518-0.105 c0.146-0.113,0.231-0.289,0.231-0.473v-0.871C20.962,17.67,20.775,17.427,20.508,17.36z M20.508,23.121 c-3.589-0.886-7.561-1.074-11.805-0.559c-0.302,0.039-0.527,0.293-0.527,0.598v0.852c0,0.172,0.073,0.336,0.202,0.449 s0.3,0.168,0.472,0.145c4.123-0.513,7.947-0.328,11.364,0.551c0.179,0.043,0.37,0.004,0.518-0.108 c0.146-0.115,0.231-0.291,0.231-0.474v-0.871C20.962,23.429,20.775,23.188,20.508,23.121z M20.508,28.887 c-3.585-0.891-7.558-1.079-11.805-0.56c-0.302,0.035-0.527,0.293-0.527,0.595v0.851c0,0.172,0.073,0.337,0.202,0.452 s0.3,0.165,0.472,0.145c4.125-0.515,7.95-0.331,11.364,0.549c0.179,0.046,0.37,0.007,0.518-0.11 c0.146-0.113,0.231-0.285,0.231-0.473v-0.866C20.962,29.19,20.775,28.952,20.508,28.887z M45.297,11.041 c-4.244-0.519-8.215-0.332-11.805,0.558c-0.268,0.067-0.455,0.306-0.455,0.583v0.866c0,0.188,0.085,0.364,0.231,0.478 s0.338,0.152,0.517,0.104c3.418-0.875,7.242-1.058,11.365-0.546c0.171,0.019,0.343-0.032,0.472-0.149 c0.129-0.112,0.202-0.276,0.202-0.448v-0.852C45.824,11.33,45.6,11.075,45.297,11.041z M45.297,16.803 c-4.247-0.521-8.219-0.329-11.805,0.558c-0.268,0.066-0.455,0.31-0.455,0.582v0.871c0,0.184,0.085,0.359,0.231,0.473 s0.338,0.151,0.517,0.105c3.416-0.875,7.24-1.059,11.365-0.547c0.171,0.023,0.343-0.031,0.472-0.145s0.202-0.278,0.202-0.45 v-0.851C45.824,17.094,45.6,16.841,45.297,16.803z M45.297,22.563c-4.244-0.516-8.215-0.327-11.805,0.559 c-0.268,0.066-0.455,0.308-0.455,0.582v0.871c0,0.183,0.085,0.358,0.231,0.474c0.146,0.112,0.338,0.151,0.517,0.108 c3.418-0.879,7.242-1.063,11.365-0.551c0.171,0.023,0.343-0.031,0.472-0.145s0.202-0.277,0.202-0.449V23.16 C45.824,22.855,45.6,22.602,45.297,22.563z M45.297,28.327c-4.247-0.52-8.219-0.331-11.805,0.56 c-0.268,0.065-0.455,0.304-0.455,0.582v0.866c0,0.188,0.085,0.359,0.231,0.473c0.146,0.117,0.338,0.156,0.517,0.11 c3.416-0.88,7.24-1.063,11.365-0.549c0.171,0.021,0.343-0.029,0.472-0.145s0.202-0.28,0.202-0.452v-0.851 C45.824,28.62,45.6,28.362,45.297,28.327z"></path></symbol>
+        <symbol id="qinggan" viewBox="-0 -0 160 144.025"><path fill="#FFFFFF" d="M96.642,13.436c-4.735-0.271-5.856,3.772-5.856,3.772s-1.116-4.044-5.852-3.772c-1.928,0.108-3.461,1.217-4.395,2.729 c-1.743,2.821-0.894,6.373,0.967,8.916c0.696,0.95,1.427,1.913,2.211,2.791c1.796,1.997,4.166,4.133,7.068,6.032 c2.908-1.899,5.277-4.035,7.073-6.032c0.784-0.878,1.512-1.841,2.208-2.791c1.863-2.543,2.714-6.095,0.971-8.916 C100.103,14.652,98.57,13.544,96.642,13.436z M90.785,1C79.27,1,69.896,10.374,69.896,21.89c0,5.273,1.993,10.313,5.616,14.198 c-0.809,1.027-5.33,6.498-14.894,13.15c-0.247,0.172-0.336,0.498-0.21,0.77c0.13,0.273,0.433,0.416,0.724,0.34 c5.301-1.395,15.115-4.473,21.291-9.361c2.714,1.193,5.528,1.799,8.362,1.799c11.521,0,20.895-9.374,20.895-20.895 C111.68,10.374,102.306,1,90.785,1z M90.785,39.886c-2.754,0-5.422-0.628-7.929-1.86l-0.47-0.234 c-0.213-0.105-0.477-0.077-0.662,0.072l-0.414,0.327c-2.661,2.116-5.621,3.942-8.787,5.44c-0.008-0.008-0.008-0.025-0.017-0.025 c2.903-2.732,4.909-5.18,6.075-6.756l0.437-0.59c0.08-0.11,0.121-0.239,0.121-0.368c0-0.167-0.065-0.328-0.19-0.449l-0.534-0.505 c-3.623-3.441-5.621-8.072-5.621-13.047c0-9.918,8.071-17.99,17.99-17.99c9.924,0,17.995,8.072,17.995,17.99 C108.78,31.813,100.709,39.886,90.785,39.886z"></path></symbol>
+        <symbol id="redian" viewBox="-0 -0 160 144.025"><path fill="#FFFFFF" d="M126.699,43.917c-0.024,0.115-0.051,0.29-0.051,0.485c0,0.826,0.399,1.6,1.066,2.063 c0.754,0.568,1.833,0.641,2.706,0.155c0-0.004,9.192-5.129,11.864-6.619l11.863,6.615c0.875,0.484,1.949,0.417,2.741-0.171 c0.636-0.444,1.035-1.218,1.035-2.044c0-0.195-0.026-0.37-0.048-0.48c0-0.005-2.035-10.339-2.627-13.341l9.956-9.236 c0.519-0.484,0.814-1.159,0.814-1.857c0-0.278-0.046-0.553-0.135-0.811c-0.286-0.905-0.538-1.554-1.521-1.677 c-0.004,0-11.015-1.285-14.065-1.65L144.365,3c-0.413-0.894-1.014-2-2-2c-0.995,0-1.599,1.113-2,2l-6.091,12.35L120.365,17 c-0.979,0.123-1.383,0.768-1.689,1.697c-0.085,0.278-0.123,0.531-0.123,0.79c0,0.698,0.294,1.378,0.807,1.854 c0.004,0.003,7.717,7.154,9.966,9.239L126.699,43.917z M136.317,18.177c0.01-0.004,0.367-0.774,0.367-0.774L142.365,5 c1.409,3.043,5.524,12.402,5.524,12.402l0.356,0.771c0.011,0.004,0.854,0.104,0.854,0.104l13.223,1.588 c-2.454,2.274-9.768,9.057-9.768,9.057L151.93,29.5l0.162,0.834l2.577,13.083c-2.921-1.627-11.644-6.491-11.644-6.491l-0.742-0.417 c0.004,0-0.739,0.417-0.739,0.417l-11.641,6.491c0.648-3.291,2.578-13.087,2.578-13.087l0.165-0.833 c-0.002,0.003-0.627-0.576-0.627-0.576l-9.772-9.057c3.318-0.401,13.227-1.588,13.227-1.588L136.317,18.177z"></path></symbol>
+        <symbol id="zan" viewBox="0 0 160 144.025"><path d="M21.359,76.162c-1.032-1.672-2.685-2.689-4.532-2.795c-2.564-0.146-4.203,1.02-5.127,2.241 c-0.015-0.019-0.03-0.038-0.045-0.057c-0.015,0.019-0.03,0.038-0.045,0.057c-0.925-1.222-2.563-2.388-5.128-2.241 c-1.848,0.105-3.5,1.123-4.531,2.795c-1.535,2.485-1.19,5.918,0.879,8.744c0.566,0.773,1.244,1.674,1.973,2.488 c1.791,1.994,3.974,3.857,6.313,5.389l0.495,0.322l0.045-0.029l0.045,0.029l0.494-0.322c2.339-1.531,4.521-3.395,6.313-5.389 c0.729-0.814,1.406-1.715,1.973-2.488C22.549,82.08,22.894,78.647,21.359,76.162z M19.023,83.839 c-0.54,0.738-1.185,1.594-1.861,2.35c-1.559,1.736-3.443,3.357-5.462,4.736c-0.015-0.011-0.03-0.021-0.045-0.032 c-0.015,0.011-0.03,0.021-0.045,0.032c-2.02-1.379-3.903-3-5.463-4.736c-0.677-0.756-1.321-1.611-1.861-2.35 c-1.239-1.695-2.193-4.473-0.8-6.73c0.422-0.682,1.386-1.842,3.098-1.94c2.618-0.148,4.414,2.329,5.071,3.412 c0.656-1.083,2.452-3.561,5.07-3.412c1.712,0.099,2.677,1.259,3.098,1.94C21.217,79.367,20.264,82.144,19.023,83.839z"></path></symbol>
+        <symbol id="xiaoxi" viewBox="-0 -0 160 144.025"><path fill-rule="evenodd" clip-rule="evenodd" fill="#fff" d="M54,88.62c-1.659,0-3.074-0.444-4.247-1.332L39.5,79.044v15.093 c0.04,0.593,0.323,0.951,0.85,1.078c4.327,0.676,8.877,1.015,13.65,1.015c4.691,0,9.222-0.339,13.59-1.015 c0.566-0.127,0.869-0.485,0.91-1.078V79.044l-10.253,8.244C57.114,88.134,55.698,88.578,54,88.62L54,88.62z M51.694,84.371 c0.606,0.465,1.375,0.719,2.306,0.761c0.889,0,1.658-0.253,2.306-0.761l11.042-8.688c0.606-0.676,0.99-1.289,1.152-1.839v-1.521 c-0.041-0.592-0.344-0.952-0.91-1.078c-4.328-0.676-8.857-1.015-13.59-1.015s-9.282,0.339-13.65,1.015 c-0.526,0.126-0.81,0.486-0.85,1.078v1.521c0.121,0.55,0.505,1.164,1.152,1.839L51.694,84.371z"></path></symbol>
+        <symbol id="yiyuan" viewBox="0 0 160 144.025"><path fill-rule="evenodd" clip-rule="evenodd" fill="#fff" d="M216.396,25.063v18.8h1.735v2.213h-41.7v-2.213h2.091v-18.8h2.92v18.8 h2.018v-18.8h-1.968V9.083h-3.029V1.251h37.977v7.832h-3.026v15.98h-1.941v18.8h2.018v-18.8H216.396z M208.452,20.179h-7.972v-8.005 h-6.057v8.005h-7.972v5.991h7.972v8.961h6.057V26.17h7.972V20.179z"></path></symbol>
+    </svg>
+</div>
+<div id="container">
+    <header><span class="logo">LOGO</span><i class="mes"><i></i><svg><use xlink:href="#xiaoxi" x="0" y="0"/></svg></i></header>
+    <div class="content">
+        <div class="banner" id="recommend">
+            <ul class="anim">
+                <li><a>1111</a></li>
+                <li><a>2222</a></li>
+                <li><a>3333</a></li>
+                <li><a>4444</a></li>
+                <li><a>5555</a></li>
+                <li><a>6666</a></li>
+            </ul>
+            <div class="pagina">
+
+            </div>
+        </div>
+        <div class="newList">
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容真的不一定</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容是的不一定</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容是的不一定</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容是的不一定</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+            <a>
+                <img src=""/>
+                <div>
+                    <h1>这里是标题，不一定是什么内容是的不一定</h1>
+                    <p>
+                        <span>经验分享</span>&nbsp&nbsp
+                        <span>今天</span>
+                        <em><i><svg><use xlink:href="#zan"/></svg></i>9999人已赞</em>
+                    </p>
+                </div>
+            </a>
+
+        </div>
+    </div>
+
+    <footer>
+        <a><i><svg><use xlink:href="#huaiyun"/></svg></i>
+            第一栏目</a>
+        <a><i><svg><use xlink:href="#qinggan"/></svg></i>
+            第二栏目</a>
+        <a><i><svg><use xlink:href="#redian"/></svg></i>
+            第三栏目</a>
+        <a><i><svg><use xlink:href="#yiyuan"/></svg></i>
+            第四栏目</a>
+    </footer>
+</div>
+
+</body>
+<script>
+(function (doc, window) {
+    var docEl = doc.documentElement,
+            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = (20 * (clientWidth / 320)) > 40 ? 40 + "px" : (20 * (clientWidth / 320)) + 'px';
+            },
+            anime =window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame ||
+                    function(e){
+                        return setTimeout(e,16.67);
+                    };
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+    window.$ = function(selector){
+        var selectorType = "querySelectorAll";
+        if(selector.indexOf("#") === 0){
+            selectorType = "getElementById";
+            selector = selector.substr(1,selector.length);
+        }
+        return document[selectorType](selector);
+    };
+    function slide(obj,pagina){
+        var _this = this;
+        _this.time = 5;
+        _this.obj = typeof obj == "string" ? $(obj) : obj;
+        _this.ul = _this.obj.querySelector("ul");
+        _this.children = _this.ul.children;
+        _this.length =_this.children.length;
+        _this.index = 0;
+        _this.afTime = _this.time * 60;
+        _this.li = document.createElement("li");
+        _this.transform.call(_this.ul,-100);
+        if(pagina){
+            _this.cdf = document.createDocumentFragment();
+            _this.arr = [];
+            _this.pagina =$(pagina)[0];
+            _this.paginas();
+        }
+        _this.init();
+    }
+    slide.prototype = {
+        init:function(){
+            var _this = this,
+                    flag = 0;
+            _this.li.innerHTML = _this.children[_this.length -1].innerHTML;
+            _this.ul.insertBefore(_this.li,_this.children[0]); ++_this.length;
+            _this.ul.appendChild(_this.children[1].cloneNode(true)); ++_this.length;
+            _this.ul.idx = 1;
+            _this.ul.len = _this.length;
+            while(_this.length--){
+                _this.children[_this.length].style.left = (_this.length * 100)+"%";
+            }
+            function setp(){
+                if(_this.index == -1){
+                    return
+                }
+                if(++_this.index > _this.afTime ){
+
+                    _this.index = 0;
+
+                    if(_this.ul.idx==1){
+                        _this.ul.classList.add("anim")
+                    }
+                    _this.ul.idx++;
+                    _this.pagina && _this.pagSwitch(_this.ul.idx,_this.ul.len);
+                    _this.transform.call(_this.ul,-(_this.ul.idx) *100)
+                }
+                anime(setp);
+            }
+            setp();
+            var auto =function(){
+                if(this.idx == this.len-1){
+                    _this.ul.classList.remove("anim");
+                    _this.transform.call(this,-(this.idx = 1) *100)
+                }
+            };
+            var tapSlide=function(e){
+                switch(e.type){
+                    case "mousedown":
+                    case "touchstart":
+                        flag = 1;
+                        _this.index = -1;
+                        this.ox = e.touches[0].clientX;
+                        this.oy = e.touches[0].clientY;
+                        this.ow = this.clientWidth;
+                        this.st = e.timeStamp;
+                        this.isUp = 0;
+                        this.classList.remove("anim");
+                        if(this.idx == this.len-1){
+                            _this.ul.classList.remove("anim");
+                            _this.transform.call(this,-(this.idx = 1) *100)
+                        }
+                        if(this.idx == 0){
+                            _this.ul.classList.remove("anim");
+                            _this.transform.call(this,-(this.idx = this.len-2)*100)
+                        }
+                        break;
+
+                    case "mousemove":
+                    case "touchmove":
+                        if(flag){
+                            e.stopPropagation();
+                            e.preventDefault();
+                            _this.transform.call(this, ( - this.idx + (e.changedTouches[0].clientX - this.ox) / this.ow) * 100);
+                        }
+                        break;
+
+                    case "mouseup":
+                    case "mouseleave" :
+                    case "touchcancel":
+                    case "touchend" :
+                        if(flag){
+                            var changeX = e.changedTouches[0].clientX;
+                            this.classList.add("anim");
+                            if (!this.isUp && changeX != this.ox) {
+                                /* if(Math.abs(changeX - this.ow) >= this.ow/1.5){
+                                 this.idx += 1;
+
+                                 }else if(Math.abs(changeX - this.ow) < this.ow/3){
+                                 this.idx += -1;
+                                 }
+                                 this.idx = Math.min(Math.max(0, this.idx), this.len);*/
+                                if(e.timeStamp - this.st >300 || Math.abs(changeX - this.ow) > this.ow/3){
+                                    this.idx += changeX > this.ox ? -1 : 1;
+                                    this.idx = Math.min(Math.max(0, this.idx), this.len);
+                                }
+                                _this.transform.call(this, -this.idx * 100)
+                            }
+                            _this.pagina &&  _this.pagSwitch(_this.ul.idx,_this.ul.len);
+                            _this.index = 1;
+                            flag = 0;
+                            anime(setp);
+                        }
+                }
+
+
+            };
+            _this.ul.addEventListener(slide.prefix=="t" ? "transitionend" : slide.prefix + "TransitionEnd",auto,false);
+            _this.ul.addEventListener("touchstart",tapSlide,false);
+            _this.ul.addEventListener("touchmove",tapSlide,false);
+            _this.ul.addEventListener("touchend",tapSlide,false);
+            _this.ul.addEventListener("touchcancel",tapSlide,false);
+            if(!("ontouchstart" in window)){
+                _this.ul.addEventListener('mousedown',
+                        function(m){
+                            m.touches = [{
+                                clientX : m.clientX,
+                                clientY : m.clientY
+                            }];
+                            tapSlide.call(this,m)
+                        },false);
+                _this.ul.addEventListener('mousemove',
+                        function(m){
+                            m.changedTouches = [{
+                                clientX : m.clientX,
+                                clientY : m.clientY
+                            }];
+                            tapSlide.call(this,m)
+                        },false);
+                _this.ul.addEventListener('mouseup',
+                        function(m){
+                            m.changedTouches = [{
+                                clientX : m.clientX,
+                                clientY : m.clientY
+                            }];
+                            tapSlide.call(this,m)
+                        },false);
+                _this.ul.addEventListener('mouseleave',
+                        function(m){
+                            m.changedTouches = [{
+                                clientX : m.clientX,
+                                clientY : m.clientY
+                            }];
+                            tapSlide.call(this,m)
+                        },false);
+            }
+        },
+        paginas:function(){
+            var i= 0,
+                    length = this.length;
+
+            for(;i<length;i++){
+                this.i = document.createElement("i");
+                this.cdf.appendChild(this.i);
+                this.arr.push(this.i);
+            }
+            this.arr[0].className= "active";
+            this.pagina.appendChild(this.cdf) ;
+            this.pagina.style.marginLeft="-"+this.pagina.offsetWidth/40+"rem";
+
+        },
+        pagSwitch:function(index,length){
+            var i= 0,
+                    len = length-2;
+            for(;i<len;i++){
+                this.arr[i].className= "";
+            }
+            this.arr[(index == len+1 ? 0 : (index -1)) && (index == 0 ? len-1 : (index -1))].className= "active";
+        },
+        transform:function(i){
+            this.style[slide.prefix + "Transform"] = "translate("+i+"%)";
+        }
+    };
+    slide.prefix= function(){
+        var _elementStyle = document.createElement('div').style;
+        var vendors = ['msT','MozT', 'webkitT', 't'],
+                transform,
+                i = 0,
+                l = vendors.length;
+        for ( ; i < l; i++ ) {
+            transform = vendors[i] + 'ransform';
+            if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
+        }
+        return false;
+    } ();
+    window.slide = slide;
+})(document, window);
+new slide("#recommend",".pagina");
+
+</script>
+</html>
