@@ -14,8 +14,8 @@
 <h3>游戏说明：</h3>
 
 <p>按n键 游戏开始:<a href="javascript:new_game();" style="background: blue;width: 100px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">游戏开始</a></p>
-<p>按d键 发牌:<a href="javascript:deal();" style="background: red;width: 80px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">发牌</a></p>
-<p>按h键 玩家停止发牌:<a href="javascript:player_done();" style="background: #008000;width: 100px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">玩家停止发牌</a></p>
+<p>按d键 要牌:<a href="javascript:deal();" style="background: red;width: 80px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">要牌</a></p>
+<p>按h键 不要牌:<a href="javascript:player_done();" style="background: #008000;width: 100px;height: 20px;display: inline-block;border: 0 none;text-align: center;color: #fff;">不要牌</a></p>
 
 <canvas id="canvas" width="800" height="600">不支持显示</canvas>
 
@@ -48,81 +48,14 @@ var back = new Image();  //牌的背面
 
 function init() {
     ctx = document.getElementById("canvas").getContext("2d");
-    ctx.font = "italic 20px microsoft yahei";
+    ctx.font = "20px microsoft yahei";
     ctx.fillStyle = "blue";
     build_cards();
     back.src = "images/poker/back-1.png";
-    canvas1 = document.getElementById("canvas");
+  //  canvas1 = document.getElementById("canvas");
     window.addEventListener('keydown', getkey, false);
     shuffle();
     deal_start();
-}
-
-// 获取键盘事件
-function getkey(event) {
-    var keyCode;
-    if (event == null) {
-        keyCode = window.event.keyCode;
-        window.event.preventDefault(); //禁止其他按键响应
-    } else {
-        keyCode = event.keyCode;
-        event.preventDefault();
-    }
-    switch (keyCode) {
-        //按键d
-        case 68:
-            deal();
-            break;
-        //按键h
-        case 72:
-            player_done();
-            break;
-        //按键n
-        case 78:
-            new_game();
-            break;
-        default :
-            alert("请按d,h,n键！")
-
-    }
-}
-
-// 发牌
-function deal() {
-    player_hand[play_i] = deal_cards(1);
-    ctx.drawImage(player_hand[play_i].picture, player_x, player_y, card_w, card_h);
-    player_x = player_x + 30;
-    play_i++;
-    if (more_to_house()) {
-        house_hand[house_i] = deal_cards(2);
-        ctx.drawImage(house_hand[house_i].picture, house_x, house_y, card_w, card_h);
-        house_x = house_x + 20;
-        house_i++;
-    }
-}
-
-// 计算庄家是否再要一张牌，总分大于等于17 返回false，否则true
-function more_to_house() {
-    var ac = 0;
-    var i;
-    var sumup = 0;
-    for (i = 0; i < house_i; i++) {
-        sumup += house_hand[i].value;
-        if (house_hand[i].value == 1) {
-            ac++;
-        }
-    }
-    if (ac > 0) {
-        if ((sumup + 10) <= 21) {
-            sumup += 10;
-        }
-    }
-    house_total = sumup;
-    if (sumup < 17) {
-        return true;
-    } else {
-        return false;
-    }
 }
 
 // 重新开始，清除画布，重置玩家和庄家手上牌的分值，重置下一张牌水平位置的变量
@@ -159,22 +92,42 @@ function deal_start() {
     house_i++;
 }
 
+// 要牌
+function deal() {
+    player_hand[play_i] = deal_cards(1);  //给玩家发牌
+    ctx.drawImage(player_hand[play_i].picture, player_x, player_y, card_w, card_h);
+    player_x = player_x + 30;
+    play_i++;
+    //庄家是否还要牌
+    if (more_to_house()) {
+        house_hand[house_i] = deal_cards(2); //给庄家发牌
+        ctx.drawImage(house_hand[house_i].picture, house_x, house_y, card_w, card_h);
+        house_x = house_x + 20;
+        house_i++;
+    }
+}
 
-// 构建一副牌
-function build_cards() {
-    var n;
-    var si;
-    var suit_name = ["clubs", "hearts", "spades", "diamonds"];  //花色, 梅花，红心，黑桃，方块
+// 计算庄家是否再要一张牌，总分大于等于17 返回false，否则true
+function more_to_house() {
+    var ac = 0; //A的变量
     var i;
-    i = 0;
-    var pic_name; //文件名
-    var nums = ["a", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];  //牌名
-    for (si = 0; si < 4; si++) {
-        for (n = 0; n < 13; n++) {
-            pic_name = "images/poker/" + suit_name[si] + "-" + nums[n] + ".png";
-            cards[i] = new Card(n + 1, suit_name[si], pic_name);
-            i++;
+    var sumup = 0;
+    for (i = 0; i < house_i; i++) {
+        sumup += house_hand[i].value; //所有牌累加
+        if (house_hand[i].value == 1) { //是否有A
+            ac++;
         }
+    }
+    if (ac > 0) {
+        if ((sumup + 10) <= 21) {
+            sumup += 10;
+        }
+    }
+    house_total = sumup;
+    if (sumup < 17) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -195,8 +148,94 @@ function deal_cards() {
     return card;
 }
 
+// 确定玩家手牌分值
+function add_up_player() {
+    var ac = 0; //保存A的变量
+    var i;
+    var sumup = 0;
+    for (i = 0; i < play_i; i++) {
+        sumup += player_hand[i].value;
+        if (player_hand[i].value == 1) { //是否有A
+            ac++;
+        }
+    }
+    if (ac > 0) {
+        if ((sumup + 10) <= 21) {
+            sumup += 10;
+        }
+    }
+    return sumup;
+}
+
+// 不要牌
+function player_done() {
+    while (more_to_house()) {
+        house_hand[house_i] = deal_cards(2); //给庄家一张牌
+        ctx.drawImage(back, house_x, house_y, card_w, card_h);
+        house_x = house_x + 20;
+        house_i++;
+    }
+    show_house();
+    play_total = add_up_player(); //确定玩家的总分值
+    if (play_total > 21) {
+        if (house_total > 21) {
+            ctx.fillText("玩家和庄家都超出21点", 30, 100);
+        } else {
+            ctx.fillText("玩家已经超过21点，失败了！", 30, 100);
+        }
+    } else {
+        if (house_total > 21) {
+            ctx.fillText("玩家赢了，庄家超出21点", 30, 100);
+        }
+        else {
+            if (play_total >= house_total) {
+                if (play_total > house_total) {
+                    ctx.fillText("你赢了！", 30, 100);
+                } else {
+                    ctx.fillText("平局", 30, 100);
+                }
+            }
+            else {
+                if (house_total <= 21) {
+                    ctx.fillText("你输啦！", 30, 100);
+                } else {
+                    ctx.fillText("玩家小于21点，庄家超过21点",30,100);
+                }
+            }
+        }
+    }
+}
+
+//显示庄家手上的牌
+function show_house() {
+    var i;
+    house_x = 500;
+    for (i = 0; i < house_i; i++) {
+        ctx.drawImage(house_hand[i].picture, house_x, house_y, card_w, card_h);
+        house_x += 20;
+    }
+}
+
+/*******************************************构建牌对象****************************************************/
+// 构建一副牌
+function build_cards() {
+    var n;
+    var si;
+    var suit_name = ["clubs", "hearts", "spades", "diamonds"];  //花色, 梅花，红心，黑桃，方块
+    var i;
+    i = 0;
+    var pic_name; //文件名
+    var nums = ["a", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];  //牌名
+    for (si = 0; si < 4; si++) {
+        for (n = 0; n < 13; n++) {
+            pic_name = "images/poker/" + suit_name[si] + "-" + nums[n] + ".png";
+            cards[i] = new MCard(n + 1, suit_name[si], pic_name);
+            i++;
+        }
+    }
+}
 // 对象 -- 牌
-function Card(n, s, pic_name) {
+function MCard(n, s, pic_name) {
     this.num = n;
     // 人头牌值为10
     if (n > 10) {
@@ -206,11 +245,43 @@ function Card(n, s, pic_name) {
     this.suit = s;
     this.picture = new Image();
     this.picture.src = pic_name;
-    this.dealt = 0;
+    this.dealt = 0;  //发牌给玩家和庄家设置为1,2
 }
+/*******************************************构建牌对象****************************************************/
+
+/*******************************************获取键盘事件****************************************************/
+// 获取键盘事件
+function getkey(event) {
+    var keyCode;
+    if (event == null) {
+        keyCode = window.event.keyCode;
+        window.event.preventDefault(); //禁止其他按键响应
+    } else {
+        keyCode = event.keyCode;
+        event.preventDefault();
+    }
+    switch (keyCode) {
+        //按键d
+        case 68:
+            deal();
+            break;
+        //按键h
+        case 72:
+            player_done();
+            break;
+        //按键n
+        case 78:
+            new_game();
+            break;
+        default :
+            alert("请按d,h,n键！")
+
+    }
+}
+/*******************************************获取键盘事件****************************************************/
 
 
-// 洗牌
+/*******************************************洗牌****************************************************/
 function shuffle() {
     var i = cards.length - 1;
     var s;
@@ -223,66 +294,12 @@ function shuffle() {
 
 // 交换牌的位置
 function swap_in_cards(j, k) {
-    var hold = new Card(cards[j].num, cards[j].suit, cards[j].picture.src);
+    var hold = new MCard(cards[j].num, cards[j].suit, cards[j].picture.src);
     cards[j] = cards[k];
     cards[k] = hold;
 }
+/*******************************************洗牌****************************************************/
 
-// 判断玩家是否再要牌的逻辑
-function add_up_player() {
-    var ac = 0;
-    var i;
-    var sumup = 0;
-    for (i = 0; i < play_i; i++) {
-        sumup += player_hand[i].value;
-        if (player_hand[i].value == 1) {
-            ac++;
-        }
-    }
-    if (ac > 0) {
-        if ((sumup + 10) <= 21) {
-            sumup += 10;
-        }
-    }
-    return sumup;
-}
-
-function player_done() {
-    while (more_to_house()) {
-        house_hand[house_i] = deal_cards(2);
-        ctx.drawImage(back, house_x, house_y, card_w, card_h);
-        house_x = house_x + 20;
-        house_i++;
-    }
-    show_house();
-    play_total = add_up_player();
-    if (play_total > 21) {
-        if (house_total > 21) {
-            ctx.fillText("你赢了，庄家超过21点！", 30, 100);
-        } else {
-            ctx.fillText("你已经超过21点，失败了！");
-        }
-    } else {
-        if (play_total >= house_total) {
-            if (play_total > house_total) {
-                ctx.fillText("你赢了！", 30, 100);
-            } else {
-                ctx.fillText("平局", 30, 100);
-            }
-        }
-        else {
-            if (house_total <= 21) {
-                ctx.fillText("你输啦！", 30, 100);
-            } else {
-                ctx.fillText("玩家小于21点，庄家超过21点");
-            }
-        }
-    }
-}
-
-function show_house() {
-
-}
 </script>
 </body>
 </html>
