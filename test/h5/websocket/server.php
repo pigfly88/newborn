@@ -1,8 +1,8 @@
 <?php
-$host = 'local.nfs.com'; //host
+$host = 'http://local.newborn.com'; //host
 $port = '9000'; //port
 chdir(dirname(__FILE__));
-$script = 'ws/'.basename(__FILE__);
+$script = 'test/h5/websocket'.basename(__FILE__);
 $null = NULL; //null var
 $jsconfig = "var vars={};vars.server='ws://{$host}:{$port}/{$script}';";
 if(!file_put_contents(__DIR__.'/config.js', $jsconfig)){

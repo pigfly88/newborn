@@ -10,13 +10,20 @@ class user_c extends base_c {
 		
 	}
 
+	
+	
 	function roomin(){
+		//$list = oo::m('room')->get();
+		//p($list);
 		if(!$rid = $this->req('rid', 0, 'intval')){
 			exit('rid error');
 		}
-		$uid = rand(1,1000);
-		echo 'uid:'.$uid;
-		$this->m->roomin($rid, $uid);
+		if(!$uid = $this->req('uid', 0, 'intval')){
+			exit('uid error');
+		}
+		if($this->m->roomin($rid, $uid)){
+			echo 'room in success';
+		}
 	}
 
 	function roomout(){

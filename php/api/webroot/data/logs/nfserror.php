@@ -1081,3 +1081,336 @@ file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; arg
 file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
   0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
 )
+2015-05-07 14:35:46--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 14:40:17--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 14:40:17--Type:2--Msg:Illegal string offset 'message'--File:E:\wwwroot\newborn\php\nfs\framework\base\Log.php--Line:30--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\Log.php; line:20; function:log_error; args:array (
+  0 => 
+  array (
+    'maxsize' => 10485760,
+    'file' => 'phperror.php',
+  ),
+)
+file:; line:; function:shutdown; args:array (
+  0 => 
+  array (
+    'log_error' => 
+    array (
+      'maxsize' => 10485760,
+      'file' => 'phperror.php',
+    ),
+  ),
+)
+2015-05-07 14:40:17--Type:2--Msg:Illegal string offset 'file'--File:E:\wwwroot\newborn\php\nfs\framework\base\Log.php--Line:31--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\Log.php; line:20; function:log_error; args:array (
+  0 => 
+  array (
+    'maxsize' => 10485760,
+    'file' => 'phperror.php',
+  ),
+)
+file:; line:; function:shutdown; args:array (
+  0 => 
+  array (
+    'log_error' => 
+    array (
+      'maxsize' => 10485760,
+      'file' => 'phperror.php',
+    ),
+  ),
+)
+2015-05-07 14:40:17--Type:2--Msg:Illegal string offset 'line'--File:E:\wwwroot\newborn\php\nfs\framework\base\Log.php--Line:32--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\Log.php; line:20; function:log_error; args:array (
+  0 => 
+  array (
+    'maxsize' => 10485760,
+    'file' => 'phperror.php',
+  ),
+)
+file:; line:; function:shutdown; args:array (
+  0 => 
+  array (
+    'log_error' => 
+    array (
+      'maxsize' => 10485760,
+      'file' => 'phperror.php',
+    ),
+  ),
+)
+2015-05-07 14:40:56--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 14:41:25--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 14:41:45--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 14:42:00--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:19:58--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:20:21--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:20:47--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:20:54--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:42--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:44--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:44--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:44--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:45--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:45--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:45--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:46--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:47--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:47--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:48--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:48--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:48--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:49--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=2
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:49--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
+2015-05-07 15:30:50--Type:2--Msg:The magic method __callStatic() must have public visibility and be static--File:E:\wwwroot\newborn\php\nfs\framework\base\DB.php--Line:21--Ip:127.0.0.1--Uri:/index.php?c=user&a=roomin&rid=1&uid=1
+<br />file:E:\wwwroot\newborn\php\nfs\framework\base\File.php; line:109; function:import; args:array (
+)
+file:E:\wwwroot\newborn\php\nfs\framework\nfs.php; line:77; function:import; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework/base/db.php',
+)
+file:E:\wwwroot\newborn\php\api\webroot\index.php; line:24; function:require; args:array (
+  0 => 'E:\\wwwroot\\newborn\\php\\nfs\\framework\\nfs.php',
+)
