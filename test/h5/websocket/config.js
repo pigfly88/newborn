@@ -1,1 +1,0 @@
-var vars={};vars.server='ws://http://local.newborn.com:9000/test/h5/websocket/server.php';

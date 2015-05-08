@@ -1,5 +1,5 @@
 <?php
-$host = 'http://local.newborn.com'; //host
+$host = 'local.newborn.com'; //host
 $port = '9000'; //port
 chdir(dirname(__FILE__));
 $script = 'test/h5/websocket'.basename(__FILE__);
