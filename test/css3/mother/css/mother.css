@@ -1,0 +1,373 @@
+/** normal **/
+*, :after, :before { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box }
+a { text-decoration: none; color: inherit }
+h1, h2, h3, h4 { margin: 0 }
+img { max-width: 100%; vertical-align: top }
+ul { padding: 0; margin: 0; list-style: none }
+ul li { padding: 0 }
+ol { margin: 0; padding: 0 0 0 20px }
+button, input { font-family: inherit }
+button { color: inherit; font: inherit; margin: 0; border: none; text-transform: none; -webkit-appearance: button }
+html { height: 100%; width: 100%; overflow: hidden }
+body { margin: 0; min-height: 100%; color: #fff; background-color: #2d3132; font: 400 12px/1.5 "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Arial, "Hiragino Sans GB", STHeiti, 'Microsoft Yahei', sans-serif; cursor: default; outline: 0; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; -webkit-text-size-adjust: none !important }
+.hide { display: none; }
+.playout { -webkit-animation: fadeOut 1s ease alternate both; animation: fadeOut 1s ease alternate both; }
+.play { display: block; -webkit-animation: fadeIn 1s ease alternate both; animation: fadeIn 1s ease alternate both; }
+
+/** Share **/
+.share { display: none; z-index: 20; padding-top: 124px; font-size: 18px; color: #fff; text-align: center; background-color: rgba(0, 0, 0, .6) }
+.share-show { display: block }
+.share:after { content: '\20'; position: absolute; right: 20px; top: 10px; width: 181px; height: 227px; background: url(../images/share_1.png) 0 0/100% no-repeat }
+.share .content { position: absolute; top: 30px; right: 130px; width: 143px; height: 98px; background: url(../images/share_2.png) 0 0/100% no-repeat; }
+
+/** Pages **/
+.pages, .page { position: absolute; top: 0; left: 0; height: 100%; width: 100%; overflow: hidden; outline: 0; }
+.page { z-index: 2; }
+.page-1 { background-color: #bfd3c8; border: 10px solid #efe6d5; }
+.page-1 .bottom { position: absolute; left: 0; bottom: 0; width: 100%; height: 20%; background: #8faea6; }
+.page-1 .btn { position: absolute; left: 50%; top: -20px; width: 145px; height: 42px; background: url(../images/begin_btn.png) 0 0 no-repeat; background-size: 145px auto; margin-left: -72px; -webkit-animation: button 0.2s linear infinite alternate; }
+.page-1 .logo { position: absolute; top: 50%; left: 50%; margin: -20px 0 0 -50px; width: 101px; height: 15px; background: url(../images/jd_logo.png) 0 0 no-repeat; background-size: 101px auto; }
+.page-1 .top { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.page-1 .title { z-index: 3; position: absolute; top: 0; left: 50%; width: 255px; height: 129px; margin: 85px 0 0 -128px; text-indent: -9999px; background: url(../images/home_7.png) 0 0 no-repeat; background-size: 255px auto; }
+.page-1 .mother { position: relative; width: 280px; height: 100%; margin: 0 auto; background: url(../images/home_1.png) center 0 no-repeat; background-size: 280px auto; }
+.page-1 .lhand { z-index: 2; width: 91px; height: 131px; position: absolute; top: 175px; left: 3px; background: url(../images/home_2.png) 0 0 no-repeat; background-size: 91px auto; -webkit-animation: lhand 0.6s linear infinite alternate; }
+.page-1 .rhand { z-index: 2; width: 90px; height: 145px; position: absolute; top: 168px; right: -2px; background: url(../images/home_3.png) 0 0 no-repeat; background-size: 90px auto; -webkit-animation: rhand 0.6s linear infinite alternate; }
+.page-1 .son { width: 135px; height: 229px; position: absolute; top: 200px; left: 50%; background: url(../images/home_4.png) 0 0 no-repeat; background-size: 135px auto; margin-left: -68px; }
+.page-1 .lear { width: 27px; height: 40px; position: absolute; top: 66px; left: 10px; background: url(../images/home_5.png) 0 0 no-repeat; background-size: 27px auto; -webkit-animation: lear 0.6s linear infinite alternate; }
+.page-1 .rear { width: 25px; height: 35px; position: absolute; top: 65px; right: 1px; background: url(../images/home_6.png) 0 0 no-repeat; background-size: 25px auto; -webkit-animation: rear 0.6s linear infinite alternate; }
+
+/* @media only screen and (min-height: 570px) {
+							.page-1 .mother {
+														width: 350px;
+														background-size: 350px auto;
+							}
+							.page-1 .lhand {
+														width: 114px;
+														height: 164px;
+														background-size: 114px auto;
+														top: 212px;
+														left: 5px;
+							}
+							.page-1 .rhand {
+														width: 114px;
+														height: 184px;
+														background-size: 114px auto;
+														top: 200px;
+														right: 0px;
+							}
+							.page-1 .son {
+														width: 170px;
+														height: 288px;
+														background-size: 170px auto;
+														top: 256px;
+														margin-left: -84px;
+							}
+} */
+@-webkit-keyframes button {
+	0% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+	100% { -webkit-transform: translate3d(0, -5px, 0); transform: translate3d(0, -5px, 0); }
+}
+@-webkit-keyframes lhand {
+	0% { -webkit-transform-origin: 0 0; -webkit-transform: rotate(2deg) }
+	100% { -webkit-transform: rotate(0deg) }
+}
+@keyframes lhand {
+	0% { -webkit-transform-origin: 0 0; -webkit-transform: rotate(2deg); transform-origin: 0 0; transform: rotate(2deg) }
+	100% { -webkit-transform: rotate(0deg); transform: rotate(0deg) }
+}
+@-webkit-keyframes rhand {
+	0% { -webkit-transform-origin: right top; -webkit-transform: rotate(-2deg) }
+	100% { -webkit-transform: rotate(0deg) }
+}
+@keyframes rhand {
+	0% { -webkit-transform-origin: right top; -webkit-transform: rotate(-2deg); transform-origin: right top; transform: rotate(-2deg) }
+	100% { -webkit-transform: rotate(0deg); transform: rotate(0deg) }
+}
+@-webkit-keyframes lear {
+	0% { -webkit-transform: scale3d(1.5, 0.8, 1); transform: scale3d(1.5, 0.8, 1) }
+	100% { -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1) }
+}
+@keyframes lear {
+	0% { -webkit-transform: scale3d(1.5, 0.8, 1); transform: scale3d(1.5, 0.8, 1) }
+	100% { -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1) }
+}
+@-webkit-keyframes rear {
+	0% { -webkit-transform: scale3d(1.5, 0.8, 1); transform: scale3d(1.5, 0.8, 1) }
+	100% { -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1) }
+}
+@keyframes rear {
+	0% { -webkit-transform: scale3d(1.5, 0.8, 1); transform: scale3d(1.5, 0.8, 1) }
+	100% { -webkit-transform: scale3d(1, 1, 1); transform: scale3d(1, 1, 1) }
+}
+
+/** Page 2 **/
+.page-2 { background: url(../images/page2_bg.png) 0 0 no-repeat #efe6d5; background-size: 100% 100%; }
+.page-2 .title { position: absolute; top: 50px; left: 50%; margin-left: -113px; width: 236px; height: 72px; background: url(../images/p2_title.png) 0 0 no-repeat; background-size: 236px auto; }
+.page-2 .choice1 { position: absolute; top: 50%; left: 50%; margin: -120px 0 0 -120px; width: 106px; height: 138px; background: url(../images/p2_choice1.png) 0 0 no-repeat; background-size: 106px auto; }
+.page-2 .choice2 { position: absolute; top: 50%; left: 50%; margin: -120px 0 0 10px; width: 100px; height: 138px; background: url(../images/p2_choice2.png) 0 0 no-repeat; background-size: 100px auto; }
+.page-2 .choice3 { position: absolute; top: 50%; left: 50%; margin: 40px 0 0 -120px; width: 110px; height: 145px; background: url(../images/p2_choice3.png) 0 0 no-repeat; background-size: 110px auto; }
+.page-2 .choice4 { position: absolute; top: 50%; left: 50%; margin: 43px 0 0 10px; width: 103px; height: 141px; background: url(../images/p2_choice4.png) 0 0 no-repeat; background-size: 103px auto; }
+
+/** Page 3 **/
+.page-3 { width: 100%; height: 100%; }
+.page-3 .stage { width: 100%; margin: 0 auto; background: url(../images/stage1.jpg) center 0 no-repeat; background-size: 320px auto; background-color: #f4eee2; }
+.page-3 .stage1 { background-color: #f4eee2; background-image: url(../images/stage1.jpg); }
+.page-3 .stage2 { background-color: #faf7db; background-image: url(../images/stage2.jpg); }
+.page-3 .stage3 { background-color: #faf7db; background-image: url(../images/stage3.jpg); }
+.page-3 .stage4 { background-color: #faf7db; background-image: url(../images/stage4.jpg); }
+.page-3 .stage1 .dialogue { position: absolute; top: 190px; left: 50%; width: 163px; height: 52px; background: url(../images/dialogue_1.png) 0 0 no-repeat; background-size: 163px auto; margin-left: -30px; -webkit-animation: fadeIn 1.5s ease 1s 2 alternate both; animation: fadeIn 1.5s ease 1s 2 alternate both; }
+.page-3 .stage2 .dialogue { position: absolute; top: 190px; left: 50%; width: 182px; height: 56px; background: url(../images/dialogue_2.png) 0 0 no-repeat; background-size: 182px auto; margin-left: -30px; -webkit-animation: fadeIn 1.5s ease 1s 2 alternate both; animation: fadeIn 1.5s ease 1s 2 alternate both; }
+.page-3 .stage3 .dialogue { position: absolute; top: 190px; left: 50%; width: 182px; height: 57px; background: url(../images/dialogue_3.png) 0 0 no-repeat; background-size: 182px auto; margin-left: -40px; -webkit-animation: fadeIn 1.5s ease 1s 2 alternate both; animation: fadeIn 1.5s ease 1s 2 alternate both; }
+.page-3 .stage4 .dialogue { position: absolute; top: 190px; left: 50%; width: 203px; height: 56px; background: url(../images/dialogue_4.png) 0 0 no-repeat; background-size: 203px auto; margin-left: -64px; -webkit-animation: fadeIn 1.5s ease 1s 2 alternate both; animation: fadeIn 1.5s ease 1s 2 alternate both; }
+.page-3 .act2 .mother { background-image: url(../images/action2.png); }
+.page-3 .act1 .mother.animating { -webkit-animation: action1 1s steps(1) 0s normal both; animation: action1 1s steps(1) 0s normal both; }
+.page-3 .act1 .mother.end { -webkit-animation: action1end 0.5s steps(1) infinite; animation: action1end 0.5s steps(1) infinite; }
+.page-3 .act1 .son.animating { -webkit-animation: childAct1 0.5s steps(1) 0.8s normal both; animation: childAct1 0.5s steps(1) 0.8s normal both; }
+.page-3 .act1 .son.end { -webkit-animation: childAct1end 0.2s steps(1) infinite; animation: childAct1end 0.2s steps(1) infinite; }
+.page-3 .stage2.act1 .mother, .page-3 .stage3.act1 .mother, .page-3 .stage4.act1 .mother { margin-left: -160px; top: 160px; }
+.page-3 .act2 .mother { background-image: url(../images/action2.png); }
+.page-3 .act2 .mother.animating { -webkit-animation: action2 1s steps(1) 0s normal both; animation: action2 1s steps(1) 0s normal both; }
+.page-3 .act2 .mother.end { -webkit-animation: action2end 0.4s steps(1) infinite; animation: action2end 0.4s steps(1) infinite; }
+.page-3 .act2 .son.animating { -webkit-animation: childAct1 0.2s steps(1) 0.4s normal both; animation: childAct1 0.2s steps(1) 0.4s normal both; }
+.page-3 .act2 .son.end { -webkit-animation: childAct1end 0.2s steps(1) infinite; animation: childAct1end 0.2s steps(1) infinite; }
+.page-3 .stage1.act2 .mother, .page-3 .stage3.act2 .mother, .page-3 .stage4.act2 .mother { margin-left: -130px; }
+.page-3 .act3 .mother {	/*margin-left: -115px;*/
+background-image: url(../images/action3.png); }
+.page-3 .act3 .mother.animating { -webkit-animation: action3 1s steps(1) 0s normal both; animation: action3 1s steps(1) 0s normal both; }
+.page-3 .act3 .mother.end { -webkit-animation: action3end 0.2s steps(1) infinite; animation: action3end 0.2s steps(1) infinite; }
+.page-3 .act3 .son.animating { -webkit-animation: childAct2 0.5s steps(1) 0.5s normal both; animation: childAct2 0.5s steps(1) 0.5s normal both; }
+.page-3 .act3 .son.end { -webkit-animation: childAct2end 0.2s steps(1) infinite; animation: childAct2end 0.2s steps(1) infinite; }
+.page-3 .stage1.act3 .mother, .page-3 .stage2.act3 .mother, .page-3 .stage4.act3 .mother { margin-left: -160px; z-index: 3; }
+.page-3 .act4 .mother { background-image: url(../images/action4.png); }
+.page-3 .act4 .mother.animating { -webkit-animation: action4 1s steps(1) 0s normal both; animation: action4 1s steps(1) 0s normal both; }
+.page-3 .act4 .mother.end {	/*-webkit-animation: action3end 0.5s steps(1) infinite;
+	animation: action3end 0.5s steps(1) infinite;*/ }
+.page-3 .act4 .son.animating { -webkit-animation: childAct3 0.5s steps(1) 4s normal both; animation: childAct3 0.5s steps(1) 4s normal both; }
+.page-3 .act4 .son.end { -webkit-animation: childAct3 0.2s steps(1) infinite; animation: childAct3 0.2s steps(1) infinite; }
+.page-3 .stage1.act4 .son, .page-3 .stage2.act4 .son, .page-3 .stage3.act4 .son, .page-3 .stage4.act4 .son { margin-left: 60px; }
+.page-3 .stage1.act4 .mother, .page-3 .stage2.act4 .mother, .page-3 .stage3.act4 .mother, .page-3 .stage4.act4 .mother { margin-left: -190px; }
+.page-3 .son { position: absolute; top: 236px; left: 50%; width: 128px; height: 170px; background: url(../images/child.png) 0 0 no-repeat; background-size: 128px auto; margin-left: 20px; }
+.page-3 .mother { position: absolute; top: 160px; left: 50%; width: 220px; height: 250px; background: url(../images/action1.png) 0 0 no-repeat; background-size: 220px auto; margin-left: -150px; }
+.page-3 .stage1 .son { position: absolute; top: 236px; left: 50%; margin-left: 20px; }
+.page-3 .stage1 .mother { position: absolute; top: 160px; left: 50%; margin-left: -150px; }
+.page-3 .hands { z-index: 4; position: absolute; top: 230px; left: 50%; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; margin-left: -20px; }
+.page-3 .hand1 { opacity: 0.6; position: absolute; top: 0; right: -20px; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; -webkit-animation: hands 0.3s ease infinite normal both; animation: hands 0.3s ease infinite normal both; }
+.page-3 .hand2 { opacity: 0.3; position: absolute; top: 0; right: -40px; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; -webkit-animation: hands 0.3s ease 0.1s infinite normal both; animation: hands 0.3s ease 0.1s infinite normal both; }
+.page-3 .stage1 .decorate { position: absolute; top: 104px; left: 50%; width: 84px; height: 70px; background: url(../images/decorate1.png) 0 0 no-repeat; background-size: 84px auto; margin-left: -45px; }
+.page-3 .stage1 .decorate.animating { -webkit-animation: decorate1 0.2s steps(1) 1.8s normal both; animation: decorate1 0.2s steps(1) 1.8s normal both; }
+.page-3 .stage2 .son { position: absolute; top: 236px; left: 50%; margin-left: 20px; }
+.page-3 .stage2 .mother { position: absolute; top: 160px; left: 50%; margin-left: -120px; }
+.page-3 .stage2 .decorate { position: absolute; top: 50px; left: 50%; width: 28px; height: 23px; background: url(../images/decorate2.png) 0 0 no-repeat; background-size: 28px auto; margin-left: 96px; }
+.page-3 .stage2 .decorate.animating { -webkit-animation: decorate2 0.2s steps(1) 2s normal both; animation: decorate2 0.2s steps(1) 2s normal both; }
+.page-3 .stage3 .mother { z-index: 3; position: absolute; top: 160px; left: 50%; margin-left: -160px; }
+.page-3 .stage3 .son { z-index: 2; position: absolute; top: 236px; left: 50%; margin-left: 40px; }
+.page-3 .stage3 .decorate { position: absolute; top: 135px; left: 50%; width: 100px; height: 144px; background: url(../images/decorate3.png) 0 0 no-repeat; background-size: 100px auto; margin-left: -50px; }
+.page-3 .stage3 .decorate.animating { -webkit-animation: decorate3 0.2s steps(1) 2s normal both; animation: decorate3 0.2s steps(1) 2s normal both; }
+.page-3 .stage4 .mother { z-index: 3; position: absolute; top: 160px; left: 50%; margin-left: -160px; }
+.page-3 .stage4 .son { position: absolute; top: 236px; left: 50%; margin-left: 60px; }
+.page-3 .stage4 .decorate { position: absolute; top: 186px; left: 50%; width: 171px; height: 50px; background: url(../images/decorate4.png) 0 0 no-repeat; background-size: 171px auto; margin-left: -85px; }
+.page-3 .stage4 .decorate { -webkit-animation: decorate4 0.5s steps(1) infinite; animation: decorate4 0.5s steps(1) infinite; }
+.page-3 .act4 .father { z-index: 4; position: absolute; top: 190px; left: 50%; width: 212px; height: 235px; background: url(../images/father.png) 0 -474px no-repeat; background-size: 212px auto; margin-left: -160px; }
+.page-3 .act4 .father.animating { -webkit-animation: action5 1s ease 2s normal both; animation: action5 1s ease 2s normal both; }
+.page-3 .act4 .father.end { margin-left: -70px; -webkit-animation: action5end 0.2s steps(1) infinite; animation: action5end 0.2s steps(1) infinite; }
+.page-3 .act4 .texts { z-index: 1; position: absolute; top: 190px; left: 50%; width: 159px; height: 218px; margin-left: -160px; }
+.page-3 .act4 .text1 { position: absolute; top: 50%; left: 50%; width: 89px; height: 68px; background: url(../images/texts.png) 0 0 no-repeat; background-size: 89px auto; margin: -34px 0 0 -68px; -webkit-animation: bounceIn 1.5s ease normal; animation: bounceIn 1.5s ease normal; }
+.page-3 .act4 .text2 { position: absolute; top: 50%; left: 50%; width: 89px; height: 67px; background: url(../images/texts.png) 0 -68px no-repeat; background-size: 89px auto; margin: -34px 0 0 12px;	/*-webkit-animation: bounceIn 1s ease 2s normal both;*/ -webkit-animation: bounceIn 1.5s ease 0.5s normal both; animation: bounceIn 1.5s ease 0.5s normal both; }
+.page-3 .act4 .text3 { position: absolute; top: 50%; left: 50%; width: 89px; height: 48px; background: url(../images/texts.png) 0 -135px no-repeat; background-size: 89px auto; margin: 30px 0 0 -90px; -webkit-animation: bounceIn 1.5s ease 1s normal both; animation: bounceIn 1.5s ease 1s normal both; }
+.page-3 .act4 .text4 { position: absolute; top: 50%; left: 50%; width: 89px; height: 49px; background: url(../images/texts.png) 0 -183px no-repeat; background-size: 89px auto; margin: 30px 0 0 16px; -webkit-animation: bounceIn 1.5s ease 1s normal both; animation: bounceIn 1.5s ease 1s normal both; }
+@-webkit-keyframes action1 {
+	0% { background-position: 0 0px; }
+	25% { background-position: 0 -252px; }
+	50% { background-position: 0 -504px; }
+	75% { background-position: 0 -756px; }
+	100% { background-position: 0 -1008px; }
+}
+@-webkit-keyframes action1end {
+	0% { background-position: 0 -756px; }
+	50% { background-position: 0 -1008px; }
+	100% { background-position: 0 -756px; }
+}
+@-webkit-keyframes action2 {
+	0% { background-position: 0 0px; }
+	20% { background-position: 0 -252px; }
+	40% { background-position: 0 -504px; }
+	60% { background-position: 0 -756px; }
+	80% { background-position: 0 -1008px; }
+	100% { background-position: 0 -1260px; }
+}
+@-webkit-keyframes action2end {
+	0% { background-position: 0 -252px; }
+	20% { background-position: 0 -504px; }
+	40% { background-position: 0 -756px; }
+	60% { background-position: 0 -1008px; }
+	80% { background-position: 0 -1260px; }
+	100% { background-position: 0 -252px; }
+}
+@-webkit-keyframes action3 {
+	0% { background-position: 0 0px; }
+	20% { background-position: 0 -252px; }
+	40% { background-position: 0 -504px; }
+	60% {		/*margin-left: -115px;*/
+	background-position: 0 -756px; }
+	80% {		/*margin-left: -115px;*/
+	background-position: 0 -1008px; }
+	100% {		/*margin-left: -115px;*/
+	background-position: 0 -1260px; }
+}
+@-webkit-keyframes action3end {
+	0% {		/*margin-left: -115px;*/
+	background-position: 0 -1008px; }
+	50% {		/*margin-left: -115px;*/
+	background-position: 0 -1260px; }
+	100% {		/*margin-left: -115px;*/
+	background-position: 0 -1008px; }
+}
+@-webkit-keyframes action4 {
+	0% { background-position: 0 0px; }
+	14.3% { background-position: 0 -252px; }
+	28.6% { background-position: 0 -504px; }
+	42.9% { background-position: 0 -756px; }
+	57.2% { background-position: 0 -1008px; }
+	71.5% { background-position: 0 -1260px; }
+	85.8% { background-position: 0 -1512px; }
+	100% { background-position: 0 -1764px; }
+}
+@-webkit-keyframes action5 {
+	0% { opacity: 0; background-position: 0 -474px; }
+	30% { opacity: 1; }
+	100% { -webkit-transform: translate3d(90px, 0, 0); transform: translate3d(90px, 0, 0); }
+}
+@-webkit-keyframes action5end {
+	0% { background-position: 0 -237px; }
+	50% { background-position: 0 0; }
+	100% { background-position: 0 -237px; }
+}
+@-webkit-keyframes childAct1 {
+	0% { background-position: 0 0; }
+	50% { top: 200px; background-position: 0 -172px; }
+	100% { top: 200px; background-position: 0 -344px; }
+}
+@-webkit-keyframes childAct1end {
+	0% { top: 200px; background-position: 0 -172px; }
+	50% { top: 200px; background-position: 0 -344px; }
+	100% { top: 200px; background-position: 0 -172px; }
+}
+@-webkit-keyframes childAct2 {
+	0% { background-position: 0 0; }
+	50% { background-position: 0 -516px; }
+	100% { background-position: 0 -688px; }
+}
+@-webkit-keyframes childAct2end {
+	0% { background-position: 0 -516px; }
+	50% { background-position: 0 -688px; }
+	100% { background-position: 0 -516px; }
+}
+@-webkit-keyframes childAct3 {
+	0% { background-position: 0 0; }
+	50% { background-position: 0 -860px; }
+	100% { background-position: 0 0; }
+}
+@-webkit-keyframes decorate1 {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 -72px; }
+}
+@-webkit-keyframes decorate2 {
+	0% { background-position: 0 0; }
+	50% { background-position: 0 -25px; }
+	100% { background-position: 0 -50px; }
+}
+@-webkit-keyframes decorate3 {
+	0% { background-position: 0 0; }
+	100% { background-position: 0 -146px; }
+}
+@-webkit-keyframes decorate4 {
+	0% { background-position: 0 0; }
+	33% { background-position: 0 -52px; }
+	66% { background-position: 0 -104px; }
+	100% { background-position: 0 0; }
+}
+@-webkit-keyframes hands {
+	0% { }
+	100% { opacity: 0; }
+}
+
+/** Page 4 **/
+.page-4 .frame { width: 100%; height: 100%; margin: 0 auto; background: url(../images/result_1.png) 0 0 no-repeat #4e4f47; background-size: 100% 100%; }
+.page-4 .f2 { background-image: url(../images/result_2.png); }
+.page-4 .f3 { background-image: url(../images/result_3.png); }
+.page-4 .f4 { background-image: url(../images/result_4.png); }
+.page-4 .tvshow { position: absolute; top: 15%; left: 50%; width: 273px; height: 243px; margin-left: -136px; background: url(../images/tv1.png) 0 0 no-repeat; background-size: 273px auto; }
+.page-4 .tvshow.t2 { background-image: url(../images/tv2.png); }
+.page-4 .tvshow.t3 { background-image: url(../images/tv3.png); }
+.page-4 .tvshow.t4 { background-image: url(../images/tv4.png); }
+.page-4 .btnsingle { width: 248px; height: 68px; position: absolute; bottom: 36px; left: 50%; margin-left: -124px; background: url(../images/btn3.png) 0 0 no-repeat; background-size: 248px auto; }
+.page-4 .btngroup { width: 248px; height: 50px; position: absolute; bottom: 105px; left: 50%; margin-left: -124px; }
+.page-4 .btngroup .lbtn { float: left; width: 124px; height: 50px; background: url(../images/btn1.png) 0 0 no-repeat; background-size: 124px auto; }
+.page-4 .btngroup .rbtn { float: right; width: 124px; height: 50px; background: url(../images/btn2.png) 0 0 no-repeat; background-size: 124px auto; }
+.page-4 .stage { position: absolute; width: 100%; height: 100%; -webkit-transform: scale(0.8, 0.8); transform: scale(0.8, 0.8); top: -70px; left: 50%; margin-left: -158px; }
+.page-4 .act2 .mother { background-image: url(../images/action1.png); }
+.page-4 .act1 .mother { margin-left: -190px; }
+.page-4 .act1 .mother.end { -webkit-animation: action1end 0.5s steps(1) infinite; animation: action1end 0.5s steps(1) infinite; }
+.page-4 .act1 .son.end { -webkit-animation: childAct1end 0.2s steps(1) infinite; animation: childAct1end 0.2s steps(1) infinite; }
+.page-4 .act2 .mother { background-image: url(../images/action2.png); }
+.page-4 .act2 .mother.animating { -webkit-animation: action2 1s steps(1) 0s normal both; animation: action2 1s steps(1) 0s normal both; }
+.page-4 .act2 .mother.end { -webkit-animation: action2end 0.4s steps(1) infinite; animation: action2end 0.4s steps(1) infinite; }
+.page-4 .act2 .son.animating { -webkit-animation: childAct1 0.2s steps(1) 0.4s normal both; animation: childAct1 0.2s steps(1) 0.4s normal both; }
+.page-4 .act2 .son.end { -webkit-animation: childAct1end 0.2s steps(1) infinite; animation: childAct1end 0.2s steps(1) infinite; }
+.page-4 .act3 .mother { z-index: 3;	/*margin-left: -140px;*/ background-image: url(../images/action3.png); }
+.page-4 .act3 .son { margin-left: 50px; }
+.page-4 .act3 .mother.end { -webkit-animation: action3end 0.2s steps(1) infinite; animation: action3end 0.2s steps(1) infinite; }
+.page-4 .act3 .son.end { -webkit-animation: childAct2end 0.2s steps(1) infinite; animation: childAct2end 0.2s steps(1) infinite; }
+.page-4 .stage1.act3 .mother, .page-4 .stage2.act3 .mother, .page-4 .stage4.act3 .mother { margin-left: -160px; z-index: 3; }
+.page-4 .act4 .mother { background-image: url(../images/action4.png); margin-left: -190px; z-index: 3; }
+.page-4 .act4 .mother.animating { -webkit-animation: action4 1s steps(1) 0s normal both; animation: action4 1s steps(1) 0s normal both; }
+.page-4 .act4 .mother.end { background-position: 0 -1764px; }
+.page-4 .act4 .son.animating { -webkit-animation: childAct3 0.5s steps(1) 4s normal both; animation: childAct3 0.5s steps(1) 4s normal both; }
+.page-4 .act4 .son.end { -webkit-animation: childAct3 0.2s steps(1) infinite; animation: childAct3 0.2s steps(1) infinite; }
+.page-4 .stage1.act4 .son, .page-4 .stage2.act4 .son, .page-4 .stage3.act4 .son, .page-4 .stage4.act4 .son { margin-left: 60px; }
+.page-4 .stage1.act4 .mother, .page-4 .stage2.act4 .mother, .page-4 .stage3.act4 .mother, .page-4 .stage4.act4 .mother { margin-left: -190px; }
+.page-4 .son { position: absolute; top: 236px; left: 50%; width: 128px; height: 170px; background: url(../images/child.png) 0 0 no-repeat; background-size: 128px auto; margin-left: 20px; }
+.page-4 .mother { position: absolute; top: 160px; left: 50%; width: 220px; height: 250px; background: url(../images/action1.png) 0 0 no-repeat; background-size: 220px auto; margin-left: -150px; }
+.page-4 .stage1 .son { position: absolute; top: 236px; left: 50%; margin-left: 20px; }
+.page-4 .stage1 .mother { position: absolute; top: 160px; left: 50%; margin-left: -150px; }
+.page-4 .hands { z-index: 4; position: absolute; top: 230px; left: 50%; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; margin-left: -40px; }
+.page-4 .act1 .hands { display: block; }
+.page-4 .hand1 { opacity: 0.6; position: absolute; top: 0; right: -20px; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; -webkit-animation: hands 0.3s ease infinite normal both; animation: hands 0.3s ease infinite normal both; }
+.page-4 .hand2 { opacity: 0.3; position: absolute; top: 0; right: -40px; width: 74px; height: 97px; background: url(../images/hands.png) 0 0 no-repeat; background-size: 74px auto; -webkit-animation: hands 0.3s ease 0.1s infinite normal both; animation: hands 0.3s ease 0.1s infinite normal both; }
+.page-4 .stage2 .son { position: absolute; top: 236px; left: 50%; margin-left: 20px; }
+.page-4 .stage2 .mother { position: absolute; top: 160px; left: 50%; margin-left: -120px; }
+.page-4 .stage3 .mother { z-index: 3; position: absolute; top: 160px; left: 50%; margin-left: -160px; }
+.page-4 .stage3 .son { z-index: 2; position: absolute; top: 236px; left: 50%; margin-left: 40px; }
+.page-4 .stage4 .mother { z-index: 3; position: absolute; top: 160px; left: 50%; margin-left: -160px; }
+.page-4 .stage4 .son { position: absolute; top: 236px; left: 50%; margin-left: 60px; }
+.page-4 .act4 .father { z-index: 4; position: absolute; top: 190px; left: 50%; width: 212px; height: 235px; background: url(../images/father.png) 0 -474px no-repeat; background-size: 212px auto; margin-left: -100px; display: block; }
+.page-4 .act4 .father.end { -webkit-animation: action5end 0.2s steps(1) infinite; animation: action5end 0.2s steps(1) infinite; }
+.page-4 .act4 .texts { z-index: 1; position: absolute; top: 190px; left: 50%; width: 159px; height: 218px; margin-left: -160px; display: block; }
+.page-4 .act4 .text1 { position: absolute; top: 50%; left: 50%; width: 89px; height: 68px; background: url(../images/texts.png) 0 0 no-repeat; background-size: 89px auto; margin: -34px 0 0 -68px; }
+.page-4 .act4 .text2 { position: absolute; top: 50%; left: 50%; width: 89px; height: 67px; background: url(../images/texts.png) 0 -68px no-repeat; background-size: 89px auto; margin: -34px 0 0 12px; }
+.page-4 .act4 .text3 { position: absolute; top: 50%; left: 50%; width: 89px; height: 48px; background: url(../images/texts.png) 0 -135px no-repeat; background-size: 89px auto; margin: 30px 0 0 -90px; }
+.page-4 .act4 .text4 { position: absolute; top: 50%; left: 50%; width: 89px; height: 49px; background: url(../images/texts.png) 0 -183px no-repeat; background-size: 89px auto; margin: 30px 0 0 16px; }
+
+/** Page ending **/
+.page-5 { background-color: #bfd3c8; border: 10px solid #efe6d5; }
+.page-5 .mother { position: absolute; top: 0; left: 50%; margin-left: -150px; width: 300px; height: 375px; background: url(../images/ending_bg.png) 0 0 no-repeat; background-size: 300px auto; }
+.page-5 .title1 { position: absolute; top: 50%; left: 50%; margin: -150px 0 0 -113px; width: 226px; height: 55px; background: url(../images/ending_1.png) 0 0 no-repeat; background-size: 226px auto; }
+.page-5 .title2 { position: absolute; top: 50%; left: 50%; margin: -80px 0 0 -75px; width: 150px; height: 44px; background: url(../images/ending_2.png) 0 0 no-repeat; background-size: 150px auto; }
+.page-5 .content { position: absolute; top: 50%; left: 50%; margin: 0px 0 0 -117px; width: 234px; height: 61px; background: url(../images/ending_3.png) 0 0 no-repeat; background-size: 234px auto; }
+.page-5 .btn { position: absolute; top: 50%; left: 50%; margin: 85px 0 0 -69px; width: 138px; height: 45px; background: url(../images/ending_4.png) 0 0 no-repeat; background-size: 138px auto; }
+.page-5 .restart { position: absolute; top: 50%; left: 50%; margin: 160px 0 0 -56px; width: 112px; height: 19px; background: url(../images/again_word.png) 0 0 no-repeat; background-size: 112px auto; }
+.page-5 .footer { position: absolute; bottom: 20px; left: 50%; margin-left: -51px; width: 102px; height: 15px; background: url(../images/ending_5.png) 0 0 no-repeat; background-size: 102px auto; }
+
+/** Trick Dialog **/
+.trickCon { position: absolute; width: 100%; height: 100%; z-index: 4; background-color: rgba(0, 0, 0, .6) }
+.tricks { position: absolute; top: 50%; left: 50%; margin: -220px 0 0 -140px; width: 280px; height: 440px; z-index: 5; background: url(../images/choose_dialog.png) 0 0 no-repeat; background-size: 280px auto; }
+.tricks .choice1 { position: absolute; top: 50%; left: 50%; margin: -140px 0 0 -120px; width: 116px; height: 124px; background: url(../images/trick_choice1.png) 0 -124px no-repeat; background-size: 116px auto; }
+.tricks .choice2 { position: absolute; top: 50%; left: 50%; margin: -140px 0 0 5px; width: 116px; height: 124px; background: url(../images/trick_choice2.png) 0 -124px no-repeat; background-size: 116px auto; }
+.tricks .choice3 { position: absolute; top: 50%; left: 50%; margin: 30px 0 0 5px; width: 116px; height: 124px; background: url(../images/trick_choice4.png) 0 -124px no-repeat; background-size: 116px auto; }
+.tricks .choice4 { position: absolute; top: 50%; left: 50%; margin: 30px 0 0 -120px; width: 116px; height: 124px; background: url(../images/trick_choice3.png) 0 -124px no-repeat; background-size: 116px auto; }
+.tricks .choice1.light, .tricks .choice2.light, .tricks .choice3.light, .tricks .choice4.light { background-position: 0 0; }
+.tricks .choice1:after, .tricks .choice2:after, .tricks .choice3:after, .tricks .choice4:after { content: ''; display: block; position: absolute; bottom: -30px; left: 0; width: 116px; height: 30px; background: url(../images/choice_words.png) 0 0 no-repeat; background-size: 116px auto; }
+.tricks .choice1:after { background-position: 0 0; }
+.tricks .choice2:after { background-position: 0 -32px; }
+.tricks .choice3:after { background-position: 0 -92px; }
+.tricks .choice4:after { background-position: 0 -60px; }
