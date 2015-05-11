@@ -5,7 +5,7 @@
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>
-        UC浏览器约跑赚话费
+        奔向集结号
     </title>
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -29,7 +29,7 @@
 <!-- 第一屏 -->
     <article id="page-index" style="display: none;">
         <header id="i-header" class="i-header">
-            <span class="i-logo"></span>
+            <!--<span class="i-logo"></span> 左上角logo-->
             <span id="i-rule" class="i-rule">游戏规则</span>
         </header>
         <ul id="i-nodes" class="i-nodes" style="display: none;">
@@ -108,7 +108,7 @@
             检测到您的另一跑道已达标，可以去兑奖咯！
             <br>同一手机只能兑换一份话费哦。<a href="http://rec.uc.cn/running/reward?uc_param_str=pfssnieisivecpmibifrdnlantnw&entry=qck" style="color: #eb481c;">去查看&gt;&gt;</a>
         </div>
-        <div id="i-end" style="display: block;  margin: 0 14px 14px 14px;">温馨提示：活动已结束，感谢您的支持。</div>
+        <div id="i-end" style="display: none;  margin: 0 14px 14px 14px;">温馨提示：活动已结束，感谢您的支持。</div>
         <div class="i-start-panel">
             <span>
                 <button id="i-start" class="i-button i-btn-animate" style="display: none;">奔跑吧，骚年</button>
@@ -132,7 +132,7 @@
                 <button id="i-back" class="i-button" style="display: none;">查看我自己的跑道</button>
             </span>
             <span>
-                <button id="i-download" class="i-button" style="display: block;">下载UC开启接力</button>
+                <button id="i-download" class="i-button" style="display: block;">关注公众号，更多好礼等着你</button>
             </span>
             <div id="i-again" class="i-button i-again" style="display: none;">
                 再跑一次
@@ -204,10 +204,10 @@
             <section id="g-voiceover"></section>
             <section id="g-up">UP</section>
         </section>
-        <section id="g-loading" style="display: none;">Loading...</section>
+        <section id="g-loading" style="display: block;">Loading...</section>
     </article>
-    <!-- <script src="../public/dist/app-index.2cc5a9e0.js"></script> -->
-<script src="./js/sea.js"></script>
+
+
     <script src="./js/app.js"></script>
     <script type="text/javascript">
     define('appData', function(require, exports) {
@@ -249,8 +249,8 @@
             ],
             DIS: [3, 4, 5, 6, 10],
             DIS_RANDOM: 1,
-            MUSIC_BG: './audio/game_bg.mp3',
-            MUSIC_CHEER: './audio/gameover.mp3',
+            MUSIC_BG: 'audio/game_bg.mp3',
+            MUSIC_CHEER: 'audio/gameover.mp3',
             MUSIC_VOLUME: 0.1, // [0, 1]
             VOICES: [
                 [
@@ -384,7 +384,8 @@
         'use strict';
         index.init();
     });
-    </script><section style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.6);"></section><iframe src="about:blank" style="display: none;"></iframe>
-
-
-</body></html>
+    </script>
+<section style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.6);"></section>
+<iframe src="about:blank" style="display: none;"></iframe>
+</body>
+</html>
