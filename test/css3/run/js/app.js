@@ -142,7 +142,13 @@
     }
 
     if (!a.seajs) {
-        var u = a.seajs = {version: "2.2.0"}, v = u.data = {}, w = c("Object"), x = c("String"), y = Array.isArray || c("Array"), z = c("Function"), A = 0, B = v.events = {};
+        var u = a.seajs = {version: "2.2.0"},
+            v = u.data = {},
+            w = c("Object"),
+            x = c("String"),
+            y = Array.isArray || c("Array"),
+            z = c("Function"), A = 0,
+            B = v.events = {};
         u.on = function (a, b) {
             var c = B[a] || (B[a] = []);
             return c.push(b), u
@@ -286,7 +292,8 @@
             return C("config", a), u
         }
     }
-}(this), !function (a, b) {
+}(this),
+    !function (a, b) {
     "function" == typeof define && (define.amd || define.cmd) ? define("cmp/jweixin-1.0.0", [], function () {
         return b(a)
     }) : b(a, !0)
@@ -585,7 +592,8 @@
     "use strict";
     function c(a) {
         var b;
-        return null == a ? b = String(a) : (b = Object.prototype.toString.call(a).toLowerCase(), b = b.substring(8, b.length - 1)), b
+        return null == a ? b = String(a) : (b = Object.prototype.toString.call(a).toLowerCase(),
+            b = b.substring(8, b.length - 1)), b
     }
 
     function d(a, b, d) {
@@ -613,7 +621,8 @@
     function f(a, b) {
         b = b || location.search;
         var c, d = b.indexOf("#");
-        return d > 0 && (b = b.substr(0, d)), c = b.match(new RegExp("[?|&]" + encodeURIComponent(a) + "=([^&]*)(&|$)")), c ? decodeURIComponent(c[1]) : ""
+        return d > 0 && (b = b.substr(0, d)),
+            c = b.match(new RegExp("[?|&]" + encodeURIComponent(a) + "=([^&]*)(&|$)")), c ? decodeURIComponent(c[1]) : ""
     }
 
     function g(a, b) {
@@ -629,14 +638,23 @@
 
     function i(a) {
         a = a || {};
-        var b, f = a.type || "GET", g = k(a.url || ""), i = e(l, a.data), j = a.success, m = a.error, n = new XMLHttpRequest;
+        var b,
+            f = a.type || "GET",
+            g = k(a.url || ""),
+            i = e(l, a.data),
+            j = a.success, m = a.error,
+            n = new XMLHttpRequest;
         g = h({_t: +new Date}, g), n.onreadystatechange = function () {
             4 === n.readyState && (200 === n.status ? j && j(JSON.parse(n.responseText)) : m && m(n))
         }, f = "POST" === f.toUpperCase() ? "POST" : "GET";
         try {
             "POST" === f ? (b = new FormData, d(i, function (a, d) {
                 d && b.append(d, "array" === c(a) ? a.join() : a)
-            }), n.open(f, g, !0), n.send(b)) : (b = h(i), n.open(f, g + "&" + b, !0), n.send())
+            }),
+                n.open(f, g, !0),
+                n.send(b)) : (b = h(i),
+                n.open(f, g + "&" + b, !0),
+                n.send())
         } catch (o) {
             console.error("ajax error", o)
         }
@@ -770,7 +788,8 @@
     "use strict";
     var d = function () {
     };
-    d.config = {dig: 32, el: 1, kl: 2, ke: 2, wd: 14, kd: 13}, d.relation = {9: ["p", "m"], 8: ["o", "l"], 7: ["i", "k"], 6: ["u", "j"], 5: ["y", "h"], 4: ["t", "g"], 3: ["r", "f"], 2: ["e", "d"], 1: ["w", "s", "x"], 0: ["q", "a", "z"], ".": ["n", "b"], "-": ["v", "c"]}, d.cw = function (a, b) {
+    d.config = {dig: 32, el: 1, kl: 2, ke: 2, wd: 14, kd: 13},
+        d.relation = {9: ["p", "m"], 8: ["o", "l"], 7: ["i", "k"], 6: ["u", "j"], 5: ["y", "h"], 4: ["t", "g"], 3: ["r", "f"], 2: ["e", "d"], 1: ["w", "s", "x"], 0: ["q", "a", "z"], ".": ["n", "b"], "-": ["v", "c"]}, d.cw = function (a, b) {
         return "number" != typeof a || isNaN(a) || "number" != typeof b || isNaN(b) ? !1 : (a + "").length > d.config.wd || (b + "").length > d.config.kd ? !1 : !0
     }, d.insert = function (a, b, c) {
         return a.substr(0, b) + c + a.substr(b)
@@ -1000,6 +1019,8 @@
             g.navigator.vibrate(a)
         }, a + b)
     }, b.stop = e
+
+    // ↓↓ 区别
 }), define("index/game/animate/drawPerson", ["utils/utils"], function (a, b, c) {
     "use strict";
     var d = a("utils/utils");
@@ -1262,9 +1283,50 @@
             default:
                 g = 0
         }
-        c.fillStyle = "#c4f2ff", c.fillRect(0, 0, e, f), d.drawSun({color: "rgba(255,253,52,0.32)", r: .34 * e * .5}), d.drawSun({color: "rgba(255,255,255,1)", r: .3 * e * .5}), d.drawSun({color: "rgba(255,252,178,1)", r: .28 * e * .5}), d.drawSun({color: "rgba(255,253,52,1)", r: .26 * e * .5}), c.fillStyle = c.strokeStyle = "white", c.beginPath();
+        c.fillStyle = "#c4f2ff",
+            c.fillRect(0, 0, e, f),
+            d.drawSun({color: "rgba(255,253,52,0.32)", r: .34 * e * .5}),
+            d.drawSun({color: "rgba(255,255,255,1)", r: .3 * e * .5}),
+            d.drawSun({color: "rgba(255,252,178,1)", r: .28 * e * .5}),
+            d.drawSun({color: "rgba(255,253,52,1)", r: .26 * e * .5}),
+            c.fillStyle = c.strokeStyle = "white",
+            c.beginPath();
         var h = .05 * e, i = .3 * f + g;
-        c.moveTo(h, i), c.quadraticCurveTo(h + 50, i - 10, h + 111, i - 14), c.bezierCurveTo(h + 125, i - 20, h + 120, i - 40, h + 98, i - 38), c.bezierCurveTo(h + 90, i - 52, h + 65, i - 50, h + 65, i - 27), c.quadraticCurveTo(h + 58, i - 30, h + 56, i - 24), c.quadraticCurveTo(h + 40, i - 30, h + 37, i - 14), c.quadraticCurveTo(h + 33, i - 14, h + 31, i - 8), c.quadraticCurveTo(h + 11, i - 4, h, i - 2), c.closePath(), c.fill(), c.stroke(), c.beginPath(), h = .49 * e, i = .25 * f + g, c.moveTo(h, i), c.quadraticCurveTo(h + 24, i + 1, h + 63, i), c.arc(h + 63, i - 13, 13, .45 * Math.PI, 1 * Math.PI, !0), c.quadraticCurveTo(h + 40, i - 12, h + 40, i - 6), c.quadraticCurveTo(h + 36, i, h + 36, i - 2), c.quadraticCurveTo(h, i, h, i - 3), c.fill(), c.stroke(), c.closePath(), c.beginPath(), h = .625 * e, i = .28 * f + g, c.moveTo(h, i), c.quadraticCurveTo(h + 48, i - 2, h + 104, i + 11), c.lineTo(h + 104, i + 9), c.quadraticCurveTo(h + 85, i + 9, h + 89, i - 18), c.bezierCurveTo(h + 88, i - 41, h + 56, i - 41, h + 53, i - 22), c.quadraticCurveTo(h + 38, i - 26, h + 39, i - 11), c.quadraticCurveTo(h + 32, i - 11, h + 32, i - 5), c.quadraticCurveTo(h + 32, i - 2, h + 29, i - 2), c.quadraticCurveTo(h + 15, i - 1, h, i - 2), c.fill(), c.stroke(), c.closePath()
+        c.moveTo(h, i),
+            c.quadraticCurveTo(h + 50, i - 10, h + 111, i - 14),
+            c.bezierCurveTo(h + 125, i - 20, h + 120, i - 40, h + 98, i - 38),
+            c.bezierCurveTo(h + 90, i - 52, h + 65, i - 50, h + 65, i - 27),
+            c.quadraticCurveTo(h + 58, i - 30, h + 56, i - 24),
+            c.quadraticCurveTo(h + 40, i - 30, h + 37, i - 14),
+            c.quadraticCurveTo(h + 33, i - 14, h + 31, i - 8),
+            c.quadraticCurveTo(h + 11, i - 4, h, i - 2),
+            c.closePath(),
+            c.fill(),
+            c.stroke(),
+            c.beginPath(), h = .49 * e, i = .25 * f + g,
+            c.moveTo(h, i),
+            c.quadraticCurveTo(h + 24, i + 1, h + 63, i),
+            c.arc(h + 63, i - 13, 13, .45 * Math.PI, 1 * Math.PI, !0),
+            c.quadraticCurveTo(h + 40, i - 12, h + 40, i - 6),
+            c.quadraticCurveTo(h + 36, i, h + 36, i - 2),
+            c.quadraticCurveTo(h, i, h, i - 3),
+            c.fill(),
+            c.stroke(),
+            c.closePath(),
+            c.beginPath(),
+            h = .625 * e, i = .28 * f + g,
+            c.moveTo(h, i),
+            c.quadraticCurveTo(h + 48, i - 2, h + 104, i + 11),
+            c.lineTo(h + 104, i + 9),
+            c.quadraticCurveTo(h + 85, i + 9, h + 89, i - 18),
+            c.bezierCurveTo(h + 88, i - 41, h + 56, i - 41, h + 53, i - 22),
+            c.quadraticCurveTo(h + 38, i - 26, h + 39, i - 11),
+            c.quadraticCurveTo(h + 32, i - 11, h + 32, i - 5),
+            c.quadraticCurveTo(h + 32, i - 2, h + 29, i - 2),
+            c.quadraticCurveTo(h + 15, i - 1, h, i - 2),
+            c.fill(),
+            c.stroke(),
+            c.closePath()
     }, d.init = function (a) {
         d.el = a, d.el.$root = a
     }, d.drawSun = function (a) {
@@ -1335,8 +1397,40 @@
     function d() {
     }
 
-    var e = a("utils/utils"), f = a("utils/timer"), g = a("utils/image"), h = a("index/game/animate/player"), i = a("appData").CONF, j = a("index/game/scene"), k = a("index/game/motion"), l = a("index/game/voiceover"), m = a("index/game/music"), n = d.animates = {sky: a("index/game/animate/sky"), person1: a("index/game/animate/person1"), person2: a("index/game/animate/person2"), person3: a("index/game/animate/person3"), person4: a("index/game/animate/person4"), person5: a("index/game/animate/person5"), ground1: a("index/game/animate/ground1"), ground2: a("index/game/animate/ground2"), ground3: a("index/game/animate/ground3"), ground4: a("index/game/animate/ground4"), ground5: a("index/game/animate/ground5"), tree1: a("index/game/animate/tree1"), tree2: a("index/game/animate/tree2"), tree3: a("index/game/animate/tree3"), tree4: a("index/game/animate/tree4"), tree5: a("index/game/animate/tree5")};
-    d.curGrade = 1, d.observer = a("widget/observer"), d.needCalcul = !1, d.gameTime = i.GAME_TIME, d.interval = 100, d.dis = 0, d.started = !1, d.showUpGrade = !1, c.exports.start = d.start = function () {
+    var e = a("utils/utils"),
+        f = a("utils/timer"),
+        g = a("utils/image"),
+        h = a("index/game/animate/player"),
+        i = a("appData").CONF,
+        j = a("index/game/scene"),
+        k = a("index/game/motion"),
+        l = a("index/game/voiceover"),
+        m = a("index/game/music"),
+        n = d.animates = {sky: a("index/game/animate/sky"),
+            person1: a("index/game/animate/person1"),
+            person2: a("index/game/animate/person2"),
+            person3: a("index/game/animate/person3"),
+            person4: a("index/game/animate/person4"),
+            person5: a("index/game/animate/person5"),
+            ground1: a("index/game/animate/ground1"),
+            ground2: a("index/game/animate/ground2"),
+            ground3: a("index/game/animate/ground3"),
+            ground4: a("index/game/animate/ground4"),
+            ground5: a("index/game/animate/ground5"),
+            tree1: a("index/game/animate/tree1"),
+            tree2: a("index/game/animate/tree2"),
+            tree3: a("index/game/animate/tree3"),
+            tree4: a("index/game/animate/tree4"),
+            tree5: a("index/game/animate/tree5")};
+    d.curGrade = 1,
+        d.observer = a("widget/observer"),
+        d.needCalcul = !1,
+        d.gameTime = i.GAME_TIME,
+        d.interval = 100,
+        d.dis = 0,
+        d.started = !1,
+        d.showUpGrade = !1,
+        c.exports.start = d.start = function () {
         e.once("game/setup", function () {
             d.setupObserver()
         }), h.initCanvas(), d.loadResource(function () {
@@ -1479,7 +1573,17 @@
     }
 }), define("index/game/scene", ["appData", "appData", "index/game/animate/sky", "index/game/animate/ground", "index/game/animate/tree", "widget/observer", "index/store", "index/game/animate/drawPerson", "utils/utils"], function (a, b) {
     "use strict";
-    var c = a("appData").CONF, d = a("appData").FILTER, e = a("index/game/animate/sky"), f = a("index/game/animate/ground"), g = a("index/game/animate/tree"), h = a("widget/observer"), i = a("index/store"), j = a("index/game/animate/drawPerson"), k = a("utils/utils"), l = k.$("#can-game"), m = k.$("#pace-left"), n = k.$("#pace-right"), o = k.$("#finger-left"), p = k.$("#finger-right"), q = k.$("#g-ready"), r = k.$("#g-countdown"), s = k.$("#g-points"), t = k.$("#g-points-s");
+    var c = a("appData").CONF, d = a("appData").FILTER, e = a("index/game/animate/sky"), f = a("index/game/animate/ground"), g = a("index/game/animate/tree"), h = a("widget/observer"), i = a("index/store"), j = a("index/game/animate/drawPerson"),
+        k = a("utils/utils"),
+        l = k.$("#can-game"),
+        m = k.$("#pace-left"),
+        n = k.$("#pace-right"),
+        o = k.$("#finger-left"),
+        p = k.$("#finger-right"),
+        q = k.$("#g-ready"),
+        r = k.$("#g-countdown"),
+        s = k.$("#g-points"),
+        t = k.$("#g-points-s");
     b.renderStart = function () {
         var a = 0, b = c.FRAMES_MAP.g1;
         e.render(l, a), new f(b).render(l, a), new g(b).render(l, a), j.render({ctx: l.getContext("2d"), src: c.RESOURCE[2], x: 0, w: 166, h: 260, bfb: .03}), window.startFinger = window.setInterval(function () {
@@ -1487,7 +1591,13 @@
             a ? (k.removeClass(m, "sel"), k.addClass(n, "sel"), k.addClass(o, "sel"), k.removeClass(p, "sel")) : (k.addClass(m, "sel"), k.removeClass(n, "sel"), k.removeClass(o, "sel"), k.addClass(p, "sel"))
         }, 200)
     }, b.started = function () {
-        window.clearInterval(window.startFinger), k.removeClass(m, "sel"), k.removeClass(n, "sel"), o.parentNode.style.display = "none", q.style.display = "none", r.style.opacity = "1", k.$("#g-music").hide()
+        window.clearInterval(window.startFinger),
+            k.removeClass(m, "sel"),
+            k.removeClass(n, "sel"),
+            o.parentNode.style.display = "none",
+            q.style.display = "none",
+            r.style.opacity = "1",
+            k.$("#g-music").hide()
     }, b.renderEnd = function () {
         k.addClass(r, "sel");
         var a = 0, b = c.FRAMES_MAP.g1;
@@ -1495,12 +1605,22 @@
             k.addClass(s, "sel"), t.innerHTML = "厉害!  跑了"
         }, 1e3)
     }, b.reset = function () {
-        t.innerHTML = "", k.$("#g-dis").innerHTML = "0", k.removeClass(s, "sel"), k.removeClass(s, "sel-ani"), k.$("#g-sec").innerHTML = "10.0", k.removeClass(r, "sel"), r.style.opacity = "0", o.parentNode.style.display = "block", q.style.display = "block", k.$("#g-music").show()
+        t.innerHTML = "", k.$("#g-dis").innerHTML = "0",
+            k.removeClass(s, "sel"),
+            k.removeClass(s, "sel-ani"),
+            k.$("#g-sec").innerHTML = "10.0",
+            k.removeClass(r, "sel"),
+            r.style.opacity = "0",
+            o.parentNode.style.display = "block",
+            q.style.display = "block",
+            k.$("#g-music").show()
     }, b.upGrade = function () {
         k.$("#g-up").className = "g-up-animate", setTimeout(function () {
             k.$("#g-up").className = ""
         }, 3e3)
-    }, i.userInfo && k.$("#g-nick").txt(d.nick(i.userInfo.nick)), k.$("#g-music").className || (k.$("#g-music").className = "g-musicon"), k.$("#g-music").addEventListener("touchstart", function (a) {
+    }, i.userInfo && k.$("#g-nick").txt(d.nick(i.userInfo.nick)),
+        k.$("#g-music").className || (k.$("#g-music").className = "g-musicon"),
+        k.$("#g-music").addEventListener("touchstart", function (a) {
         "g-musicon" === k.$("#g-music").className ? (k.$("#g-music").className = "g-musicoff", h.emit("musicoff")) : (k.$("#g-music").className = "g-musicon", h.emit("musicon")), a.cancelBubble = !0
     })
 }), define("index/game/voiceover", ["utils/utils", "appData"], function (a, b, c) {
@@ -1564,13 +1684,16 @@
     }, d.callUcbrowser = function () {
         "others" === k() && g.callUcbrowser(f.href)
     }, d.listenDom = function () {
+
         g.$("#i-start").addEventListener("click", function () {
+            //奔跑吧，骚年
             d.start()
         }), g.$("#i-relay").addEventListener("click", function () {
             d.start()
         }), g.$("#i-again").addEventListener("click", function () {
             d.startAgain()
         }), g.$("#i-try").addEventListener("click", function () {
+            //试跑一次
             d.start()
         }), g.$("#i-self").addEventListener("click", function () {
             d.createRunning()
@@ -1612,15 +1735,50 @@
 
     var e = document, f = a("appData").CONF, g = a("appData").FILTER, h = a("index/tpl"), i = a("utils/pf"), j = a("index/store"), k = a("utils/utils");
     d.renderStatic = function () {
-        "uc" === i() ? (k.$("#i-notice-uc").show(), j.isOwner() && j.ownerInfo.wechatBind && k.$("#i-notice-bind").show()) : "wechat" === i() ? (k.$("#i-notice-download").show(), k.$("#i-notice-download-close").show()) : (k.$("#i-adverise").show(), k.$("#i-abstract").show()), k.$(".i-copy").show()
+        "uc" === i() ? (k.$("#i-notice-uc").show(),
+            j.isOwner() && j.ownerInfo.wechatBind && k.$("#i-notice-bind").show()) : "wechat" === i() ? (k.$("#i-notice-download").show(),
+            k.$("#i-notice-download-close").show()) : (k.$("#i-adverise").show(),
+            k.$("#i-abstract").show()),
+            k.$(".i-copy").show()
     }, d.render = function () {
         function a() {
-            k.$("#i-owner").hide(), k.$(".i-stat").hide(), k.$(".i-button").hide()
+            k.$("#i-owner").hide(),
+            k.$(".i-stat").hide(),
+            k.$(".i-button").hide()
         }
-
         var b;
-        return a(), j.error ? void k.$("#i-stat-error").show() : "others" === i() ? (0 === j.curDis ? (k.$("#i-stat-others").show(), k.$("#i-try").show()) : (k.$(".i-cur").txt(j.curDis), k.$("#i-stat-others-runed").show(), k.$("#i-again").show()), k.$("#i-download").show(), void k.$("#i-nodes").hide()) : (j.records.length ? (k.$("#i-nodes").show(), this.renderMap()) : k.$("#i-nodes").hide(), j.isOwner() ? (b = j.ownerInfo.isShared ? j.getRemain() : f.TOTAL_DIS - j.bestDis, j.ownerInfo.isShared ? b > 0 ? (k.$("#i-stat-remain-owner").show(), k.$("#i-invite-continue").show()) : (k.$("#i-stat-reward-owner").show(), k.$("#i-reward").show(), k.$("#i-invite-continue").show()) : 0 === j.bestDis && 0 === j.curDis ? (k.$("#i-stat-remain-owner").show(), k.$("#i-start").show()) : 0 !== j.bestDis && 0 !== j.curDis ? (k.$("#i-stat-remain-runed-owner").show(), k.$("#i-again").show(), k.$("#i-invite").show()) : 0 !== j.bestDis && 0 === j.curDis && (k.$("#i-stat-remain-runed-again-owner").show(), k.$("#i-again").show(), k.$("#i-invite").show())) : (b = j.getRemain(), b > 0 ? 0 !== j.curDis ? k.$("#i-stat-remain-runed").show() : (k.$("#i-stat-remain").show(), k.$("#i-relay").show()) : 0 !== j.curDis ? k.$("#i-stat-reward-runed").show() : k.$("#i-stat-reward").show(), j.userInfo.created ? k.$("#i-back").show() : k.$("#i-self").show()), k.$("#i-owner").show(), k.$("#i-owner strong").txt(g.nick(j.ownerInfo.nick)), k.$(".i-total").txt(j.getTotalDis()), k.$(".i-cur").txt(j.curDis), k.$(".i-best").txt(j.bestDis), k.$(".i-remain").txt(b), void (j.ownerInfo.isShared ? (k.$("#i-ranking").show(), this.renderRanking()) : k.$("#i-ranking").hide()))
-    }, d.renderRanking = function () {
+        return a(),
+                j.error ? void k.$("#i-stat-error").show() : "others" === i() ? (0 === j.curDis ? (k.$("#i-stat-others").show(),
+                k.$("#i-try").show()) : (k.$(".i-cur").txt(j.curDis),
+                k.$("#i-stat-others-runed").show(),
+                k.$("#i-again").show()),
+                k.$("#i-download").show(),
+
+                void k.$("#i-nodes").hide()) : (j.records.length ? (k.$("#i-nodes").show(),
+                this.renderMap()) : k.$("#i-nodes").hide(),
+                j.isOwner() ? (b = j.ownerInfo.isShared ? j.getRemain() : f.TOTAL_DIS - j.bestDis,
+                j.ownerInfo.isShared ? b > 0 ? (k.$("#i-stat-remain-owner").show(),
+                k.$("#i-invite-continue").show()) : (k.$("#i-stat-reward-owner").show(),
+                k.$("#i-reward").show(),
+                k.$("#i-invite-continue").show()) : 0 === j.bestDis && 0 === j.curDis ? (k.$("#i-stat-remain-owner").show(),
+                k.$("#i-start").show()) : 0 !== j.bestDis && 0 !== j.curDis ? (k.$("#i-stat-remain-runed-owner").show(),
+                k.$("#i-again").show(),
+                k.$("#i-invite").show()) : 0 !== j.bestDis && 0 === j.curDis && (k.$("#i-stat-remain-runed-again-owner").show(),
+                k.$("#i-again").show(),
+                k.$("#i-invite").show())) : (b = j.getRemain(), b > 0 ? 0 !== j.curDis ? k.$("#i-stat-remain-runed").show() : (k.$("#i-stat-remain").show(),
+                k.$("#i-relay").show()) : 0 !== j.curDis ? k.$("#i-stat-reward-runed").show() : k.$("#i-stat-reward").show(),
+                j.userInfo.created ? k.$("#i-back").show() : k.$("#i-self").show()),
+                k.$("#i-owner").show(),
+                k.$("#i-owner strong").txt(g.nick(j.ownerInfo.nick)),
+                k.$(".i-total").txt(j.getTotalDis()),
+                k.$(".i-cur").txt(j.curDis),
+                k.$(".i-best").txt(j.bestDis),
+                k.$(".i-remain").txt(b),
+
+                void (j.ownerInfo.isShared ? (k.$("#i-ranking").show(),
+                this.renderRanking()) : k.$("#i-ranking").hide()))
+    },
+        d.renderRanking = function () {
         for (var a = k.$("#i-records"), b = j.records.sort(function (a, b) {
             return a.dist < b.dist ? -1 : 1
         }), c = e.createDocumentFragment(), d = b.length; a.firstChild;)
@@ -1655,15 +1813,19 @@
         var g, i = k.$("#i-nodes");
         a(i), g = b(), c(i, g), d(i, g)
     }, d.showIndex = function () {
-        k.$("#page-index").show(), k.$("#page-game").hide(), this.render()
+        k.$("#page-index").show(),
+            k.$("#page-game").hide(), this.render()
     }, d.showGame = function () {
-        k.$("#page-index").hide(), k.$("#page-game").show()
+        k.$("#page-index").hide(),
+            k.$("#page-game").show()
     }, c.exports = d
 }), define("index/share", ["utils/utils", "widget/mask", "index/store", "cmp/share", "utils/pf", "appData", "appData", "cmp/jweixin-1.0.0", "widget/observer"], function (a, b) {
     "use strict";
     function c(a) {
         var b = {};
-        return "friend" === a ? (b.title = k.SHAREFRIENDCONF.title, b.desc = k.SHAREFRIENDCONF.desc.replace("xxx", g.getRemain())) : b.title = k.SHARELINECONF.title.replace("xxx", g.getRemain()), b.imgUrl = j.userInfo.avatar, b.link = n, b.success = function () {
+        return "friend" === a ? (b.title = k.SHAREFRIENDCONF.title,
+            b.desc = k.SHAREFRIENDCONF.desc.replace("xxx", g.getRemain())) : b.title = k.SHARELINECONF.title.replace("xxx", g.getRemain()),
+            b.imgUrl = j.userInfo.avatar, b.link = n, b.success = function () {
             m.emit("log", {page: "click_share", step: 2, share_type: a, share_status: "ok"})
         }, b.cancel = function () {
             m.emit("log", {page: "click_share", step: 2, share_type: a, share_status: "cancel"})
@@ -1673,13 +1835,22 @@
     function d(a) {
         if ("uc" === i()) {
             var b = k.UC_SHARE.FRIENDS;
-            "WechatFriends" === a ? b.content = b.content.replace("xxx", g.getRemain()) : "WechatTimeline" === a && (b = k.UC_SHARE.TIMELINE, b.title = b.title.replace("xxx", g.getRemain())), b.uclink = n, e.$("#i-sharemask-uc").hide(), setTimeout(function () {
+            "WechatFriends" === a ? b.content = b.content.replace("xxx",
+                g.getRemain()) : "WechatTimeline" === a && (b = k.UC_SHARE.TIMELINE,
+                b.title = b.title.replace("xxx", g.getRemain())),
+                b.uclink = n, e.$("#i-sharemask-uc").hide(), setTimeout(function () {
                 h(b.title, b.content, b.uclink, a, b.domid, "")
             }, 200)
         }
     }
 
-    var e = a("utils/utils"), f = a("widget/mask"), g = a("index/store"), h = a("cmp/share"), i = a("utils/pf"), j = a("appData").RENDER, k = a("appData").CONF, l = a("cmp/jweixin-1.0.0"), m = a("widget/observer"), n = window.location.protocol + "//" + window.location.host + "/running/" + g.ownerInfo.magic + "/index?uc_param_str=" + k.UC_PARAMS + "&entry=indexshare" + k.SHARE_PARAM;
+    var e = a("utils/utils"),
+        f = a("widget/mask"),
+        g = a("index/store"),
+        h = a("cmp/share"),
+        i = a("utils/pf"),
+        j = a("appData").RENDER,
+        k = a("appData").CONF, l = a("cmp/jweixin-1.0.0"), m = a("widget/observer"), n = window.location.protocol + "//" + window.location.host + "/running/" + g.ownerInfo.magic + "/index?uc_param_str=" + k.UC_PARAMS + "&entry=indexshare" + k.SHARE_PARAM;
     b.share = function () {
         "wechat" === i() ? f.showShare() : "uc" === i() && d("WechatFriends")
     }, b.updateRemain = function () {
@@ -1688,12 +1859,18 @@
         e.$("#i-sharemask-uc").addEventListener("click", function () {
             e.$("#i-sharemask-uc").hide(), m.emit("log", {page: "click_share", step: 2, share_status: "cancel"})
         }), e.$("#i-shareuc-friend").addEventListener("click", function (a) {
-            d("WechatFriends"), m.emit("log", {page: "click_share", step: 2, share_type: "friend", share_status: "ok"}), e.cancelBubble(a)
+            d("WechatFriends"), m.emit("log", {page: "click_share", step: 2,
+                share_type: "friend",
+                share_status: "ok"}), e.cancelBubble(a)
         }), e.$("#i-shareuc-line").addEventListener("click", function (a) {
-            d("WechatTimeline"), m.emit("log", {page: "click_share", step: 2, share_type: "timeline", share_status: "ok"}), e.cancelBubble(a)
+            d("WechatTimeline"), m.emit("log", {page: "click_share", step: 2,
+                share_type: "timeline", share_status: "ok"}), e.cancelBubble(a)
         }), window.addEventListener("load", function () {
-            "wechat" === i() && (g.sdkConfig.debug = k.DEBUG, g.sdkConfig.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"], l.config(g.sdkConfig), l.ready(function () {
-                l.onMenuShareTimeline(c("timeline")), l.onMenuShareAppMessage(c("friend"))
+            "wechat" === i() && (g.sdkConfig.debug = k.DEBUG,
+                g.sdkConfig.jsApiList = ["onMenuShareTimeline", "onMenuShareAppMessage"],
+                l.config(g.sdkConfig), l.ready(function () {
+                l.onMenuShareTimeline(c("timeline")),
+                    l.onMenuShareAppMessage(c("friend"))
             }))
         })
     }
@@ -1749,8 +1926,22 @@
     "use strict";
     var c = document, d = a("index/store"), e = a("appData").MSG, f = a("appData").FILTER;
     b.record = function (a) {
-        var b, g = c.createElement("li"), h = c.createElement("span"), i = c.createElement("img"), j = c.createElement("h3"), k = c.createElement("p"), l = c.createElement("time"), m = c.createElement("em");
-        return i.src = a.avatar, j.innerText = f.nick(a.nick), l.innerText = f.time(a.createTime), b = d.ownerInfo.userId === d.userInfo.userId ? e.i : e.he, m.innerText = a.runnerUserId === d.ownerInfo.userId ? f.dist1(a) : f.dist2(b, a), g.appendChild(h), g.appendChild(j), g.appendChild(k), h.appendChild(i), k.appendChild(l), k.appendChild(m), g
+        var b,
+            g = c.createElement("li"),
+            h = c.createElement("span"),
+            i = c.createElement("img"),
+            j = c.createElement("h3"),
+            k = c.createElement("p"),
+            l = c.createElement("time"),
+            m = c.createElement("em");
+        return i.src = a.avatar,
+            j.innerText = f.nick(a.nick),
+            l.innerText = f.time(a.createTime),
+            b = d.ownerInfo.userId === d.userInfo.userId ? e.i : e.he,
+            m.innerText = a.runnerUserId === d.ownerInfo.userId ? f.dist1(a) : f.dist2(b, a),
+            g.appendChild(h), g.appendChild(j), g.appendChild(k),
+            h.appendChild(i), k.appendChild(l), k.appendChild(m),
+            g
     }, b.node = function (a, b, d) {
         function e(a) {
             function b() {
@@ -1775,15 +1966,31 @@
             return e = d = 0, c() ? 0 : (e = d = 1, g = 0, c() ? 1 : (e = d = 2, g = 0, c() ? 2 : 3))
         }
 
-        var f = c.createElement("li"), g = c.createElement("section"), h = c.createElement("span"), i = c.createElement("img"), j = c.createElement("p"), k = b % 8 + 1, l = parseInt((b + 1) / 4), m = e(b + 1);
-        return f.appendChild(g), f.appendChild(h), f.appendChild(j), h.appendChild(i), f.style.top = 7 + 62 * l + "px", f.style.left = 29 + 74 * m + "px", 0 === a.type ? (i.src = a.avatar, j.innerText = a.dist + "m", g.className = "i-node-" + k) : 1 === a.type ? (h.className = "i-node-null", g.className = "i-node-" + k + "-g") : (h.className = "i-node-final", g.className = "i-node-" + k, d > 0 && (g.className += "-g")), f
+        var f = c.createElement("li"),
+            g = c.createElement("section"),
+            h = c.createElement("span"),
+            i = c.createElement("img"),
+            j = c.createElement("p"),
+            k = b % 8 + 1,
+            l = parseInt((b + 1) / 4),
+            m = e(b + 1);
+        return f.appendChild(g), f.appendChild(h), f.appendChild(j), h.appendChild(i),
+            f.style.top = 7 + 62 * l + "px",
+            f.style.left = 29 + 74 * m + "px",
+                0 === a.type ? (i.src = a.avatar,
+                    j.innerText = a.dist + "m",
+            g.className = "i-node-" + k) : 1 === a.type ? (h.className = "i-node-null",
+                    g.className = "i-node-" + k + "-g") : (h.className = "i-node-final",
+                    g.className = "i-node-" + k, d > 0 && (g.className += "-g")), f
     }
 }), define("utils/image", [], function (a, b) {
     "use strict";
     b.init = function (a) {
         for (var b, c, d, e = a.length; e--;)
-            for (b = a[e], c = document.querySelectorAll(b.q), d = c.length; d--;)
-                c[d].style.background = b.bg, c[d].style.backgroundSize = b.bgSize
+            for (b = a[e], c = document.querySelectorAll(b.q),
+                     d = c.length; d--;)
+                c[d].style.background = b.bg,
+                    c[d].style.backgroundSize = b.bgSize
     }
 }), define("utils/lock", [], function (a, b, c) {
     "use strict";

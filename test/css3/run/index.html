@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0143)http://rec.uc.cn/running/ssz9suvvxssttstsr/index?uc_param_str=pfssnieisivecpmibifrdnlantnw&entry=indexshare&from=singlemessage&isappinstalled=0 -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+
     <meta http-equiv="Cache-Control" content="no-cache">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <title>
@@ -26,13 +26,14 @@
 </style></head>
 
 <body>
-<!-- 第一屏 -->
-    <article id="page-index" style="display: none;">
+<!-- 首页 -->
+    <article id="page-index" style="display: block;">
         <header id="i-header" class="i-header">
             <!--<span class="i-logo"></span> 左上角logo-->
             <span id="i-rule" class="i-rule">游戏规则</span>
         </header>
-        <ul id="i-nodes" class="i-nodes" style="display: none;">
+        <!-- 接力轨迹 -->
+        <ul id="i-nodes" class="i-nodes" style="display: block;">
         </ul>
         <div id="i-adverise" style="display: block;">
             3000万元寻找最会约Pao的人
@@ -85,7 +86,7 @@
             </p>
             <!-- status reward runed end -->
             <!-- status others start -->
-            <p id="i-stat-others" class="i-stat" style="display: block;">
+            <p id="i-stat-others" class="i-stat" style="display: none;">
                 欢迎来到UC接力跑！
                 <br>接力跑满<span>500</span>米可兑换<span>50元话费！</span>
                 <br>仅限UC浏览器用户参与
@@ -171,8 +172,8 @@
             <br>优视科技 版权所有
         </div>
     </article>
-<!-- 第二屏 -->
-    <article id="page-game" style="display: block;">
+<!-- 游戏 -->
+    <article id="page-game" style="display: none;">
         <section id="g-main" style="height: 736px; display: block;">
             <canvas id="can-game" class="g-can-game" width="414" height="736"></canvas>
             <div id="g-music" class="g-musicon"></div>
@@ -289,7 +290,7 @@
             MASK_SRC: {
                 download: './images/mask-dl.png',
                 // share: '../public/images/mask-shareb.png',
-                share: 'http://image.uc.cn/s/uae/g/01/running_money/mask-shareb.png',
+                share: './images/mask-shareb.png',
                 rewardIos: './images/mask-rw-ios.png',
                 rewardAndroid: './images/mask-rw-android.png'
             },
@@ -380,6 +381,7 @@
             he: 'Ta'
         };
     });
+    // 加载入口模块
     seajs.use('index/index', function(index) {
         'use strict';
         index.init();
