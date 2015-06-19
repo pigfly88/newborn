@@ -1,6 +1,6 @@
 <?php
 $host = 'local.newborn.com'; //host
-$port = '9000'; //port
+$port = 9000; //port
 chdir(dirname(__FILE__));
 $script = 'test/h5/websocket'.basename(__FILE__);
 
@@ -38,6 +38,15 @@ $clients = array($socket);
 $null = NULL; //null var
 //start endless loop, so that our script doesn't stop
 while (true) {
+	/*
+	$newsocket = socket_accept($socket) or die('socket accept error\n');
+	
+	if($res = socket_read($newsocket, 8192)){
+		//var_dump(date('Y-m-d H:i:s'), $res);
+		$response_text = mask(json_encode(array('type'=>'system', 'message'=>$res)));
+		send_message($response_text);
+	}
+	*/
 	//manage multipal connections
 	$changed = $clients;
 	//returns the socket resources in $changed array
@@ -49,6 +58,9 @@ while (true) {
 		$clients[] = $socket_new; //add socket to client array
 		
 		$header = socket_read($socket_new, 1024); //read data sent by the socket
+		socket_getpeername($socket_new, $ip);
+		socket_getsockname($socket_new, $addr);
+		var_dump('newsocket', $socket_new, $header, $ip, $addr);
 		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
 		socket_getpeername($socket_new, $ip); //get ip address of connected socket
@@ -91,6 +103,7 @@ while (true) {
 			send_message($response);
 		}
 	}
+	
 }
 // close the listening socket
 echo 'socket close'.PHP_EOL;
@@ -99,6 +112,7 @@ socket_close($sock);
 function send_message($msg)
 {
 	global $clients;
+	if(empty($clients)) return;
 	foreach($clients as $changed_socket)
 	{
 		@socket_write($changed_socket,$msg,strlen($msg));
