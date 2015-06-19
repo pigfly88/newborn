@@ -3,17 +3,18 @@ $host = 'local.newborn.com'; //host
 $port = '9000'; //port
 chdir(dirname(__FILE__));
 $script = 'test/h5/websocket'.basename(__FILE__);
-$null = NULL; //null var
+
 $jsconfig = "var vars={};vars.server='ws://{$host}:{$port}/{$script}';";
+echo 'write js config ... ';
 if(!file_put_contents(__DIR__.'/config.js', $jsconfig)){
-	echo 'write js config... [fail]'.PHP_EOL;
+	echo '[fail]'.PHP_EOL;
 	exit;
 }else{
-	echo 'write js config... [success]'.PHP_EOL;
+	echo '[success]'.PHP_EOL;
 }
 
 //Create TCP/IP sream socket
-echo 'socekt create... ';
+echo 'creating socket ... ';
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 if(false===$socket){
 	var_dump(socket_last_error(), socket_strerror());
@@ -29,12 +30,12 @@ socket_bind($socket, 0, $port);
 
 //listen to port
 if(socket_listen($socket)){
-	echo 'listening...'.PHP_EOL;
+	echo "socket listening on {$host}:{$port} ...".PHP_EOL;
 }
 
 //create & add listning socket to the list
 $clients = array($socket);
-
+$null = NULL; //null var
 //start endless loop, so that our script doesn't stop
 while (true) {
 	//manage multipal connections
@@ -60,7 +61,7 @@ while (true) {
 	}
 	
 	//loop through all connected sockets
-	foreach ($changed as $changed_socket) {	
+	foreach ($changed as $changed_socket) {
 		
 		//check for any incomming data
 		while(socket_recv($changed_socket, $buf, 1024, 0) >= 1)
@@ -92,6 +93,7 @@ while (true) {
 	}
 }
 // close the listening socket
+echo 'socket close'.PHP_EOL;
 socket_close($sock);
 
 function send_message($msg)
