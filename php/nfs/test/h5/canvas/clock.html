@@ -1,0 +1,82 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>带指针的时钟</title>
+</head>
+<body>
+<canvas width="300" height="300" id="canvas"></canvas>
+<script>
+    var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d"),
+            margin = 35,
+            font_height = 15, //字号
+            hand_truncation = canvas.width / 25,
+            hour_hand_trunction = canvas.width / 10,
+            number_spacing = -20, //数字距离外圈的间距
+            radius = canvas.width / 2 - margin,  //时钟半径
+            hand_radius = radius + number_spacing;
+
+    // 绘制时钟外圈
+    function drawCircle() {
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, radius, 0, Math.PI * 2, true);
+        ctx.stroke();
+    }
+
+    // 绘制时钟中心
+    function drawCenter() {
+        ctx.beginPath();
+        ctx.arc(canvas.width / 2, canvas.height / 2, 5, 0, Math.PI * 2, true);
+        ctx.fill();
+    }
+
+
+    //绘制数字
+    function drawNumbers() {
+        var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            angle = 0,  // 角度
+            numberWidth = 0;
+
+        numbers.forEach(function (numbers) {
+            angle = Math.PI / 6 * (numbers - 3);  // todo 这里为什么要减去3，才可以显示正确的数字
+            numberWidth = ctx.measureText(numbers).width; //字体宽度
+            ctx.fillText(numbers, canvas.width / 2 + Math.cos(angle) * (hand_radius) - numberWidth / 2, //todo 角度不理解啊
+                            canvas.height / 2 + Math.sin(angle) * (hand_radius) + font_height / 3);
+        })
+    }
+
+
+    //
+    function drawHand(loc, isHour) {
+        var angle = (Math.PI * 2) * (loc / 60) - Math.PI / 2,
+            hand_radius = isHour ? radius - hand_truncation - hour_hand_trunction : radius - hand_truncation;
+
+        ctx.moveTo(canvas.width / 2, canvas.height / 2);
+        ctx.lineTo(canvas.width / 2 + Math.cos(angle) * hand_radius, canvas.height / 2 + Math.sin(angle) * hand_radius);
+        ctx.stroke();
+    }
+
+    // 绘制指针
+    function drawHands() {
+        var date = new Date,
+            hour = date.getHours();
+            hour = hour > 12 ? hour - 12 : hour;
+        drawHand(hour * 5 + (date.getMinutes() / 60) * 5, true, 0.5);
+        drawHand(date.getMinutes(), false, 0.5);
+        drawHand(date.getSeconds(), false, 0.2);
+    }
+
+
+    function drawClock() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawCircle();
+        drawCenter();
+        drawNumbers();
+        drawHands();
+    }
+
+    ctx.font = font_height + "px Arial";
+    loop = setInterval(drawClock, 1000);
+</script>
+</body>
+</html>

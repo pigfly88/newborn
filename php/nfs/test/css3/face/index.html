@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb">
+<head>
+    <meta property="og:image" content="http://how-old.netimages/faces2/main6_results.png"/>
+    <meta property="og:site_name" content="你看我多大了?"/>
+    <meta name="description" content="The #HowOldRobot guesses how old you look using Machine Learning.">
+    <meta property="og:description" content="The #HowOldRobot guesses how old you look using Machine Learning."/>
+    <meta property=" og:url" content="http://how-old.net/">
+    <meta charset=" utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>你看我多大了?</title>
+    <link href="css/css.css" rel="stylesheet"/>
+
+    <script src="js/modernizr.js"></script>
+
+    <script type="text/javascript">
+        var appInsights = window.appInsights || function (config) {
+            function s(config) {
+                t[config] = function () {
+                    var i = arguments;
+                    t.queue.push(function () {
+                        t[config].apply(t, i)
+                    })
+                }
+            }
+
+            var t = {config: config}, r = document, f = window, e = "script", o = r.createElement(e), i, u;
+            for (o.src = config.url || "//az416426.vo.msecnd.net/scripts/a/ai.0.js", r.getElementsByTagName(e)[0].parentNode.appendChild(o), t.cookie = r.cookie, t.queue = [], i = ["Event", "Exception", "Metric", "PageView", "Trace"]; i.length;)s("track" + i.pop());
+            return config.disableExceptionTracking || (i = "onerror", s("_" + i), u = f[i], f[i] = function (config, r, f, e, o) {
+                var s = u && u(config, r, f, e, o);
+                return s !== !0 && t["_" + i](config, r, f, e, o), s
+            }), t
+        }({
+            instrumentationKey: "cab4fee1-f928-4a15-a726-75cf729d7c21"
+        });
+
+        window.appInsights = appInsights;
+        appInsights.trackPageView();
+    </script>
+</head>
+<body>
+<div id="fb-root"></div>
+<script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<script>
+    !function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (!d.getElementById(id)) {
+            js = d.createElement(s);
+            js.id = id;
+            js.src = '//platform.twitter.com/widgets.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }
+    }(document, 'script', 'twitter-wjs');
+</script>
+<div class="container" style="max-width: 800px;text-align: center ">
+
+    <div id="header" class="row center-block">
+        <img id="headerimage" src="images/photo-icon.png"/>
+
+        <div id="headertext">
+            <div class="row">
+                <div>
+                    <h1 id="picmeh1id">
+                        How-Old.net
+                    </h1>
+                </div>
+                <div class="subheader">
+                    你看我多大了? <span id="demoSpan">#HowOldRobot</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="selectImage">
+
+
+        <form role="search" id="searchform" onsubmit="return searchImages()">
+            <div class="input-group" style="background-color: white">
+                <span class="input-group-addon" style="padding: 0px 0px 0px 0px; border: none"><img id="bLogo" class=""
+                                                                                                    src="images/bing2.png"
+                                                                                                    data-bm="3"></span>
+                <input type="search" name="Search" style="border-style: none;" class="form-control"
+                       placeholder="Search Faces..." id="searchText">
+
+                <div class="input-group-btn">b_searchboxSubmit
+                    <input name="go" tabindex="0" title="Search" class="b_searchboxSubmit" id="searchsubmit"
+                           type="submit" value="Submit Query">
+                </div>
+            </div>
+        </form>
+
+        <h5 id="searchError" class="bodyfont"
+            style="padding-bottom: 2px; font-size: Medium; text-align: center; visibility: hidden;"></h5>
+
+
+        <div id="imageDiv" class="ImageSelector" style="visibility: hidden; ">
+            <div id="imageList" class="ScrollArea notSelectedImage">
+                <img src="images/face/scroll000.jpg" data-url="images/faces2/main000.jpg"
+                     data-image-name="images/face/main000.jpg" id="faces2/main000.jpg"/>
+                <img src="images/face/scroll001.jpg" data-url="images/faces2/main001.jpg"
+                     data-image-name="images/face/main001.jpg" id="faces2/main001.jpg"/>
+                <img src="images/face/scroll002.jpg" data-url="images/faces2/main002.jpg"
+                     data-image-name="images/face/main002.jpg" id="faces2/main002.jpg"/>
+                <!--<img src="images/faces2/scroll003.jpg" data-url="images/faces2/main003.jpg"-->
+                     <!--data-image-name="faces2/main003.jpg" id="faces2/main003.jpg"/>-->
+                <!--<img src="images/faces2/scroll004.jpg" data-url="images/faces2/main004.jpg"-->
+                     <!--data-image-name="faces2/main004.jpg" id="faces2/main004.jpg"/>-->
+                <!--<img src="images/faces2/scroll005.jpg" data-url="images/faces2/main005.jpg"-->
+                     <!--data-image-name="faces2/main005.jpg" id="faces2/main005.jpg"/>-->
+                <!--<img src="images/faces2/scroll007.jpg" data-url="images/faces2/main007.jpg"-->
+                     <!--data-image-name="faces2/main007.jpg" id="faces2/main007.jpg"/>-->
+                <!--<img src="images/faces2/scroll006.jpg" data-url="images/faces2/main006.jpg"-->
+                     <!--data-image-name="faces2/main006.jpg" id="faces2/main006.jpg"/>-->
+                <!--<img src="images/faces2/scroll008.jpg" data-url="images/faces2/main008.jpg"-->
+                     <!--data-image-name="faces2/main008.jpg" id="faces2/main008.jpg"/>-->
+                <!--<img src="images/faces2/scroll009.jpg" data-url="images/faces2/main009.jpg"-->
+                     <!--data-image-name="faces2/main009.jpg" id="faces2/main009.jpg"/>-->
+                <!--<img src="images/faces2/scroll0010.jpg" data-url="images/faces2/main0010.jpg"-->
+                     <!--data-image-name="faces2/main0010.jpg" id="faces2/main0010.jpg"/>-->
+                <!--<img src="images/faces2/scroll0011.jpg" data-url="images/faces2/main0011.jpg"-->
+                     <!--data-image-name="faces2/main0011.jpg" id="faces2/main0011.jpg"/>-->
+                <!--<img src="images/faces2/scroll0012.jpg" data-url="images/faces2/main0012.jpg"-->
+                     <!--data-image-name="faces2/main0012.jpg" id="faces2/main0012.jpg"/>-->
+                <!--<img src="images/faces2/scroll0013.jpg" data-url="images/faces2/main0013.jpg"-->
+                     <!--data-image-name="faces2/main0013.jpg" id="faces2/main0013.jpg"/>-->
+                <!--<img src="images/faces2/scroll0014.jpg" data-url="images/faces2/main0014.jpg"-->
+                     <!--data-image-name="faces2/main0014.jpg" id="faces2/main0014.jpg"/>-->
+            </div>
+
+            <div id="SelectorBox"></div>
+            <div id="SelectorTag">
+                <button type="button" class="btn btn-default" onclick=" analyzeUrl() ">
+                    <span class="glyphicon glyphicon-circle-arrow-right" style="margin-right: 4px"
+                          aria-hidden="true"></span>使用这张照片
+                </button>
+            </div>
+        </div>
+
+
+        <label id="uploadLabel" class="center-block" style="width: 230px;">
+            <button id="uploadFileId" class="btn btn-default center-block action"
+                    style="background-color: rgb(174, 117, 11); border-radius: 0"
+                    onclick=" document.getElementById('uploadBtn').click(); ">
+            <span>
+                <img src="images/browse-icon.svg" style="width: 25px; height: 25px"/>
+            </span>
+                使用自己的照片
+            </button>
+            <input id="uploadBtn" type="file" accept="images/*" style="visibility: hidden; width: 0px; height: 0px">
+        </label>
+
+        <p id="maxImageSize" class="help-block center-block bodyfont">注意:我们不保留这张照片</p>
+    </div>
+    <div id="results" hidden>
+        <h5 id="analyzingLabel" class="bodyfont"
+            style="font-size: Medium; text-align: center; visibility: hidden;"></h5>
+
+        <div id="thumbContainer" class="center-block" style="padding-left: 0px; position: relative;">
+            <img id="thumbnail" src="images/placeholder.png" class="img-responsive center-block"
+                 onerror=" this.onerror = null;this.src = 'images/placeholder.png'; "/>
+
+            <div id="faces">
+                <div></div>
+            </div>
+        </div>
+        <p id="improvingLabel" class="help-block center-block bodyfont"
+           style="font-weight: 100; font-size: 13px; text-align: center; visibility: hidden">很抱歉,我们不能获得完全正确的年龄和性别
+            <a class="bodyfont link-underline" href="http://aka.ms/faceapi" target="_blank"
+               style="font-weight: 100; font-size: 13px; text-decoration: underline">we are still improving this
+                feature</a>.</p>
+        <button class="btn btn-default center-block action"
+                style="margin-top: 20px; background-color: rgb(174, 117, 11);border-radius:0"
+                onclick=" history.go(-1); ">
+        <span>
+            <img src="images/photo-icon.png" style="width: 25px; height: 25px"/>
+        </span>
+            Try Another Photo!
+        </button>
+        <div id="jsonEventDiv" style="margin-top: 30px;" hidden>
+            <pre id="jsonEvent" style="text-align: left"></pre>
+        </div>
+    </div>
+    <a id="dontWorryId" class="bodyfont center-block link" style="text-align: center; padding-bottom: 20px;"
+       href="http://aka.ms/facedemo" target="_blank">
+        <span>Read the story behind this demo</span>
+    </a>
+
+    <!-- 作者信息 -->
+    <!--<div id="socialDiv">-->
+        <!--<div class="fb-share-button" data-href="http://how-old.net/" data-layout="button_count"></div>-->
+        <!--<a href="https://twitter.com/intent/tweet?button_hashtag=HowOldRobot&text=The%20%23HowOldRobot%20guesses%20how%20old%20you%20look%20using%20Machine%20Learning."-->
+           <!--class="twitter-hashtag-button">Tweet #HowOldRobot</a>-->
+    <!--</div>-->
+
+    <div id="footerId">
+        <a class="bodyfont link" style="width: 96px; font-size: 12px;"
+           href="http://www.microsoft.com/privacystatement/en-us/core/default.aspx" target="_blank"><span>Privacy &amp; Cookies</span></a>
+        <label class="bodyfont" style="font-size: 12px" href="#"> | </label>
+        <a class="bodyfont link" style="width: 96px; font-size: 12px;"
+           href="http://azure.microsoft.com/en-us/support/legal/website-terms-of-use/" target="_blank"><span>Terms of Use</span></a>
+        <label id="linkSeparetor" hidden class="bodyfont" style="font-size: 12px" href="#"> | </label>
+        <a id="viewEvent" hidden class="bodyfont link" style="font-size: 12px" href="#"><span>View Source</span></a>
+    </div>
+    <img id="microsoftIcon" src="images/microsoft-rev-01.png" class="center-block"/>
+
+    <input data-val="true" data-val-required="The IsTest field is required." id="isTest" name="isTest" type="hidden"
+           value="False"/>
+
+
+</div>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/javascript.js"></script>
+<script src="js/demo.js"></script>
+
+
+</body>
+</html>
