@@ -45,14 +45,14 @@ class oo extends Component {
      * @param string $server 格式：mongodb://[username:password@]host1[:port1][,host2[:port2:],...]/db
      * @return obj
      */
-    public static function mongo(){
-    	return oo::base('cachemongo', self::cfg('db.mongo'));
+    public static function cache($cache){
+    	return oo::base('cache'.$cache, self::cfg('db.'.$cache));
     }
     
     /**
      * 利用魔术方法的特性动态加载NFS下的类库
      * e.g:
-     * nfs::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
+     * NFS::helper('Socket')，helper是未定义的静态方法，那么就会通过__callStatic()去调度helper文件夹的Socket类
      */
     /*
     public static function __callStatic($folder, $arg) {
@@ -73,7 +73,7 @@ class oo extends Component {
      * @return Ambigous <boolean, object>
      */
 	public static function m($model=''){
-		empty($model) && $model = nfs::$controller;
+		empty($model) && $model = NFS::$controller;
 
 		$res = false;
 		if(self::include_file(NFS_BASE_ROOT.'model.php')){
@@ -93,7 +93,7 @@ class oo extends Component {
 	public static function c($controller=''){
 		self::include_file(NFS_BASE_ROOT.'controller.php');
 		
-		if(empty($controller))	$controller = nfs::$controller;	
+		if(empty($controller))	$controller = NFS::$controller;	
 		$path = explode('.', $controller);
 		$c = APP_ROOT.DS;
 		if(count($path)>1){

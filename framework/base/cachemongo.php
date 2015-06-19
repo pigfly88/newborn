@@ -48,7 +48,7 @@ class cachemongo {
     }
     
     public function table($tbl){
-    	if( (! $tbl = trim($tbl)) || ( ! $atbl = explode('.', $tbl)) || (count($atbl) != 2)){
+    	if( (!$tbl = trim($tbl)) || ( !$atbl = explode('.', $tbl)) || (count($atbl) != 2)){
     		$this->log("[table name error]:$tbl, example:'blog.posts'");
     	}
     	return $atbl;

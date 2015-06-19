@@ -8,8 +8,8 @@
 
 define('APP_ROOT', dirname(__DIR__));
 
-require '../../framework/nfs.php';
+require '../../framework/NFS.php';
 
-nfs::run();
+NFS::run();
 
 

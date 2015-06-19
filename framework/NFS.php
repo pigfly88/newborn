@@ -75,7 +75,7 @@ oo::include_file(NFS_BASE_ROOT.'func.php');
 oo::include_file(NFS_BASE_ROOT.'controller.php');
 oo::base('file')->import(NFS_BASE_ROOT.'log.php');
 oo::base('file')->import(NFS_BASE_ROOT.'db.php');
-class nfs{
+class NFS{
 	public static $controller;
 	public static $action;	
 	public static $cfg;
