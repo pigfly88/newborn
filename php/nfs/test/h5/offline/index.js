@@ -1,1 +1,0 @@
-var server = {'name':'newborn'};
