@@ -1,0 +1,1 @@
+var server = {'name':'newborn'};

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)http://tu.qq.com/websites/pk-mnzhuang/index.html?pf=wechat#rd -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="cache-control" content="no-cache">
+        
+        <title>全民COS武媚娘</title>
+        <meta name="description" content="太美了！一键上妆秒变媚娘，大家一起玩~">
+        <script type="text/javascript">
+            var viewWidth = 640;
+            var phoneWidth = parseInt(window.screen.width);
+            var phoneScale = phoneWidth / viewWidth;
+            var isAndroid = false;
+            var androidVer = 4.0;
+            var ua = navigator.userAgent;
+            if (/Android (\d+\.\d+)/.test(ua)){
+                isAndroid = true;
+                var version = parseFloat(RegExp.$1);
+                androidVer = version;
+                var phoneHeight = parseInt(window.screen.height);
+                if (phoneWidth <= phoneHeight) {
+                    if(version > 2.3){
+                        document.write('<meta name="viewport" content="width='+viewWidth+', initial-scale='+phoneScale+', minimum-scale='+phoneScale+', maximum-scale='+phoneScale+', target-densitydpi=device-dpi" />');
+                    }else{
+                        document.write('<meta name="viewport" content="width='+viewWidth+', target-densitydpi=device-dpi" />');
+                    }
+                } else {
+                    phoneScale = phoneHeight / viewWidth;
+                    var deviceWidth = viewWidth * phoneWidth / phoneHeight;
+                    if(version > 2.3){
+                        document.write('<meta name="viewport" content="width='+deviceWidth+', initial-scale='+phoneScale+', minimum-scale='+phoneScale+', maximum-scale='+phoneScale+', target-densitydpi=device-dpi" />');
+                    }else{
+                        document.write('<meta name="viewport" content="width='+deviceWidth+', target-densitydpi=device-dpi" />');
+                    }
+                }
+            } else {
+                document.write('<meta name="viewport" content="width='+viewWidth+', user-scalable=no, initial-scale='+phoneScale+', minimum-scale='+phoneScale+', maximum-scale='+phoneScale+'" />');
+            }
+        </script><meta name="viewport" content="width=640, user-scalable=no, initial-scale=0.5, minimum-scale=0.5, maximum-scale=0.5">
+        <link rel="stylesheet" type="text/css" href="./css/pk.css">
+    <style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+    <body>
+        <div id="qzoneBar" class="qzone-bar" style="visibility:hidden;"><div id="qzoneTips">&nbsp;</div></div>
+        <div id="wrapper" class="wrapper">
+            <div id="pkLayer" class="pk-layer">
+                <img id="pkBgImg" class="pk-bg" style="visibility: visible; opacity: 1;" src="./images/bg.jpg">
+            </div>
+            <div id="cropLayer" class="crop-layer" style="display: none;">
+                <img id="myPic" class="my-pic" src="" style="visibility: hidden;">
+                <canvas id="myCanvas" width="320" height="400" class="my-canvas">canvas</canvas>
+            </div>
+        </div>
+        <div id="pkCover" class="pk-cover">
+            <div class="pk-tips">上传你的自拍照 秒变媚娘</div>
+            <div id="pkBtn" class="pk-btn">&nbsp;</div>
+            <!-- div id="followSection" class="follow-section" status="on">
+                <div class="follow-checkbox" style="background:url(http://res.tu.qq.com/assets/opwumeiniang_img/btns.png?v=2) no-repeat -46px -133px;">&nbsp;</div>
+                <div class="follow-tips">关注美颜彩妆部落</div>
+            </div -->
+            <div url="http://tu.qq.com" class="download-btn-2">&nbsp;</div>
+            <input id="uploadInput" type="file" class="upload-input">
+        </div>
+        <div id="cropCover" class="crop-cover" style="display: none;">
+            <div id="cancelBtn" class="cancel-btn">&nbsp;</div>
+            <div id="confirmBtn" class="confirm-btn">&nbsp;</div>
+        </div>
+        <div id="loadingMask" class="loading-mask" style="display: none;">
+            <div class="loading-bg">&nbsp;</div>
+            <div class="loading-tips">&nbsp;</div>
+            <img src="./images/loadingIcon.png">
+        </div>
+        <img id="loadingIcon" class="loading-icon" style="display: none;" src="./images/loadingIcon.png">
+        <div id="errTips" class="err-tips" style="display: none;"><div id="errBtn" class="err-btn">&nbsp;</div></div>
+
+        <script type="text/javascript" src="./js/jquery-1.11.2.min.js"></script>
+        <script type="text/javascript" src="./js/ext.js"></script>
+        <script type="text/javascript" src="./js/pk.js"></script>
+        <script type="text/javascript">
+            var supportTouch = ("createTouch" in document);
+            if (isAndroid) {
+                window.onorientationchange = function() {
+                    window.location.reload();
+                }
+
+                if (/QQ\/\d+\.\d+\.\d+\.\d+/.test(ua)) {
+                    document.body.addEventListener("touchstart", function(evt){evt.preventDefault();return false;});
+                }
+            }
+
+            var canvasDom;
+            var canvasCtx;
+            var imgMinWidth = 0;
+            var imgMinHeight = 0;
+
+            var cropPanEnabled = false;
+            var cropPanOrigin = {x:0, y:0};
+            var cropPanFrom = {x:0, y:0};
+
+            var cropPinchEnabled = false;
+            var cropPinchOrigin = {x:0, y:0};
+            var cropPinchSize = {width:0, height:0};
+            var cropPinchFrom = 0;
+
+            $(function(){
+                window.setTimeout(function(){
+                    var bgImg = new Image();
+                    bgImg.onload = function() {
+                        var $pkBgImg = $("#pkBgImg");
+                        $pkBgImg.attr("src", this.src);
+                        $pkBgImg.css("visibility", "visible");
+                        $pkBgImg.css("opacity", "1");
+                    }
+                    bgImg.src = "http://res.tu.qq.com/assets/opwumeiniang_img/bg.jpg";
+                }, 200);
+                window.setTimeout(function(){
+                    $("#qzoneBar")[0].className = "qzone-bar";
+
+                    var evtName = supportTouch ? "touchend" : "click";
+                    $("div[url]").on(evtName, function(){
+                        window.location.href = $(this).attr("url");
+                    });
+                }, 500);
+                
+                var $canvas = $("#myCanvas");
+                canvasDom = $canvas[0];
+                if (canvasDom.getContext) {
+                    canvasCtx = canvasDom.getContext("2d");
+                    
+                    cropStop();
+
+                    var platform = getParam("pf");
+                    if (platform.length <= 0 || platform == "qzone") {
+                        getUser(function(nickName){
+                            if (nickName.length > 0) {
+                                $("#qzoneTips").text("欢迎您，" + nickName);
+                                $("#qzoneBar").css("visibility", "visible");
+                                $("#wrapper").css("margin-top", "80px");
+                            }
+                        });
+                    }
+
+                    if (androidVer <= 2.3) {
+                        window.location.href = "http://tu.qq.com";
+                    }
+                } else {
+                    window.alert("您的浏览器不支持换妆，请尝试使用safari或者chrome。");
+                }
+            });
+            
+//            var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+//            document.write(unescape("%3Cspan class='hide' id='cnzz_stat_icon_1254094120'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1254094120' type='text/javascript'%3E%3C/script%3E"));
+        </script>
+        <!--<span class="hide" id="cnzz_stat_icon_1254094120"><a href="http://www.cnzz.com/stat/website.php?web_id=1254094120" target="_blank" title="站长统计">站长统计</a></span><script src="./全民COS武媚娘_files/z_stat.php" type="text/javascript"></script>-->
+        <!--<script src="./全民COS武媚娘_files/core.php" charset="utf-8" type="text/javascript"></script>-->
+
+</body></html>

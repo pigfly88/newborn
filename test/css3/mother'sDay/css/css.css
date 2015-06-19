@@ -1,0 +1,85 @@
+/*2015.5.5 update
+1.不使用定位垂直水平居中弹出框，使用transform: translate(-50%,-50%);
+2.减少无用的div嵌套
+3.减少clearfix类，使用伪类来清除浮动:after{content: " ";display: table;}
+4.去除fl，fr类，不使用浮动，用display:inline-block进行并列
+5.可以用img缩放代替边距，transform: scale(.95);删除外侧div,!css3属性一定要加浏览器标识
+6.弹出阴影层不用js获取高度，用四边绝对定位 top: 0; left: 0; right: 0;bottom: 0;
+7.使用h5 语义化标签
+*/
+
+@charset "utf-8";
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,li,fieldset,form,label,legend,table,tbody,tfoot,thead,tr,th,td,i,b,s { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font: 1rem/1rem Helvetica,Microsoft yahei,Arial }
+ul,ol { list-style: none }
+a img { border: none; vertical-align: top } a { text-decoration: none }
+button { overflow: visible; padding: 0; margin: 0; border: 0 none; background-color: transparent }
+button::-moz-focus-inner { padding: 0 }
+textarea,input { background: none; padding: 0; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+input[type=password] { -webkit-text-security: disc }
+textarea:focus,input:focus,button:focus { outline: none }
+body { word-wrap: break-word;position: relative}
+* { -webkit-tap-highlight-color: rgba(0,0,0,0) }
+.hide{display: none!important;}
+.overflow{height: 100%;overflow: hidden}
+
+body{background-color: #f85d54;}
+/*第四屏*/
+header{color: #fff;text-align: center;position: relative;}
+header h1{font-size: .9rem; line-height: 2.2rem;}
+header h2{font-size: 1rem;line-height: 1.4rem}
+header .info{font-size: .6rem; line-height: 1rem;}
+header span.rule{color: #fdc000;font-size: .7rem;position: absolute;right: .45rem;top: .15rem}
+header span.num{ color: #764e4d; font-size: .6rem; line-height: 1.3rem; }
+header span.num b{font-size: .7rem; }
+
+.product{margin: .75rem .15rem;}
+.product:after{content: " ";display: table;}
+.product ul li{width: 46.4%; display: inline-block; background: #fff; font-size: .6rem; margin-bottom: .3rem;padding: .2rem;}
+.product ul li img{width: 100%}
+
+/*弹层*/
+.mask{position: absolute; top: 0; left: 0; right: 0;bottom: 0; z-index: 1; background-color: rgba(0, 0, 0, 0.701961);}
+.pop{width: 14.5rem;background: #3f2167;border-radius: .25rem;position: fixed;left: 50%;top: 50%;z-index: 2;-webkit-transform: translate(-50%,-50%);-ms-transform: translate(-50%,-50%);transform: translate(-50%,-50%);}
+.pop-bd{padding: 1.1rem 1.5rem;text-align: center;color: #fff;}
+.btn{background: #ff3d5f;width: 10.3rem;height: 2rem;font: .9rem/2rem "microsoft yahei";color: #fff;border-radius: .25rem;}
+
+/*弹层-申请*/
+
+.apply .avatar{width: 4rem;height: 4rem;background-size: 100%;border-radius: 50%; border: #fff .2rem solid;margin-bottom: .25rem}
+.apply .text{background: #fff;border-radius: 1.5rem;border: 0 none;width: 100%;height: 1.7rem;font-size: .6rem;text-indent: 1em;color: #333}
+.apply .form li.time label { vertical-align: middle;font-size: .6rem; }
+.apply .form li{margin-bottom: 1rem}
+.apply .form li.time{font-size: .6rem;}
+.apply .form li.time input{text-align: left;vertical-align: middle;margin-left: 1rem;}
+.apply .btn{margin: .5rem 0;}
+.apply .info{color: #ee4a62;font-size: .6rem;}
+
+/*弹层-成功*/
+.success h2{line-height: 1.8rem;}
+.success p, .success p span{line-height: 1.2rem; font-size: .6rem;}
+.success .btn{margin-top: 1.5rem}
+
+/*弹层-活动规则*/
+.rules h3{color: #fdc000;font-size: .65rem;line-height: 1.2rem;text-align: left;margin: .25rem 0}
+.rules p{text-align: left;font-size: .6rem;line-height: 1rem;}
+
+/*弹层-产品介绍*/
+.pro img{width: 5rem;height: 5rem;margin-bottom: .5rem;}
+.pro p{text-align: left; font-size: .7rem; line-height: 1.1rem; margin-bottom: .3rem;}
+.pro .btn{margin-top: .5rem}
+
+
+/*完成页*/
+.line{border-bottom: #ccc .05rem dashed;height: .05rem;margin: .75rem 1rem 0;}
+.pro-all{margin: 0 1rem;}
+.pro-list { display: -moz-box; display: -webkit-box; display: box; width: 100%;}
+.pro-name{color: #fff}
+.seat{height: 3rem;width: 3rem;float: left}
+.list {height: 3rem;line-height: 3rem;border-bottom: #ccc .05rem dashed;font-size: .7rem;}
+.list-one { -moz-box-flex: 1; -webkit-box-flex: 1; box-flex: 1; }
+.list-two{ -moz-box-flex: 2; -webkit-box-flex: 2; box-flex: 2; }
+.list img{width: 1.9rem;height: 1.9rem;vertical-align: middle;border: #fff .05rem solid;margin-right: .95rem;}
+.qr-add{text-align: center;font-size: .7rem;color: #fff;padding-bottom: 1rem}
+.qr-add img{width: 4.75rem;height: 4.75rem;display: block;margin: 1.5rem auto .5rem;}
+
+

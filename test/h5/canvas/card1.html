@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新建一副牌</title>
+</head>
+<body onload="init()">
+<canvas id="canvas" width="900" height="400">不支持显示</canvas>
+
+
+<script>
+    var ctx;
+
+    var first_x = 30; //第一张牌X坐标
+    var first_y = 50; //第二张牌Y坐标
+    var card_rad = 30; //多边形的半径
+    var card_width = 4 * card_rad; //牌宽
+    var card_height = 4 * card_rad; //牌高
+    var margin = 30; //牌之间的边距
+    var backcolor = "rgb(128,0,128)";
+
+    var cards = []; //一副牌
+
+
+    // 设置牌的背面
+    function draw_back() {
+        ctx.fillStyle = backcolor;
+        ctx.fillRect(this.sx, this.sy, this.swidth, this.sheight);
+    }
+
+    // 对象 -- 牌
+    function Card(sx, sy, swidth, sheight, info) {
+        this.sx = sx;
+        this.sy = sy;
+        this.swidth = swidth;
+        this.sheight = sheight;
+        this.info = info;  //设置边数
+        this.draw = draw_back; //
+    }
+
+    //新建一副牌
+    function mark_cards() {
+        var first_card; //一对牌中第一张牌的变量
+        var second_card; //一对牌中第二张牌的变量
+        var cx = first_x; //第一个x坐标
+        var cy = first_y; //第一个y坐标
+        for (var i = 3; i < 9; i++) {
+            //创建一张牌和位置
+            first_card = new Card(cx, cy, card_width, card_height, i);
+            second_card = new Card(cx, cy + card_height + margin, card_width, card_height, i);
+            cards.push(second_card);
+            cx = cx + card_width + margin; //加上牌的宽度加外边距
+            first_card.draw();
+            second_card.draw();
+        }
+    }
+
+
+    function init() {
+        ctx = document.getElementById("canvas").getContext("2d");
+        mark_cards();
+    }
+</script>
+</body>
+</html>
