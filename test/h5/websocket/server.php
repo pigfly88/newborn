@@ -1,20 +1,29 @@
 <?php
+/**
+ * 小喇叭
+ * 参考http://blog.csdn.net/shagoo/article/details/6396089
+ */
 $host = 'local.newborn.com'; //host
 $port = 9000; //port
+$maxuser = 100;
 chdir(dirname(__FILE__));
 $script = 'test/h5/websocket'.basename(__FILE__);
-
-$jsconfig = "var vars={};vars.server='ws://{$host}:{$port}/{$script}';";
+$url = "ws://{$host}:{$port}/{$script}";
+echo '======小喇叭======'.PHP_EOL;
+$jsconfig = "var vars={};vars.server='{$url}';";
 echo 'write js config ... ';
 if(!file_put_contents(__DIR__.'/config.js', $jsconfig)){
-	echo '[fail]'.PHP_EOL;
-	exit;
+	die('[fail]'.PHP_EOL);
 }else{
 	echo '[success]'.PHP_EOL;
 }
 
 //Create TCP/IP sream socket
 echo 'creating socket ... ';
+/**
+ * tcp:SOCK_STREAM,提供一个顺序化的、可靠的、全双工的、基于连接的字节流
+ * udp:SOCK_DGRAM,无连接，不可靠、固定最大长度
+ */
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 if(false===$socket){
 	var_dump(socket_last_error(), socket_strerror());
@@ -22,17 +31,20 @@ if(false===$socket){
 }else{
 	echo '[success]'.PHP_EOL;
 }
-//reuseable port
+/**
+ * 一般来说，一个端口释放后会等待两分钟之后才能再被使用，SO_REUSEADDR是让端口释放后立即就可以被再次使用
+ * 参考:http://www.cnblogs.com/mydomain/archive/2011/08/23/2150567.html
+ */
 socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
 
-//bind socket to specified host
+//绑定端口
 socket_bind($socket, 0, $port);
 
 //listen to port
-if(socket_listen($socket)){
+if(socket_listen($socket, $maxuser)){
 	echo "socket listening on {$host}:{$port} ...".PHP_EOL;
 }
-
+socket_set_nonblock($socket);//非阻塞
 //create & add listning socket to the list
 $clients = array($socket);
 $null = NULL; //null var
@@ -49,27 +61,29 @@ while (true) {
 	*/
 	//manage multipal connections
 	$changed = $clients;
-	//returns the socket resources in $changed array
 	socket_select($changed, $null, $null, 0, 10);
 	
 	//check for new socket
 	if (in_array($socket, $changed)) {
 		$socket_new = socket_accept($socket); //accpet new socket
-		$clients[] = $socket_new; //add socket to client array
-		
 		$header = socket_read($socket_new, 1024); //read data sent by the socket
 		socket_getpeername($socket_new, $ip);
 		socket_getsockname($socket_new, $addr);
-		var_dump('newsocket', $socket_new, $header, $ip, $addr);
-		perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
 		
-		socket_getpeername($socket_new, $ip); //get ip address of connected socket
-		$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
-		send_message($response); //notify all users about new connection
-		
-		//make room for new socket
-		$found_socket = array_search($socket, $changed);
-		unset($changed[$found_socket]);
+		if(substr($header, 0, 6)=='notice'){//小喇叭推送消息
+			$hinfo = explode('|', $header);
+			$msg = $hinfo[1];
+			echo "小喇叭接收到消息:{$msg}".PHP_EOL;
+		}else{//其他客户端请求连接
+			$clients[] = $socket_new; //add socket to client array
+			perform_handshaking($header, $socket_new, $host, $port, $script); //perform websocket handshake
+			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
+			send_message($response); //notify all users about new connection
+			
+			//make room for new socket
+			$found_socket = array_search($socket, $changed);
+			unset($changed[$found_socket]);
+		}
 	}
 	
 	//loop through all connected sockets
@@ -159,7 +173,7 @@ function mask($text)
 }
 
 //handshake new client.
-function perform_handshaking($receved_header,$client_conn, $host, $port)
+function perform_handshaking($receved_header,$client_conn, $host, $port, $script)
 {
 	$headers = array();
 	$lines = preg_split("/\r\n/", $receved_header);
@@ -179,7 +193,7 @@ function perform_handshaking($receved_header,$client_conn, $host, $port)
 	"Upgrade: websocket\r\n" .
 	"Connection: Upgrade\r\n" .
 	"WebSocket-Origin: $host\r\n" .
-	"WebSocket-Location: ws://$host:$port/demo/shout.php\r\n".
+	"WebSocket-Location: ws://$host:$port/{$script}\r\n".
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
 }

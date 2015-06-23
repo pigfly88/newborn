@@ -7,7 +7,7 @@ $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP) or die('socket create err
 //stream_set_timeout($socket, $timeout);
 socket_connect($socket, $host, $port) or die('socket connect error');
 
-$data = 'push msg~';
+$data = 'notice|我是小喇叭';
 $res = socket_write($socket, $data);
 socket_recv($socket, $buf, 200, 0);
 $status = $res ? '成功' : '失败';

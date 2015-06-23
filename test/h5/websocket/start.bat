@@ -1,1 +1,1 @@
-E:/XAMPP/php/php -f "E:/wwwroot/newborn/test/h5/websocket/server.php"
+D:/XAMPP/php/php -f "D:/xampp/htdocs/newborn/test/h5/websocket/server.php"
