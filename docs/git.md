@@ -59,3 +59,7 @@ $git subtree pull --prefix=ai ai --squash
 示例
 
 $git subtree push --prefix=ai ai master
+
+======================================================
+git 忽略已经提交的文件
+git update-index --assume-unchanged <files>
