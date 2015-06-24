@@ -2,3 +2,6 @@
 test/h5/websocket/start.bat
 test/h5/websocket/config.js
 php/api/webroot/data/*
+nbproject/*
+.project
+.settings
