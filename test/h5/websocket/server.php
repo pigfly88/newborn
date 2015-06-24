@@ -25,9 +25,9 @@ echo 'creating socket ... ';
  * udp:SOCK_DGRAM,无连接，不可靠、固定最大长度
  */
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+debug($socket);
 if(false===$socket){
-	var_dump(socket_last_error(), socket_strerror());
-	exit;
+	debug(socket_strerror(socket_last_error()));
 }else{
 	echo '[success]'.PHP_EOL;
 }
@@ -50,32 +50,29 @@ $clients = array($socket);
 $null = NULL; //null var
 //start endless loop, so that our script doesn't stop
 while (true) {
-	/*
-	$newsocket = socket_accept($socket) or die('socket accept error\n');
-	
-	if($res = socket_read($newsocket, 8192)){
-		//var_dump(date('Y-m-d H:i:s'), $res);
-		$response_text = mask(json_encode(array('type'=>'system', 'message'=>$res)));
-		send_message($response_text);
-	}
-	*/
-	//manage multipal connections
 	$changed = $clients;
-	socket_select($changed, $null, $null, 0, 10);
-	
+	if(false===socket_select($changed, $write, $null, 0, 10)){//多连接=>异步
+		debug(socket_strerror(socket_last_error()));
+	}
+	if($write){
+		debug($write);
+	}
+	$msg = array();
 	//check for new socket
 	if (in_array($socket, $changed)) {
 		$socket_new = socket_accept($socket); //accpet new socket
+		$clients = array_merge($clients, array($socket_new)); //add socket to client array
 		$header = socket_read($socket_new, 1024); //read data sent by the socket
 		socket_getpeername($socket_new, $ip);
 		socket_getsockname($socket_new, $addr);
 		
 		if(substr($header, 0, 6)=='notice'){//小喇叭推送消息
 			$hinfo = explode('|', $header);
-			$msg = $hinfo[1];
-			echo "小喇叭接收到消息:{$msg}".PHP_EOL;
+			$msg[] = $hinfo[1];
+			debug("小喇叭接收到消息:{$msg}");
+			send_message('xlb');
 		}else{//其他客户端请求连接
-			$clients[] = $socket_new; //add socket to client array
+			
 			perform_handshaking($header, $socket_new, $host, $port, $script); //perform websocket handshake
 			$response = mask(json_encode(array('type'=>'system', 'message'=>$ip.' connected'))); //prepare json data
 			send_message($response); //notify all users about new connection
@@ -120,8 +117,8 @@ while (true) {
 	
 }
 // close the listening socket
-echo 'socket close'.PHP_EOL;
-socket_close($sock);
+debug('socket close');
+//socket_close($sock);
 
 function send_message($msg)
 {
@@ -196,4 +193,12 @@ function perform_handshaking($receved_header,$client_conn, $host, $port, $script
 	"WebSocket-Location: ws://$host:$port/{$script}\r\n".
 	"Sec-WebSocket-Accept:$secAccept\r\n\r\n";
 	socket_write($client_conn,$upgrade,strlen($upgrade));
+}
+
+function debug($param){
+	if(is_scalar($param)){
+		echo $param.PHP_EOL;
+	}else{
+		var_dump($param);
+	}
 }
