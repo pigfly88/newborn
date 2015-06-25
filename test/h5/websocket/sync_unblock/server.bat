@@ -1,2 +1,2 @@
-E:/XAMPP/php/php -f "E:/wwwroot/newborn/test/h5/websocket/sync_unblock/server.php"
+D:/xampp/php/php -f "D:/xampp/htdocs/newborn/test/h5/websocket/sync_unblock/server.php"
 cmd

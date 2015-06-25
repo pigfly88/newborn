@@ -42,11 +42,12 @@ while(true){
 			$clients = array_merge($clients, array($client));
 			if(false!==$client){
 				debug('accept client request');
-				sleep(5);//这儿睡5秒放大阻塞效果，同时打开多个cmd命令，你会看到只有上一个客户端请求完成之后才执行下一个，也就是阻塞了
+				sleep(5);//这儿睡5秒放大效果
 				$recvdata = socket_read($client, 1024, PHP_BINARY_READ);
 				if(false===$recvdata){
 					debug();
 				}else{
+					socket_write($client,'recv');
 					debug($recvdata);
 				}
 			}
