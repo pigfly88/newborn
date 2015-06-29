@@ -18,12 +18,14 @@ if(false===socket_listen($socket)){
 }else{
 	debug('listening...');
 }
-$clients = array($socket);
+
 socket_set_nonblock($socket);//非阻塞
 $null = NULL;
+
 //不断地等待客户端请求
+$clients = array();
 while(true){
-	$read = $clients;
+
 	/**
 	 *  $read可以理解为一个数组，这个数组中存放的是文件描述符。当它有变化（就是有新消息到或者有客户端连接/断开）时，socket_select函数才会返回，继续往下执行
 		$write是监听是否有客户端写数据，传入NULL是不关心是否有写变化
@@ -34,15 +36,20 @@ while(true){
 		如果为null：无超时，socket_select() 会无限阻塞，直到有新连接过来，则返回 
 		$tv_usec
 	 */
-	
+	$read = array_merge($clients, array($socket));
 	if(socket_select($read, $write, $null, 0, 0)){
 		if(in_array($socket, $read)){
 			//一旦有连接请求过来，一个新的socket资源将被创建
 			$client = socket_accept($socket);
-			$clients = array_merge($clients, array($client));
+			
 			if(false!==$client){
+				$clients[] = $client;
 				debug('accept client request');
-				sleep(5);//这儿睡5秒放大效果
+				$test=0;
+				for($i=0;$i<100000000;$i++){
+					$test+=$i;
+				}
+				debug($test);
 				$recvdata = socket_read($client, 1024, PHP_BINARY_READ);
 				if(false===$recvdata){
 					debug();
@@ -53,6 +60,7 @@ while(true){
 			}
 		}
 	}
+	$clients = array_filter($clients);
 }
 
 function debug($params=null){
