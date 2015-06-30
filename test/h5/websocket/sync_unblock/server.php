@@ -7,6 +7,7 @@ set_time_limit(0);
  * 
  */
 $socket = socket_create(AF_INET, SOCK_STREAM, getprotobyname('tcp'));
+var_dump('socket create', $socket);
 if(false===$socket){
 	debug();
 }
@@ -24,6 +25,7 @@ $null = NULL;
 
 //不断地等待客户端请求
 $clients = array();
+
 while(true){
 
 	/**
@@ -36,30 +38,40 @@ while(true){
 		如果为null：无超时，socket_select() 会无限阻塞，直到有新连接过来，则返回 
 		$tv_usec
 	 */
-	$read = array_merge($clients, array($socket));
+	//$read = array_merge($clients, array($socket));
+	$read[] = $socket;
 	if(socket_select($read, $write, $null, 0, 0)){
+		var_dump('socket_select', $socket, $read, $write);
 		if(in_array($socket, $read)){
 			//一旦有连接请求过来，一个新的socket资源将被创建
 			$client = socket_accept($socket);
-			
+			debug('socket accept');
 			if(false!==$client){
-				$clients[] = $client;
-				debug('accept client request');
-				$test=0;
-				for($i=0;$i<100000000;$i++){
-					$test+=$i;
-				}
-				debug($test);
-				$recvdata = socket_read($client, 1024, PHP_BINARY_READ);
-				if(false===$recvdata){
-					debug();
-				}else{
-					socket_write($client,'recv');
-					debug($recvdata);
-				}
+				//$clients[] = $client;
+				
 			}
 		}
+		
+		foreach($read as $v){
+			debug('socket read');
+	
+			$recvdata = socket_read($client, 1024, PHP_BINARY_READ);
+			debug('read...');
+			for($i=0;$i<100000000;$i++){
+				$test+=$i;
+			}
+			debug($test);
+			if(false===$recvdata){
+				debug();
+			}else{
+				socket_write($client,'recv');
+				debug($recvdata);
+			}
+		}
+	
 	}
+	
+	//var_dump('close socket', $clients);exit;
 	$clients = array_filter($clients);
 }
 
