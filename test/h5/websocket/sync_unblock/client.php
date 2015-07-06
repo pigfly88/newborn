@@ -6,11 +6,13 @@ if(false===$socket){
 if(false===socket_connect($socket, '127.0.0.1', 9001)){
 	debug();
 }
-if(socket_write($socket, 'sys')){
-	debug('write success');
+for($i=0;$i++;$i<3){
+	if(socket_write($socket, 'sys')){
+		debug('write success');
+	}
+	socket_recv($socket, $buf, 200, 0);
+	debug($buf);
 }
-socket_recv($socket, $buf, 200, 0);
-debug($buf);
 function debug($params=null){
 	if(is_null($params)){
 		echo socket_strerror(socket_last_error()).PHP_EOL;
