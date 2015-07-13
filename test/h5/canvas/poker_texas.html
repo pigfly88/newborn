@@ -64,7 +64,6 @@ function init() {
 // 绘制桌面
 function draw_desk(){
 
-    ctx.drawImage(desk,0, 0, 800, 600);
     /*绘制场景 start*/
 
 //    ctx.beginPath();
@@ -88,8 +87,11 @@ function new_game() {
 
 //发牌
 function deal_start() {
-   // ctx.drawImage(desk, 0, 0, 800, 450);
-
+//    ctx.drawImage(desk, 0, 0);
+    ctx.beginPath();
+    ctx.strokeStyle = "#ff0000";
+    ctx.arc(200,200,150,0,Math.PI,false);
+    ctx.stroke();
     ctx.fillText("庄家",500,90,30);
     ctx.fillText("玩家1",100,320,40);
     //玩家得到第一张牌
