@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="jquery-2.0.0.js"></script>
+    <script>
+       function fn1(){ alert(1) }
+       function fn2(){ alert(2) }
+       var cb = $.Callbacks();
+
+        cb.add(fn1);
+        cb.add(fn2);
+
+//        cb.fire();
+        cb.remove(fn2);
+        cb.fire();
+    </script>
+</head>
+<body>
+
+</body>
+</html>
