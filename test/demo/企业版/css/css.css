@@ -1,0 +1,33 @@
+/*2015.5.5 update
+1.不使用定位垂直水平居中弹出框，使用transform: translate(-50%,-50%);
+2.减少无用的div嵌套
+3.减少clearfix类，使用伪类来清除浮动:after{content: " ";display: table;}
+4.去除fl，fr类，不使用浮动，用display:inline-block进行并列
+5.可以用img缩放代替边距，transform: scale(.95);删除外侧div,!css3属性一定要加浏览器标识
+6.弹出阴影层不用js获取高度，用四边绝对定位 top: 0; left: 0; right: 0;bottom: 0;
+7.使用h5 语义化标签
+*/
+
+@charset "utf-8";
+html,body,div,span,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,a,address,em,img,ol,ul,li,fieldset,form,label,legend,table,tbody,tfoot,thead,tr,th,td,i,b,s { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font: 1rem/1rem Helvetica,Microsoft yahei,Arial }
+ul,ol { list-style: none }
+a img { border: none; vertical-align: top } a { text-decoration: none }
+button { overflow: visible; padding: 0; margin: 0; border: 0 none; background-color: transparent }
+button::-moz-focus-inner { padding: 0 }
+textarea,input { background: none; padding: 0; -webkit-border-radius: 0; -moz-border-radius: 0; border-radius: 0; }
+input[type=password] { -webkit-text-security: disc }
+textarea:focus,input:focus,button:focus { outline: none }
+body { word-wrap: break-word;position: relative}
+* { -webkit-tap-highlight-color: rgba(0,0,0,0) }
+.hide{display: none!important;}
+.overflow{height: 100%;overflow: hidden}
+
+body{background: #fcfcfc;}
+
+
+/*header*/
+header{height: 1.625rem;border-bottom: #dcdcdc 0.025rem solid;box-shadow: 0 0 0.15rem #dcdcdc;}
+/*footer*/
+footer{height: 2.85rem;border-top: #dcdcdc 0.025rem solid;border-bottom: #dcdcdc 0.025rem solid;}
+/*mod*/
+.mod{border-bottom: #dcdcdc 0.025rem solid;}
