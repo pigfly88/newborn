@@ -27,8 +27,11 @@
   - 外部模块标签，<header></header><footer></footer> 
   - 超链接标签<a href=""></a>
   - img等其他标签
-  - 
 - 3、制作svg图标
   - 将ps中的矢量图片导入至ai，生成svg格式
   - 再通过iconfont.cn上
-- 
+- 4、完成头部，底部，底部浮动部分
+  - 用弹性布局(box-flex)代替浮动（float）完成1行2列
+  - 用rgba属性代替opacity
+- 5、完成公用模块的标题
+- 6、完成文字列表
