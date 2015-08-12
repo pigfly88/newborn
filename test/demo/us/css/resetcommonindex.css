@@ -1,0 +1,80 @@
+﻿@charset "utf-8";
+/*banner*/
+
+
+/* 产品中心 */
+.g_cpc{background: #fafafa;padding-top: 20px;}
+.g_cpc h2, .f_pr h2{margin: 0; font-size: 22px; font-weight: 200; line-height: 58px; color: #333;}
+.g_cpc h3{padding-left: 888px;height: 24px;margin-bottom: 7px;}
+
+
+.m_cp dl{float: left; width: 260px;}
+.m_cp .lastdl{margin-right: 0;}
+.m_cp dl dt{position: relative; width: 260px;height: 260px;}
+.m_cp dl dt img{display: block;width: 260px;height: 260px;}
+.m_cp dl dt em{background: #000; opacity: .6; position: absolute; width: 254px; height: 28px; display: block; line-height: 28px; text-align: center; left: 3px; bottom: 3px; color: #fffeff; font-size: 12px; border-radius: 0 0 12px 12px;}
+
+.bg{width:200px;height:230px;position:absolute;left:0;top:0;z-index:50;
+display:none;}
+
+.text{width:200px;height:230px;position:absolute;left:20px;top:50px;z-index:55;color:#fff;display:none; cursor: pointer; text-align: center;font-weight: normal; width: 158px;}
+
+
+ /*走进俪森 */
+.g_zj{padding-top: 20px;}
+
+
+
+
+.m_zjimg p{display:none;}
+.m_zjimg p.tp0{display:block;}
+.m_zjimg .zj{width: 445px;}
+.m_zjimg .u_lst3{left:184px;top:290px;}
+.m_zjimg .u_lst3 li{float: left;width: 19px;height: 19px;margin-right: 9px;}
+.m_zjimg .u_lst3 li.cur{float: left;width: 19px;height: 19px;margin-right: 9px; }
+
+
+.m_zjr{width: 640px;}
+.m_zjr dl{height: 63px;}
+.m_zjr dd{width: 520px;color: #5b5b5b;font-size: 14px;line-height: 22px; float: left;padding-left: 15px;}
+.m_zjr dt{display: inline-block; border: 1px solid #99235f;width: 82px;height: 33px;line-height: 33px;text-align: center;color: #99235f; float: left;font-size: 16px;}
+
+
+
+.test3{width:260px;height:260px;position:relative; float: left;margin: 0 10px 10px 0; overflow: hidden; }
+.bg{width:305px;height:305px;position:absolute;left:0;top:0;z-index:50;
+display:none;cursor: pointer;}
+
+
+
+.line{width:100%;height:1px;border-top:1px solid #d1d7dc;}
+.footer-6s{width:100%;height:127px;background-color:#f8f8f8;margin-top:50px;}
+.foot-6s{width:1200px;height:127px;background-color:#bd0505;margin:0 auto;background:url(../images/footer.png)}
+.foot-txt{background: #333;color: #fff;width:100%;height:380px;margin:0 auto;overflow:hidden;}
+.foot-txt a{color: #fff;}
+.foot-txt-help{width:1000px;height:180px;margin: 100px auto 0;}
+.foot-part1{height:180px;float:left;margin-right:50px;padding-right: 50px;border-right:1px solid #d3d3d3;}
+.foot-txt-help li{line-height:24px;text-align:left;}
+.foot-title{text-align:left;font-size:18px;color:#ddd;margin-bottom:20px;font-family: "Microsoft YaHei",\5fae\8f6f\96c5\9ed1,arial,\5b8b\4f53}
+.foot-part2{width:360px;height:180px;float:left;}
+.footer-bot{width:100%;height:40px;background-color:#ebebeb;}
+.foot-bot{width:1200px;height:40px;line-height:40px;margin:0 auto;}
+.foot-bot a{margin:0 30px;font-size:13px;color:black;}
+
+.show{position: relative;margin-bottom: 20px;}
+.fix-l{position: absolute;left: 0;top: 0;height: 494px;}
+.fix-r{float: left;margin-left: 234px;}
+.show-r ul li{float: left;height: 240px;border-right: 1px solid #e5e5e5;border-bottom: 1px solid #e5e5e5}
+.show-r ul li img{width: 215px;}
+.info-tra-right{position: absolute; width: 14px; height: 28px; background: url(../images/info_tra.svg) no-repeat;top: 10%; right: -14px; background-position: 0 -51px; z-index: 1;}
+.m_kfr{background: #fff;padding: 20px 15px 10px;}
+
+.link{margin-bottom: 40px;}
+.link ul li{float: left;margin: 0 10px 10px 0;text-align: center;}
+.link ul li img{display: block;width: 172px;margin-bottom: 10px;}
+
+#flashs { position: relative; z-index: 1; height: 400px }
+#flashs .bgitem { position: absolute; }
+#flashs .btn { bottom: 48px; margin-right: -450px; padding: 5px 6px; position: absolute; left: 50%; z-index: 7; }
+#flashs .btn span { background: #666; border-radius: 50%; color: #fff; cursor: pointer; display: inline-block; margin-left: 5px; padding: 2px 6px; }
+#flashs .btn span.cur { background: none repeat scroll 0 0 #992360; color: #FFFFFF; }
