@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>母亲节活动</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta content="telephone=no" name="format-detection"/>
+    <link rel="stylesheet" href="css/css.css"/>
+</head>
+<body>
+    <header>
+        <span class="rule">活动规则</span>
+        <h1>Free for Mother's Day</h1>
+        <h2>不花钱，免费拿</h2>
+        <div class="info">任选三款，免费申领<span class="num">（剩余次数<b>3</b>）</span></div>
+    </header>
+    <div class="product">
+        <ul>
+            <li><img src="images/pro1.jpg" alt="爱心贺卡"/>爱心贺卡</li>
+            <li><img src="images/pro2.jpg" alt="玻璃杯"/>玻璃杯</li>
+            <li><img src="images/pro3.jpg" alt="购物袋"/>购物袋</li>
+            <li><img src="images/pro4.jpg" alt="广告扇"/>广告扇</li>
+            <li><img src="images/pro5.jpg" alt="化妆包"/>化妆包</li>
+            <li><img src="images/pro6.jpg" alt="轻松熊整理盒"/>轻松熊整理盒</li>
+            <li><img src="images/pro7.jpg" alt="手电筒"/>手电筒</li>
+            <li><img src="images/pro8.jpg" alt="相框笔筒"/>相框笔筒</li>
+            <li><img src="images/pro9.jpg" alt="橡胶手套"/>橡胶手套</li>
+            <li><img src="images/pro10.jpg" alt="衣架"/>衣架</li>
+        </ul>
+    </div>
+
+    <!-- 弹层 --活动规则 [[-->
+    <div class="pop rules hide">
+        <div class="pop-bd">
+            <h3>活动时间：</h3>
+            <p>2015年05月09日 —— 2015年5月18日</p>
+            <h3>活动规则：</h3>
+            <p>用户在礼品列表中，最多选择3件，提交联系资料，即可成功申请。</p>
+            <p>每款礼品都有唯一兑换码，在不花钱微信公众号（礼品零微信号：BuHuaQian365）中可以查看。</p>
+            <h3>礼品领取方式：</h3>
+            <p><strong>5月9日</strong>阳光棕榈园《母亲节特别活动》现场，凭礼品兑换码现场领取。</p>
+            <p><strong>5月18日</strong>为礼品补发活动，领取方式相同。</p>
+        </div>
+    </div>
+
+    <!-- 弹层 --产品介绍 [[-->
+    <div class="pop pro hide">
+        <div class="pop-bd">
+            <img src="images/pro1.jpg" alt="爱心贺卡"/>
+            <p>名称：爱心贺卡</p>
+            <p>礼品介绍：表情达意，呼朋唤友必备工具。母亲节的爱，从一张小小的爱心贺卡开始吧！</p>
+            <p>申领方式：点击“免费领取”按钮，输入姓名及联系方式，即可在《阳光棕榈园》5月9日母亲节特点击“免费领取”按钮，输入姓名及联系方式，即可在《阳光棕榈园》5月9日母亲节别活动期间，领取所申请礼品。（所有礼品，任选3款，确定后不可取消）</p>
+            <button class="btn btn-get">免费领取</button>
+        </div>
+    </div>
+    <!-- 弹层 --产品介绍 ]]-->
+
+    <!-- 弹层 --填写信息 [[-->
+    <div class="pop apply hide">
+        <div class="pop-bd">
+            <img src="images/avatar.jpg" alt="" class="avatar"/>
+
+            <ul class="form">
+                <li><input type="text" value="" name="name" class="text" pattern="[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*" placeholder="姓名" required="required"/></li>
+                <li><input type="text" value="" class="text" pattern="1\d{10}" placeholder="手机号" required="required" /></li>
+                <li class="time">
+                    <input type="radio" name="time" id="time-one"/><label for="time-one">5月9日领取</label>
+                    <input type="radio" name="time" id="time-two"/><label for="time-two">5月18日领取</label>
+                </li>
+            </ul>
+            <button class="btn btn-submit">确认申领该礼品</button>
+
+            <p class="info">填写真实信息以便发货哦！</p>
+        </div>
+    </div>
+    <!-- 弹层 填写信息 ]]-->
+
+    <!-- 弹层 --预约成功 [[-->
+    <div class="pop success hide">
+        <div class="pop-bd">
+            <h2>预约成功</h2>
+            <p>请于5月9日，在阳光棕榈园领取您的礼品</p>
+            <p>
+                <span class="fl">礼品：购物袋</span>
+                <span class="fr">兑换码：1234</span>
+            </p>
+            <button class="btn btn-done">我知道了</button>
+        </div>
+    </div>
+    <!-- 弹层 预约成功 ]]-->
+
+
+
+    <!-- 遮罩[[ -->
+    <div class="mask hide"></div>
+    <!-- 遮罩]] -->
+
+<script src="js/zepto.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>

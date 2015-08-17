@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)http://rec.uc.cn/running/reward -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <title>
+        UC浏览器约跑赚话费
+    </title>
+    <link rel="shortcut icon" href="http://www.ucweb.com/favicon.ico">
+    <link rel="stylesheet" href="http://image.uc.cn/s/uae/g/01/running_money/reward/style-reward.fa0572df.css">
+<style id="style-1-cropbar-clipper">/* Copyright 2014 Evernote Corporation. All rights reserved. */
+.en-markup-crop-options {
+    top: 18px !important;
+    left: 50% !important;
+    margin-left: -100px !important;
+    width: 200px !important;
+    border: 2px rgba(255,255,255,.38) solid !important;
+    border-radius: 4px !important;
+}
+
+.en-markup-crop-options div div:first-of-type {
+    margin-left: 0px !important;
+}
+</style></head>
+
+<body class="bd">
+    <img id="head" class="r-head" src="./images/ban.png">
+    <div id="share-img" class="share-img"></div>
+    <article id="notice" class="page">
+        <div class="box-w">
+            <div class="r-phone-ok mb30">
+                <font id="notice-phone"></font>
+                <span>已验证</span><em></em>
+            </div>
+            <dl class="wait-it">
+                <dt></dt>
+                <dd>
+                    <div class="t0">已达标！好厉害！</div>
+                </dd>
+            </dl>
+            <div class="wait-t1">5月4日-5月8日 每天14:00-15:00开放兑奖
+                <br>记得调好闹钟哦~</div>
+            <div class="wait-t2">【收藏本页】或【搜索“话费”】随时查看兑奖</div>
+        </div>
+    </article>
+    <article id="page-uc-phone" class="page">
+        <div class="box-w">
+            <div id="uc-phone-error" class="r-error radius-t-lr"></div>
+            <div class="phone"></div>
+            <div class="r-form">
+                <div class="item">
+                    <input id="uc-phone-phonetxt" class="txt" type="number" placeholder="">
+                </div>
+                <div class="item-b">
+                    <input id="uc-phone-btn" class="btn" type="button" value="确定">
+                </div>
+            </div>
+            <dl id="uc-phone-backGame" class="back-game">
+                <dt>什么？还没有达标？</dt>
+                <dd id="uc-phone-gogame">去玩游戏</dd>
+            </dl>
+        </div>
+        <div id="uc-phone-wz" class="r-wz" style="display:none;">后续话费会充值到这个手机号码中，请确保没有输错。</div>
+    </article>
+    <article id="page-uc-fail" class="page ">
+        <!-- bl-red bl-over-->
+        <dl class="r-nobill">
+            <dt><img src="./images/img0.png"></dt>
+            <dd>
+                <div id="uc-fail-txt0" class="t0">本轮话费领完了…</div>
+                <div id="uc-fail-txt1" class="t1">小小心意，请收下！ 请下一场兑奖再来！</div>
+            </dd>
+        </dl>
+        <dl id="r-red-flow" class="r-red-flow">
+            <dt id="uc-fail-red">
+                <div class="item">
+                    <div class="red">￥1<span>购物红包</span></div>
+                    <div class="t">满￥29.9使用</div>
+                </div>
+                <div id="uc-fail-red-txt" class="uc-fail-txt"></div>
+            </dt>
+            <dd id="uc-fail-flow">
+                <div class="item">
+                    <div class="flow">100M</div>
+                    <div class="flow1">电信流量包</div>
+                    <div class="t">剩余<span id="uc-fail-flowRemain">0</span>份</div>
+                </div>
+                <div id="uc-fail-flow-txt" class="uc-fail-txt"></div>
+            </dd>
+        </dl>
+        <dl class="uc-fail-t">
+            <dd>仅限电信用户</dd>
+        </dl>
+    </article>
+    <article id="page-uc-fee" class="page">
+        <div class="box-w">
+            <div class="r-phone-ok">
+                <font id="uc-fee-phone"></font>
+                <span>已验证</span><em></em>
+            </div>
+            <dl class="r-mgs-txt">
+                <dt></dt>
+                <dd>
+                    <div class="t0">本场话费剩余</div>
+                    <div id="uc-fee-remain" class="t1"></div>
+                </dd>
+            </dl>
+            <div id="uc-fee-awarding" class="r-btn " style="display:none;">立即兑奖</div>
+            <div id="uc-fee-drawTime" class="r-wz pb25">每天1场 14:00-15:00</div>
+        </div>
+    </article>
+    <article id="page-uc-result" class="page">
+        <div class="box-w">
+            <dl id="uc-result-con" class="r-rest">
+            </dl>
+            <div id="uc-result-share-say" class="share-say"></div>
+            <dl id="r-lgo" class="r-lgo">
+                <dt id="lgo-look">点击查看</dt>
+                <dd id="lgo-go">去购物广场</dd>
+            </dl>
+        </div>
+        <div id="uc-result-txt" class="r-wz"></div>
+        <div id="share" class="share"></div>
+    </article>
+    <article id="page-uc-traffic" class="page">
+        <div class="box-w">
+            <div class="r-flow-sut"><em></em>流量包已拿下，请完善充值信息！</div>
+            <div id="uc-traffic-error" class="r-error"></div>
+            <div class="r-form">
+                <div class="item">
+                    <input id="uc-traffic-phonetxt" class="txt" type="number" placeholder="请输入电信手机号码">
+                </div>
+                <div class="item getVCodePar">
+                    <input id="uc-traffic-VCodetxt" class="txt" type="text" placeholder="请输入验证码">
+                    <input id="uc-traffic-getVCode" class="getVCode" data-type="true" data-time="60" type="button" value="获取验证码">
+                </div>
+                <div class="item-b">
+                    <input id="uc-traffic-btn" class="btn" type="button" value="确定">
+                </div>
+            </div>
+        </div>
+    </article>
+    <article id="page-uc-end" class="page" style="display: block;">
+        <div class="box-w">
+            <dl class="r-end">
+                <dt>活动已结束！</dt>
+                <dd id="uc-end-txt">约跑赚话费活动已结束，谢谢您的支持 : )</dd>
+            </dl>
+            <div id="uc-end-tis" class="bor-txt">温馨提示：获得中国电信100M流量的用户，请在17:00前填写流量充值的电信号码，过期作废哦。</div>
+        </div>
+    </article>
+    <article id="page-wechat-submit" class="page">
+        <div class="box-w">
+            <div id="wechat-submit-error" class="r-error"></div>
+            <div class="phone"></div>
+            <div class="r-form">
+                <div class="item">
+                    <input id="wechat-submit-phonetxt" class="txt" type="number" placeholder="请输入手机号">
+                </div>
+                <div class="item-b">
+                    <input id="wechat-submit-btn" class="btn" type="button" value="确定">
+                </div>
+            </div>
+        </div>
+        <div class="r-wz">后续话费会充值到这个手机号码中，请确保没有输错。</div>
+    </article>
+    <article id="page-wechat-finish" class="page">
+        <div class="box-w pb25">
+            <dl class="r-certificate">
+                <dt>
+                    <div class="t0">恭喜你！手机成功认证</div>
+                    <div class="t1">可以通过以下2种方式，到UC浏览器领取话费</div>
+                </dt>
+                <dd>
+                    <div class="t">方法1</div>打开UC浏览器，搜索框输入“<span>话费</span>”进入兑奖页面
+                    <div class="pz"><img src="./images/pz.png"></div>
+                </dd>
+                <dd>
+                    <div class="t">方法2</div>长按复制链接到UC浏览器打开
+                    <div class="s1" id="r-url">http://rec.uc.cn/running/cheer?uc_param_str=pfssnieisivecpmibifrdnlantnw&amp;entry=wccopy</div>
+                </dd>
+            </dl>
+            <dl id="wechat-finish-btns" class="list-two">
+                <dt>
+                    <div id="r-reward-wc" class="r-btn">立即兑奖</div>
+                </dt>
+                <dd>
+                    <div id="r-download-wc" class="r-btn">立即下载</div>
+                </dd>
+            </dl>
+        </div>
+    </article>
+    <article id="page-others" class="page">
+        <div class="box-w pb25">
+            <dl class="r-certificate">
+                <dt>
+                    <div class="t0">欢迎你！只能在UC浏览器兑奖哦！</div>
+                    <div class="t1">可以通过以下2种方式，到UC浏览器领取话费</div>
+                </dt>
+                <dd>
+                    <div class="t">方法1</div>打开UC浏览器，搜索框输入“<span>话费</span>”进入兑奖页面
+                    <div class="pz"><img src="./images/pz.png"></div>
+                </dd>
+                <dd>
+                    <div class="t">方法2</div>长按复制链接到UC浏览器打开
+                    <div id="others-url" class="s1">http://rec.uc.cn/running/cheer?uc_param_str=pfssnieisivecpmibifrdnlantnw&amp;entry=otcopy</div>
+                </dd>
+            </dl>
+            <div id="others-downbtn" class="r-btn">立即下载</div>
+        </div>
+    </article>
+    <dl id="wins-list" class="r-list">
+        <dt>已获得</dt>
+        <div id="wins-list-con"></div>
+    </dl>
+    <div id="rule" class="r-rule">
+        <div id="rule-h" class="r-rule-h">详细规则</div>
+    </div>
+    <div class="r-copy">
+        Copyright © 2004 - 2015
+        <br>优视科技 版权所有
+    </div>
+    <div id="wait" class="wait">排队中 . <span></span></div>
+    <script src="./js/app-reward.f987152b.js"></script>
+    <script type="text/javascript">
+    define('appData', function(require, exports) {
+        'use strict';
+        /*后端渲染入口*/
+        exports.RENDER = {
+            userInfo: '{}',
+            seckillTime: 0,
+            sdkConfig: '{}',
+            prizeInfo: '{}',
+            records: '[]',
+            check: false,
+            startDraw: false,
+            rewardEnd: 'not_register',
+        };
+        exports.RENDER.userInfo = JSON.parse(exports.RENDER.userInfo) || {};
+        exports.RENDER.prizeInfo = JSON.parse(exports.RENDER.prizeInfo) || {};
+        exports.RENDER.records = JSON.parse(exports.RENDER.records) || [];
+        exports.RENDER.drawTime = '每天1场 14:00-15:00';
+        exports.RENDER.startTime = 14;
+        /*程序配置对象*/
+        exports.CONF = {
+            maxNumRedpacket: 2,
+            touchTime: 200,
+            prize: {
+                fee: '50元话费',
+                traffic: '100M电信流量',
+                redpacket: '1元红包'
+            },
+            result: {
+                'getFee': {
+                    titles: ['恭喜!', '优先获得话费'],
+                    desc: '50元话费于48小时内充值到<b>{}</b>号码中',
+                    sizeW: '170px',
+                    checkSping: false,
+                    icon: true
+                },
+                'getTraffic': {
+                    titles: ['恭喜!', '流量包领取成功！'],
+                    desc: '电信流量包将于兑换成功后<b>48</b>小时内充值到{}',
+                    sizeW: '185px',
+                    checkSping: false,
+                    icon: true
+                },
+                'getRedpacket': {
+                    titles: ['恭喜!', '购物红包领取成功！'],
+                    desc: '1元满减红包将于<b>48</b>小时内充值到{}淘宝账号中',
+                    sizeW: '200px',
+                    checkSping: true,
+                    icon: true,
+                },
+                'error': {
+                    titles: ['出错！', '请刷新重试'],
+                    desc: '',
+                    sizeW: '150px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'unqualified': {
+                    titles: ['抱歉！', '您无资格抢奖品'],
+                    desc: '',
+                    sizeW: '170px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'countdown': {
+                    titles: ['抱歉！', '还未开始'],
+                    desc: '',
+                    sizeW: '130px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'noway': {
+                    titles: ['抱歉！', '该奖品已抢光了'],
+                    desc: '',
+                    sizeW: '170px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'duplicate': {
+                    titles: ['稍等！', '正在处理'],
+                    desc: '',
+                    sizeW: '130px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'end': {
+                    titles: ['抱歉！', '已结束'],
+                    desc: '',
+                    sizeW: '120px',
+                    checkSping: false,
+                    icon: false,
+                },
+                '5001': {
+                    titles: ['抱歉！', '请求出错，请重试'],
+                    desc: '',
+                    sizeW: '180px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'oops': {
+                    titles: ['很遗憾！', '未中奖'],
+                    desc: '',
+                    sizeW: '130px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'success_hongao_max': {
+                    titles: ['抱歉！', '红包领取超过最大限制'],
+                    desc: '',
+                    sizeW: '220px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'success_fee': {
+                    titles: ['抱歉！', '您已成功抢过话费了'],
+                    desc: '',
+                    sizeW: '210px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'success_traffic': {
+                    titles: ['抱歉！', '您已成功抢过流量了'],
+                    desc: '',
+                    sizeW: '210px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'success_hongbao': {
+                    titles: ['抱歉！', '您已成功抢过红包了'],
+                    desc: '',
+                    sizeW: '210px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'success_taobao_max': {
+                    titles: ['抱歉！', '该淘宝账号领取超过最大限额'],
+                    desc: '',
+                    sizeW: '275px',
+                    checkSping: false,
+                    icon: false,
+                },
+                'only_fee_bt_null': {
+                    titles: ['抱歉！', '本轮话费已被抢光了'],
+                    desc: '',
+                    sizeW: '210px',
+                    checkSping: false,
+                    icon: false,
+                },
+            },
+            failTxt: {
+                havePrize: [
+                    '我错了，我该死',
+                    '没有守住话费，被那帮人 抢光了！容我奉上红包、 流量包孝敬您'
+                ],
+                nullPrize: [
+                    '苍天啊，手慢了一步',
+                    '这轮奖品都领完了！'
+                ]
+            },
+            rewardEnd: {
+                'not_register': '约跑赚话费活动已结束，谢谢您的支持 : )',
+                'not_win': '约跑赚话费活动已结束，谢谢您的支持 : )',
+                'win': '约跑赚话费兑奖已结束，请耐心等候到账 : )',
+                'win_end_time':'约跑赚话费兑奖已结束，请耐心等候到账 : )'
+            },
+            SHOPPING_SRC: 'http://go.uc.cn/page/zdl/gouwu',
+            REWARD_SHARE: {
+                getFee: {
+                    title: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    content: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    domid: 'share-img'
+                },
+                getTraffic: {
+                    title: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    content: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    domid: 'share-img'
+                },
+                getRedpacket: {
+                    title: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    content: '#UC约跑赚话费#动动手指10秒钟就可以玩嗨！还有红包、流量包我会乱说？我刚刚拿到了属于王者的奖励，谁不服谁来挑战！',
+                    domid: 'share-img'
+                }
+
+            },
+            MASK_SRC: {
+                download: 'public/images/mask-dl.png',
+                share: 'public/images/mask-share.png',
+                rewardIos: 'public/images/mask-rw-ios.png',
+                rewardAndroid: 'public/images/mask-rw-android.png'
+            },
+            UC_PARAMS: 'pfssnieisivecpmibifrdnlantnw',
+            SHARE_PARAM: '',
+            DOWNLOAD_URL: {
+                android: 'http://wap.uc.cn/index.php?action=PackageDown&do=ByPfid&product=UCBrowser&pfid=145&lang=zh-cn&bid=999&direct=true&from=running',
+                androidQQ: 'http://fusion.qq.com/cgi-bin/qzapps/unified_jump?appid=10936&from=singlemessage&isTimeline=false&actionFlag=0&params=pname%3Dcom.UCMobile%26versioncode%3D165%26channelid%3D%26actionflag%3D0&isappinstalled=0',
+                iosQQ: 'http://wap.uc.cn/StoreLog/index?r=http%3A%2F%2Fa.app.qq.com%2Fo%2Fsimple.jsp%3Fpkgname%3Dcom.UCMobile%26g_f%3D992088&from=running&m=refresh&sig=b4968fefcf5556097fd81cedcbe803b6',
+                iosStore: 'http://wap.uc.cn/StoreLog/index?r=https%3A%2F%2Fitunes.apple.com%2Fcn%2Fapp%2Fuc-liu-lan-qi-ji-su-yu-le%2Fid586871187%3Fmt%3D8&from=running&m=refresh&sig=75d8f08e3c77a19a2543378945d2c0cd'
+            }
+        };
+        /*文案配置对象*/
+        exports.MSG = {
+            error: {
+                nullPhone: '请先输入手机号',
+                notPhone: '非法手机号!',
+                notFinished: '没跑完,不能注册兑奖!',
+                registered: '已注册!',
+                occupation: '号码已被占用!',
+                failed: '注册失败!',
+                notRegistered: '凭证错误',
+                not1700: '抱歉，不支持此类号码的话费充值',
+
+                notDrawRecord: '没有中奖记录',
+                telNotEmpty: '已填写',
+                telUsed: '号码已被注册',
+                canNotRecharge: '号码段不能充值',
+                maxDayLimit: '次数超过限制',
+                concurrent: '处理中',
+                requestFailed: '请求失败',
+
+                codeFail: '验证码错误',
+                tryAgain: '请重试',
+
+
+                enterError: '您的号码输入有误，请重新输入!',
+                enterErrorTriffice: '请输入电信号码',
+                vCodeError: '验证码错误'
+            }
+        };
+    });
+    seajs.use('reward/router', function(router) {
+        'use strict';
+        router.init();
+    });
+    </script><section style="display: none; position: fixed; top: 0px; left: 0px; width: 100%; height: 100%; z-index: 1000; background: rgba(0, 0, 0, 0.6);"></section>
+
+
+</body></html>
