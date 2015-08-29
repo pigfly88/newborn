@@ -63,3 +63,34 @@ $git subtree push --prefix=ai ai master
 ======================================================
 git 忽略已经提交的文件
 git update-index --assume-unchanged <files>
+
+======================================================
+ssh方式
+1 如果没有安装ssh，那么使用下面的指令
+
+sudo apt-get install ssh
+
+2 检查SSH公钥
+
+cd ~/.ssh
+看看存不存在.ssh，如果存在的话，掠过下一步；不存在的请看下一步
+
+3 生成SSH公钥
+$ ssh-keygen -t rsa -C "your_email@youremail.com" 
+# Creates a new ssh key using the provided email Generating public/private rsa key pair. 
+Enter file in which to save the key (/home/you/.ssh/id_rsa):
+现在你可以看到，在自己的目录下，有一个.ssh目录，说明成功了
+3.1 输入github密码
+
+Enter passphrase (empty for no passphrase): [Type a passphrase] 
+Enter same passphrase again: [Type passphrase again]
+这个时候输入你在github上设置的密码。
+3.2 然后在.ssh中可以看到
+
+Your identification has been saved in /home/you/.ssh/id_rsa. 
+# Your public key has been saved in /home/you/.ssh/id_rsa.pub.
+# The key fingerprint is: 
+# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@youremail.com
+
+4 添加SSH公钥到github
+打开github，找到账户里面添加SSH，把idrsa.pub内容复制到key里面。

@@ -16,5 +16,18 @@
 3.3 导出特定表的结构
 > mysqldump -u{用户名} -p -B {数据库名} --table {表名} d.sql  
 
+3.4 导出数据库
+> mysqldump -u{用户名} -p {数据库名} > s.sql
+
+
+4.修改root密码
+mysql -u root -p
+mysql> SET PASSWORD FOR 'root'@'localhost' = PASSWORD('newpass');
+
+
+
+
+
+
 **tips**  
 {}花括号内的为变量，[]中括号内的为可选
