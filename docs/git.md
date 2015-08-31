@@ -94,3 +94,8 @@ Your identification has been saved in /home/you/.ssh/id_rsa.
 
 4 添加SSH公钥到github
 打开github，找到账户里面添加SSH，把idrsa.pub内容复制到key里面。
+
+分支
+git branch -a 查看所有分支
+git checkout dev 切换到dev分支
+git push origin dev push到dev分支
