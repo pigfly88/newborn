@@ -88,14 +88,14 @@ Enter same passphrase again: [Type passphrase again]
 3.2 然后在.ssh中可以看到
 
 Your identification has been saved in /home/you/.ssh/id_rsa. 
-# Your public key has been saved in /home/you/.ssh/id_rsa.pub.
-# The key fingerprint is: 
-# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@youremail.com
+`# Your public key has been saved in /home/you/.ssh/id_rsa.pub.
+`# The key fingerprint is: 
+`# 01:0f:f4:3b:ca:85:d6:17:a1:7d:f0:68:9d:f0:a2:db your_email@youremail.com
 
 4 添加SSH公钥到github
 打开github，找到账户里面添加SSH，把idrsa.pub内容复制到key里面。
 
-分支
-git branch -a 查看所有分支
-git checkout dev 切换到dev分支
-git push origin dev push到dev分支
+- 分支
+- `git branch -a 查看所有分支
+- `git checkout dev 切换到dev分支
+- `git push origin dev push到dev分支
