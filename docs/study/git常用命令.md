@@ -99,3 +99,4 @@ Your identification has been saved in /home/you/.ssh/id_rsa.
 - `git branch -a 查看所有分支
 - `git checkout dev 切换到dev分支
 - `git push origin dev push到dev分支
+分支详解：http://www.ruanyifeng.com/blog/2012/07/git.html
