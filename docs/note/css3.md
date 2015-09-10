@@ -55,7 +55,27 @@
 	4、text-shadow(文字阴影)
 		text-shadow:x,y,blur,color
 ### 五、背景
-	
+	1、定位(no-repeat)
+		background-origin: border-box | padding-box |content-box 
+	2、裁剪
+		background-clip : border-box | padding-box | content-box | no-clip
+	3、大小
+		background-size : auto | <长度值> | <百分比> | cover(覆盖) | contain（等比缩放）
+	4、多重背景
+		①background:url，url，url
+		②background-image：
+		 background-repeat：
+		 background-position：
+		 ……
+		background-color 只能设置一个
+###六、属性选择器
+	1、通配符
+
+		
+		
+		
+		
+	 	
 
 
 		
