@@ -68,8 +68,22 @@
 		 background-position：
 		 ……
 		background-color 只能设置一个
-###六、属性选择器
-	1、通配符
+###六、选择器
+	1、属性选择器
+		格式：标签[属性（符号）="val"]
+		符号（^） 属性值以val开头
+    	符号（$） 属性值以val结束
+		符号（*） 属性值任意位置包含val
+	2、结构性伪类选择器
+		:root   设置背景颜色
+	    :not    选择某个元素以外的所有元素
+		:empty  选择没有任何内容的元素
+		:target 选择url对应的某个id区域
+		:first-child 第一个元素
+		:last-child 最后一个元素
+		:nth-child(n) 一个或多个的子元素
+		:nth-last-child(n) 倒数第n个
+		:first-of-type
 
 		
 		
