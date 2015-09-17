@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta content="telephone=no" name="format-detection"/>
+    <title>背景漂浮</title>
+    <style>
+        body{background: #152544}
+        .bg{background-color: #142441; position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 22; width: 100%; height: 100%; overflow: hidden;}
+        .bg div{background-image: url("images/bg.png");position: relative;}
+        .bg1{background-position: 0 0;width: 43px;height: 28px;left: 40px;top: 30px;}
+        .bg2{background-position: -43px 0;width: 20px;height: 20px;left: 120px;top: 50px;}
+        .bg3{background-position: -63px 0;width: 20px;height: 20px;left: 260px;top: 120px;}
+        @keyframes m1ball {
+            0% {
+                top: 0
+            }
+
+            100% {
+                top: 110%
+            }
+        }
+        @-webkit-keyframes m1ball {
+            0% {
+                top: 0
+            }
+
+            100% {
+                top: 110%
+            }
+        }
+
+        .bg1 {
+            animation-name: m1ball;
+            -webkit-animation-name: m1ball;
+            animation-duration: 8s;
+            -webkit-animation-duration: 8s;
+            animation-delay: 0s;
+            -webkit-animation-delay: 0s;
+            animation-timing-function: linear;
+            -webkit-animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite
+        }
+
+        .bg2 {
+            animation-name: m1ball;
+            -webkit-animation-name: m1ball;
+            animation-duration: 11s;
+            -webkit-animation-duration: 11s;
+            animation-delay: 2.5s;
+            -webkit-animation-delay: 2.5s;
+            animation-timing-function: linear;
+            -webkit-animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite
+        }
+
+        .bg3 {
+            animation-name: m1ball;
+            -webkit-animation-name: m1ball;
+            animation-duration: 7s;
+            -webkit-animation-duration: 7s;
+            animation-delay: 1.8s;
+            -webkit-animation-delay: 1.8s;
+            animation-timing-function: linear;
+            -webkit-animation-timing-function: linear;
+            animation-fill-mode: forwards;
+            -webkit-animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            -webkit-animation-iteration-count: infinite
+        }
+    </style>
+</head>
+<body>
+   <div class="bg">
+       <div class="bg1"></div>
+       <div class="bg2"></div>
+       <div class="bg3"></div>
+   </div>
+</body>
+</html>
