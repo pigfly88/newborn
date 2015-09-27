@@ -1,0 +1,17 @@
+zte备忘
+
+1、获取当前索引
+$("li").click(function(){
+$("li").index(this)
+})
+
+2、两列文字浮动
+动态获取screen宽度/2 加上 右边距
+
+3、div距离设备的四边的距离
+offset().上右下左
+
+4、判断移动分辨率
+screen.width
+
+5、
