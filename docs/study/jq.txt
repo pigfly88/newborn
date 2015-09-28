@@ -14,4 +14,17 @@ offset().上右下左
 4、判断移动分辨率
 screen.width
 
-5、
+5、动态活动滚动条距离页面顶部的距离
+    function getScrollTop() {
+        var scrollPos;
+        if (window.pageYOffset) {
+            scrollPos = window.pageYOffset;
+        } else if (document.compatMode && document.compatMode != 'BackCompat') {
+            scrollPos = document.documentElement.scrollTop;
+        } else if (document.body) {
+            scrollPos = document.body.scrollTop;
+        }
+        return scrollPos;
+    }
+
+6、在js中新增样式时使用addclass方法，不要直接.css,，方便取消
