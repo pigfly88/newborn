@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>首页</title>
+    <link rel="stylesheet" href="../global.css"/>
+    <style>
+        .slider{width: 782px;height: 327px;overflow: hidden;float: left;margin-bottom: 26px;position: relative;}
+        .slider ul li{float: left;width: 782px;height: 327px; position:absolute; left:0px; top:0px; display:none;}
+        .slider ul li span{background: url("../images/repeat.png");display: block;position: absolute;bottom: 0;left: 0;width: 100%;height: 44px;line-height: 44px;text-indent: 2em;}
+        .slider ul li a{color: #fff;}
+        .slider ul li a img{width: 783px;height: 327px}
+        .slider-dot{position: absolute;bottom: 10px;right: 10px;}
+        .slider-dot a{display: inline-block;width: 11px;height: 11px;background: #fff;margin-right: 8px;}
+        .slider-dot a:hover, .slider-dot a.current{background: #2693c0;}
+    </style>
+</head>
+<body>
+
+    <div class="layout clearfix">
+        <!-- slider [[ -->
+        <div class="slider">
+            <ul>
+                <li><a href=""><img src="../pic.jpg"><span>深圳市深圳湾口岸办公大楼1</span></a></li>
+                <li><a href=""><img src="../pic.jpg"><span>深圳市深圳湾口岸办公大楼2</span></a></li>
+                <li><a href=""><img src="../pic.jpg"><span>深圳市深圳湾口岸办公大楼3</span></a></li>
+                <li><a href=""><img src="../pic.jpg"><span>深圳市深圳湾口岸办公大楼4</span></a></li>
+            </ul>
+            <span class="slider-dot"><!--<a href="javascript:;" class="current"></a><a href="javascript:;"></a><a href="javascript:;"></a><a href="javascript:;"></a>--></span>
+        </div>
+    </div>
+
+
+	<script src="../jquery-1.11.1.min.js"></script>
+    <script>
+        var tt = 0;
+        var stime2 = 4000;
+        var objM = $(".slider ul li");
+        var sss = objM.length,Auto2;
+
+        //$(".newsBan p").append("<div class='control'></div>");
+        for (var z = 0; z < objM.length; z++) {$(".slider-dot").append('<a href="javascript:;"></a>');}
+        $(".slider-dot a").eq(0).addClass('current').siblings().removeClass('current');
+        objM.eq(0).fadeIn();
+        $(".slider-dot a").hover(function () {
+            clearInterval(Auto2);
+            var ibnum = $(".slider-dot a").index(this);
+            $(".slider-dot a").eq(ibnum).addClass('current').siblings().removeClass('current');
+            objM.fadeOut();
+            objM.eq(ibnum).fadeIn();
+            tt = ibnum;
+        }, function () { Auto2 = setInterval(iBan, stime2); });
+
+        $(".newsBan").hover(function(){ clearInterval(Auto2);},function(){Auto2 = setInterval(iBan, stime2);});
+
+        function iBan() {
+            tt++;
+            if (tt < sss) {
+                $(".slider-dot a").eq(tt).addClass('current').siblings().removeClass('current');
+                objM.fadeOut();
+                objM.eq(tt).fadeIn();
+            } else if (tt == sss) {
+                tt = 0;
+                $(".slider-dot a").eq(tt).addClass('current').siblings().removeClass('current');
+                objM.fadeOut();
+                objM.eq(tt).fadeIn();
+            }
+        }
+        Auto2 = setInterval(iBan, stime2);
+    </script>
+</body>
+</html>
