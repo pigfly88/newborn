@@ -1,0 +1,7 @@
+php所有的变量都存在一个zval的结构里面，通过refcount和is_ref来存储变量的引用关系。
+refcount是变量的引用次数，is_ref是变量是否被引用，当is_ref=0的时候refcount总是为1。
+旧版的GC策略是refcount=0的时候，php执行垃圾回收。
+但有一种特殊情况是数组的某一个元素指向自己的时候，unset数组，refcount仍然为1，会造成内存泄露。
+新版的GC策略是如果一个zval的refcount减少之后>0，那么此zval有可能成为垃圾，GC将其放入一个缓冲区，
+当缓冲区满了之后，GC执行垃圾回收，用深度优先算法对每一个zval执行减1操作，
+再用深度优先判断每一个zval的refcount，如果==0，标记为垃圾，如果>0，执行+1还原操作。遍历zval将垃圾释放。
