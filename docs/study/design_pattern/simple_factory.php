@@ -14,7 +14,7 @@ class mysql implements db_interface{
 	}
 	
 	public function query($sql){
-		echo "mysql query {$sql}<br />"; //模拟查询
+		echo "[mysql] {$sql}<br />"; //模拟查询
 	}
 }
 
@@ -26,7 +26,7 @@ class oracle implements db_interface{
 	}
 	
 	public function query($sql){
-		echo "oracle query{$sql}<br />";
+		echo "[oracle] {$sql}<br />";
 	}
 }
 
@@ -34,12 +34,12 @@ class oracle implements db_interface{
 class dbfactory{
 	static $obj;
 	
-	public static function create($opt){
-		$dbtype = $opt['type'];
-		if(!isset(self::$obj[$dbtype])){
-			self::$obj[$dbtype] = new $dbtype($opt);
+	public static function create($name, $opt){
+		if(!isset(self::$obj[$name])){
+			$dbtype = $opt['type'];
+			self::$obj[$name] = new $dbtype($opt);
 		}
-		return self::$obj[$dbtype];
+		return self::$obj[$name];
 	}
 }
 
@@ -53,8 +53,8 @@ class db{
 		isset($cfg['default']) && self::$db_default = $cfg['default']['type'];
 	}
 	
-	public static function selectdb($dbtype){
-		return dbfactory::create(self::$cfg[$dbtype]);
+	public static function selectdb($name){
+		return dbfactory::create($name, self::$cfg[$name]);
 	}
 	
 	public static function __callStatic($name, $args){
