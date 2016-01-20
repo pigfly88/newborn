@@ -10,8 +10,6 @@
 + [字段类型](#3)
 + [基准测试与性能分析](#4)
 	+ [基准测试](#4.1)
-	+ [并发](#2.2)
-	+ [事务](#2.3)
 	
 <h2 id="1">常用命令</h2>
 <h4 id="1.1">登录</h4>
@@ -152,62 +150,64 @@ InnoDB在这种情况下可以预知并立即返回错误，处理方式是**回
 	+ 响应时间。利用周期性图标准确反映数值
 	+ 扩展性。当数据库大小发生改变、连接数或者硬件发生改变的时候
 
-+工具
-	ab -n1000 -c10 http://123.57.92.9/?c=product&id=29
-	请求总数1000 并发请求10
++ 工具
+	+ ab
+> -n1000 -c10 http://123.57.92.9/?c=product&id=29:请求总数1000 并发请求10
+
+	[cli]
 	D:\xampp\apache\bin>ab -n1000 -c10 http://123.57.92.9/?c=product&id=29
-This is ApacheBench, Version 2.3 <$Revision: 655654 $>
-Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
-Licensed to The Apache Software Foundation, http://www.apache.org/
+	This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+	Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+	Licensed to The Apache Software Foundation, http://www.apache.org/
+	
+	Benchmarking 123.57.92.9 (be patient)
+	Completed 100 requests
+	Completed 200 requests
+	Completed 300 requests
+	Completed 400 requests
+	Completed 500 requests
+	Completed 600 requests
+	Completed 700 requests
+	Completed 800 requests
+	Completed 900 requests
+	Completed 1000 requests
+	Finished 1000 requests
 
-Benchmarking 123.57.92.9 (be patient)
-Completed 100 requests
-Completed 200 requests
-Completed 300 requests
-Completed 400 requests
-Completed 500 requests
-Completed 600 requests
-Completed 700 requests
-Completed 800 requests
-Completed 900 requests
-Completed 1000 requests
-Finished 1000 requests
 
-
-Server Software:        nginx/1.4.4
-Server Hostname:        123.57.92.9
-Server Port:            80
-
-Document Path:          /?c=product
-Document Length:        0 bytes
-
-Concurrency Level:      10
-Time taken for tests:   42.859 seconds 总耗时
-Complete requests:      1000
-Failed requests:        0
-Write errors:           0
-Non-2xx responses:      1000
-Total transferred:      199000 bytes
-HTML transferred:       0 bytes
-Requests per second:    23.33 [#/sec] (mean) 吞吐量，每秒处理的请求数
-Time per request:       428.594 [ms] (mean)
-Time per request:       42.859 [ms] (mean, across all concurrent requests)
-Transfer rate:          4.53 [Kbytes/sec] received
-
-Connection Times (ms)
-              min  mean[+/-sd] median   max
-Connect:       31   43   9.6     47      94
-Processing:    47  383  37.5    375     547
-Waiting:       31  227 104.8    219     531
-Total:         78  426  39.4    422     594
-
-Percentage of the requests served within a certain time (ms) 时间分布
-  50%    422 50%的请求处理时间不超过422ms
-  66%    422
-  75%    438
-  80%    438
-  90%    469
-  95%    500
-  98%    531
-  99%    547
- 100%    594 (longest request)
+	Server Software:nginx/1.4.4
+	Server Hostname:123.57.92.9
+	Server Port:80
+	
+	Document Path:  /?c=product
+	Document Length:0 bytes
+	
+	Concurrency Level:  10
+	Time taken for tests:   42.859 seconds 总耗时
+	Complete requests:  1000
+	Failed requests:0
+	Write errors:   0
+	Non-2xx responses:  1000
+	Total transferred:  199000 bytes
+	HTML transferred:   0 bytes
+	Requests per second:23.33 [#/sec] (mean) 吞吐量，每秒处理的请求数
+	Time per request:   428.594 [ms] (mean)
+	Time per request:   42.859 [ms] (mean, across all concurrent requests)
+	Transfer rate:  4.53 [Kbytes/sec] received
+	
+	Connection Times (ms)
+	  min  mean[+/-sd] median   max
+	Connect:   31   43   9.6 47  94
+	Processing:47  383  37.5375 547
+	Waiting:   31  227 104.8219 531
+	Total: 78  426  39.4422 594
+	
+	Percentage of the requests served within a certain time (ms) 时间分布
+	  50%422 50%的请求处理时间不超过422ms
+	  66%422
+	  75%438
+	  80%438
+	  90%469
+	  95%500
+	  98%531
+	  99%547
+	 100%594 (longest request)
