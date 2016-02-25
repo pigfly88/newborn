@@ -10,7 +10,8 @@
 + [字段类型](#3)
 + [基准测试与性能分析](#4)
 	+ [基准测试](#4.1)
-	
++ [字段类型](#4)
+
 <h2 id="1">常用命令</h2>
 <h4 id="1.1">登录</h4>
 > mysql [-h地址] [-P端口] -u{用户名} -p
@@ -211,3 +212,76 @@ InnoDB在这种情况下可以预知并立即返回错误，处理方式是**回
 	  98%531
 	  99%547
 	 100%594 (longest request)
+
+<h2 id="1">字段类型</h2>
+<table border="1">
+  <tr>
+    <th>名称</th>
+    <th>字节</th>
+  </tr>
+  <tr>
+    <td>tinyint</td>
+    <td>1字节，范围（2的8次方）</td>
+  </tr>
+<tr>
+    <td>smallint</td>
+    <td>2字节，范围（2的16次方）</td>
+  </tr>
+<tr>
+    <td>mediumint</td>
+    <td>3字节，范围（2的24次方）</td>
+  </tr>
+<tr>
+    <td>int</td>
+    <td>4字节，范围（2的32次方）</td>
+  </tr>
+<tr>
+    <td>bigint</td>
+    <td>8字节，范围（2的64次方）</td>
+  </tr>
+<tr>
+    <td>float(m, d)</td>
+    <td>4字节，单精度浮点型，m总个数，d小数位</td>
+  </tr>
+<tr>
+    <td>double(m, d)</td>
+    <td>8字节，双精度浮点型，m总个数，d小数位</td>
+  </tr>
+<tr>
+    <td>decimal(m ,d)</td>
+    <td>存储为字符串的浮点数</td>
+  </tr>
+<tr>
+    <td>char</td>
+    <td>定长，255个字符</td>
+  </tr>
+<tr>
+    <td>varchar</td>
+    <td>变长，65535个字符</td>
+  </tr>
+<tr>
+    <td>blob</td>
+    <td>二进制</td>
+  </tr>
+<tr>
+    <td>text</td>
+    <td>65535个字符</td>
+  </tr>
+<tr>
+    <td>enum</td>
+    <td>65535个字符，用数字存储字符串，额外使用数字对应字符的映射表</td>
+  </tr>
+<tr>
+    <td>datetime</td>
+    <td>8字节</td>
+  </tr>
+<tr>
+    <td>timestamp</td>
+    <td>4字节，范围：1970~2038</td>
+  </tr>
+</table>
+
+int(1)和int(11)在存储上面无任何区别，只是规定了命令行显示的字符宽度。
+char字段会在存值的时候末尾补齐空格，取值的时候删掉末尾所有的空格。
+varchar和text：varchar允许默认值，text不允许。
+varchar长度<=255，使用1字节存储长度，>255使用2字节存储长度。如：varchar(10)使用11字节，varchar(1000)使用1002字节。
