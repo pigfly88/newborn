@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>token</title>
+</head>
+<body>
+	<form ction="index.php" method="post" id="submitForm">
+		<input type="hidden" name="token" value="<?=$_SESSION['token']?>" />
+		<input type="text" name="username" value="" />
+		<button type="submit" name="submit" id="submitBtn">保存</button>
+	</form>
+</body>
+</html>
