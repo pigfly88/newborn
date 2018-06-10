@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <title>token</title>
+</head>
+<body>
+	<form action="api.php" method="post" id="submitForm" onsubmit="return submitForm()">
+		<input type="text" name="username" id="username" value="" />
+		<input type="text" name="phone" id="phone" value="" />
+		<button type="submit" name="submit" id="submitBtn">保存</button>
+	</form>
+</body>
+
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+<script>
+function submitForm(){
+	var username = $('#username').val();
+	var phone = $('#phone').val();
+	<?php $rand = mt_rand(1, 9999); ?>
+	var rand = <?=$rand?>;
+	var token = "<?=base64_encode(time().md5($rand.'abc'))?>";
+	$.ajax({ url: "api.php", method:'post', data: {submit:1, username:username, phone:phone, rand:rand, token:token}, success: function(){
+        $(this).addClass("done");
+     }});
+	 return false;
+}
+</script>
+</html>
